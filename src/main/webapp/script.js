@@ -29,8 +29,8 @@ function getSchoolInfo() {
       '.race_ethnicity.nhpi,latest.student.demographics.race_ethnicity' +
       '.two_or_more,latest.student.demographics.race_ethnicity' +
       '.non_resident_alien,latest.student.demographics.race_ethnicity' +
-      '.unknown,latest.student.demographics.men,latest.student,' +
-      '.demographics.womenlatest.completion.completion_rate_4yr_100nt'
+      '.unknown,latest.student.demographics.men,latest.student' +
+      '.demographics.women,latest.completion.completion_rate_4yr_100nt'
 
   fetch(link)
   .then((response) => response.text())
