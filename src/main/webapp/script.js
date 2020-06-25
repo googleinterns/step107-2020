@@ -12,29 +12,3 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function getSchoolInfo() {
-  // Get school data from API.
-  const link = 'https://api.data.gov/ed/collegescorecard/v1/schools.json?' +
-      'api_key=C8Uyh2jQCmfjfKN3qwqwcJOi77c5k3V6zM7cRFgJ&school.name=Harvard' +
-      '%20University&fields=id,school.city,school.name,school.state,school' +
-      '.school_url,school.ownership,school.minority_serving.' +
-      'historically_black,latest.admissions.admission_rate.overall,' +
-      'latest.admissions.sat_scores.average.overall,latest.admissions' +
-      '.act_scores.midpoint.cumulative,latest.cost.tuition,latest.cost' +
-      '.avg_net_price,latest.student.size,latest.student.demographics' +
-      '.race_ethnicity.white,latest.student.demographics.race_ethnicity' +
-      '.black,latest.student.demographics.race_ethnicity.hispanic,' +
-      'latest.student.demographics.race_ethnicity.asian,latest' +
-      '.student.demographics.race_ethnicity.aian,latest.student.demographics' +
-      '.race_ethnicity.nhpi,latest.student.demographics.race_ethnicity' +
-      '.two_or_more,latest.student.demographics.race_ethnicity' +
-      '.non_resident_alien,latest.student.demographics.race_ethnicity' +
-      '.unknown,latest.student.demographics.men,latest.student' +
-      '.demographics.women,latest.completion.completion_rate_4yr_100nt'
-
-  fetch(link)
-  .then((response) => response.text())
-  .then((data) => {
-    console.log(JSON.parse(data));
-  });
-}
