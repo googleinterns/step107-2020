@@ -74,7 +74,7 @@ function getSchoolInfo() {
     console.log(sateliteCampusesList);
     console.log(dataResults);
 
-    // BAsic School Information.
+    // Basic School Information.
     let ownership = '';
     if (dataResults['school.ownership'] == 1) {
       ownership = 'public';
