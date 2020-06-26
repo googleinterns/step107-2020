@@ -48,29 +48,30 @@
  */
 function getSchoolInfo() {
   // Get school data from API.
-  const link = 'https://api.data.gov/ed/collegescorecard/v1/schools.json?' +
-      'api_key=C8Uyh2jQCmfjfKN3qwqwcJOi77c5k3V6zM7cRFgJ&school.name=Rutgers' +
-      '%20University&fields=id,school.city,school.name,school.state,school' +
-      '.school_url,school.ownership,school.minority_serving.' +
-      'historically_black,latest.admissions.admission_rate.overall,' +
-      'latest.admissions.sat_scores.average.overall,latest.admissions' +
-      '.act_scores.midpoint.cumulative,latest.cost.tuition,latest.cost' +
-      '.avg_net_price,latest.student.size,latest.student.demographics' +
-      '.race_ethnicity.white,latest.student.demographics.race_ethnicity' +
-      '.black,latest.student.demographics.race_ethnicity.hispanic,' +
-      'latest.student.demographics.race_ethnicity.asian,latest' +
-      '.student.demographics.race_ethnicity.aian,latest.student.demographics' +
-      '.race_ethnicity.nhpi,latest.student.demographics.race_ethnicity' +
-      '.two_or_more,latest.student.demographics.race_ethnicity' +
-      '.non_resident_alien,latest.student.demographics.race_ethnicity' +
-      '.unknown,latest.student.demographics.men,latest.student' +
-      '.demographics.women,latest.completion.completion_rate_4yr_100nt'
 
-  fetch(link)
+  fetch(getLink('Rutgers University'))
   .then((response) => response.text())
   .then((data) => {
-    console.log(JSON.parse(data));
-    const dataResults = JSON.parse(data).results[0];
+    parsedData = JSON.parse(data);
+    console.log(parsedData.results);
+
+    let dataResults = [];
+    let sateliteCampusesList = [];
+    // Checks if there is main campus 
+    if (parsedData.length == 1) {
+      dataResults = data[0];
+    } else {
+      parsedData.results.forEach((campus) => {
+        if (campus['school.main_campus'] == 1) {
+          dataResults = campus;
+        } else if (campus['school.main_campus'] == 0){
+          sateliteCampusesList.push(campus)
+        }
+      });
+      // get data result to be main campus
+      // get satellites links and names
+    }
+    console.log(sateliteCampusesList);
     console.log(dataResults);
 
     // BAsic School Information.
@@ -144,10 +145,6 @@ function getSchoolInfo() {
     studentsDiv.append('Population: ' + numStudents + ' Students');
     studentsDiv.append('4 Year Graduation Rate: ' + graduationRate4yr * 100 + '%');
 
-    
-
-    
-
     function drawRaceChart() {
       let data = google.visualization.arrayToDataTable([
         ['Race', 'Percentage'],
@@ -191,3 +188,23 @@ function getSchoolInfo() {
   });
 }
 
+function getLink(schoolName) {
+  return ('https://api.data.gov/ed/collegescorecard/v1/schools.json?' +
+      'api_key=C8Uyh2jQCmfjfKN3qwqwcJOi77c5k3V6zM7cRFgJ&school.name=' + 
+      schoolName + '&fields=id,school.city,school.name,school.state,school' +
+      '.school_url,school.ownership,school.minority_serving.' +
+      'historically_black,latest.admissions.admission_rate.overall,' +
+      'latest.admissions.sat_scores.average.overall,latest.admissions' +
+      '.act_scores.midpoint.cumulative,latest.cost.tuition,latest.cost' +
+      '.avg_net_price,latest.student.size,latest.student.demographics' +
+      '.race_ethnicity.white,latest.student.demographics.race_ethnicity' +
+      '.black,latest.student.demographics.race_ethnicity.hispanic,' +
+      'latest.student.demographics.race_ethnicity.asian,latest' +
+      '.student.demographics.race_ethnicity.aian,latest.student.demographics' +
+      '.race_ethnicity.nhpi,latest.student.demographics.race_ethnicity' +
+      '.two_or_more,latest.student.demographics.race_ethnicity' +
+      '.non_resident_alien,latest.student.demographics.race_ethnicity' +
+      '.unknown,latest.student.demographics.men,latest.student' +
+      '.demographics.women,latest.completion.completion_rate_4yr_100nt,' +
+      'school.main_campus,school.institutional_characteristics.level')
+}
