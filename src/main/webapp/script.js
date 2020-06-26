@@ -44,11 +44,12 @@
  * school.ownership
  * school.school_url
  * school.state
+ * school.main_campus
  */
 function getSchoolInfo() {
   // Get school data from API.
   const link = 'https://api.data.gov/ed/collegescorecard/v1/schools.json?' +
-      'api_key=C8Uyh2jQCmfjfKN3qwqwcJOi77c5k3V6zM7cRFgJ&school.name=Harvard' +
+      'api_key=C8Uyh2jQCmfjfKN3qwqwcJOi77c5k3V6zM7cRFgJ&school.name=Rutgers' +
       '%20University&fields=id,school.city,school.name,school.state,school' +
       '.school_url,school.ownership,school.minority_serving.' +
       'historically_black,latest.admissions.admission_rate.overall,' +
@@ -68,49 +69,123 @@ function getSchoolInfo() {
   fetch(link)
   .then((response) => response.text())
   .then((data) => {
+    console.log(JSON.parse(data));
     const dataResults = JSON.parse(data).results[0];
     console.log(dataResults);
-    schoolHeader = document.getElementById('school-name');
-    schoolHeader.append(dataResults['school.name']);
 
+    // BAsic School Information.
     let ownership = '';
     if (dataResults['school.ownership'] == 1) {
       ownership = 'public';
     } else {
-      ownership = 'private'
+      ownership = 'private';
     }
-    schoolDesc = document.getElementById('school-desc');
-    schoolDesc.append(dataResults['school.name'] + 'is a ' + ownership + 
-        ' University in ' + dataResults['school.city'] + ', ' + 
-        dataResults['school.state']);
+    const name = dataResults['school.name'];
+    const city = dataResults['school.city'];
+    const state = dataResults['school.state']
+
+    const schoolDesc = document.getElementById('school-desc');
+    schoolDesc.append(name + ' is a ' + ownership + 
+        ' University in ' + city + ', ' + state);
+    
+    // Cost Statistics Variables.
+    const inStateTuition = dataResults['latest.cost.tuition.in_state'];
+    const outOfStateTuition = dataResults['latest.cost.tuition.out_of_state']
+    const costDiv = document.getElementById('cost');
+    costDiv.append('In-State Tuition: $' + inStateTuition);
+    costDiv.append('Out-of-State Tuition: $' + outOfStateTuition);
+    
+    // Admissions Statistics Variables.
+    const acceptanceRate = 
+        dataResults['latest.admissions.admission_rate.overall'] * 100;
+    const avgSAT = 
+        dataResults['latest.admissions.sat_scores.average.overall'];
+    const avgACT = 
+        dataResults['latest.admissions.act_scores.midpoint.cumulative'];
+
+    // Student Statistic Variables.
+    const numStudents = dataResults['latest.student.size'];
+    const raceHeader = 'latest.student.demographics.race_ethnicity.';
+    const numWhiteStudents = dataResults[raceHeader + 'white'] * numStudents;
+    const numAsianStudents = dataResults[raceHeader + 'asian'] * numStudents;
+    const numBlackStudents = dataResults[raceHeader + 'black'] * numStudents;
+    const numHispanicStudents = 
+        dataResults[raceHeader + 'hispanic'] * numStudents;
+    const numIndigenousStudents = 
+        dataResults[raceHeader + 'aian'] * numStudents;
+    const numMultiracialStudents = 
+        dataResults[raceHeader + 'two_or_more'] * numStudents;
+    const numUnreportedRaceStudnets = (dataResults[raceHeader + 'unknown'] + 
+        dataResults[raceHeader + 'non_resident_alien']) * numStudents;
+    const numMen = 
+        dataResults['latest.student.demographics.men'] * numStudents;
+    const numWomen = 
+        dataResults['latest.student.demographics.women'] * numStudents;
+    const graduationRate4yr = 
+        dataResults['latest.completion.completion_rate_4yr_100nt'];
+
+    schoolHeader = document.getElementById('school-name');
+    schoolHeader.append(dataResults['school.name']);
+
+    // Admissions Divs
+    const admissionsDiv = document.getElementById('admissions');
+    admissionsDiv.append('Acceptance Rate: ' + acceptanceRate + '%');
+    admissionsDiv.append('Average SAT Score: ' + avgSAT);
+    admissionsDiv.append('Average ACT Score: ' + avgACT);
 
     // Load the Visualization API and the corechart package.
     google.charts.load('current', {'packages':['corechart']});
 
     // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawRaceChart);
+    google.charts.setOnLoadCallback(drawGenderChart);
+    
+    const studentsDiv = document.getElementById("students");
+    studentsDiv.append('Population: ' + numStudents + ' Students');
+    studentsDiv.append('4 Year Graduation Rate: ' + graduationRate4yr * 100 + '%');
 
-    const raceHeader = 'latest.student.demographics.race_ethnicity.';
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
+    
+
+    
+
+    function drawRaceChart() {
+      let data = google.visualization.arrayToDataTable([
         ['Race', 'Percentage'],
-        ['White', dataResults[raceHeader + 'white'] * dataResults['latest.student.size']],
-        ['Asian', dataResults[raceHeader + 'asian'] * dataResults['latest.student.size']],
-        ['Black', dataResults[raceHeader + 'black'] * dataResults['latest.student.size']],
-        ['Hispanic', dataResults[raceHeader + 'hispanic'] * dataResults['latest.student.size']],
-        ['Indigenous Ameircan/Alaskan', dataResults[raceHeader + 'aian'] * dataResults['latest.student.size']],
-        ['Two or More Races', dataResults[raceHeader + 'two_or_more'] * dataResults['latest.student.size']],
-        ["Unreported", (dataResults[raceHeader + 'unknown'] + dataResults[raceHeader + 'non_resident_alien']) * dataResults['latest.student.size']],
+        ['White', numWhiteStudents],
+        ['Asian', numAsianStudents],
+        ['Black', numBlackStudents],
+        ['Hispanic', numHispanicStudents],
+        ['Indigenous Ameircan/Alaskan', numIndigenousStudents],
+        ['Two or More Races', numMultiracialStudents],
+        ["Unreported", numUnreportedRaceStudnets],
       ]);
 
-      var options = {
-        title: 'Racial Demographic Breakdown',
+      let options = {
+        title: 'Breakdown by Race',
         pieHole: 0.4,
-        colors: ['#D4EBD0', '#A4C5C6', 'FFEB99', '856C8B'],
+        colors: ['#C6ACA4', '#A4C5C6', '#FFEB99', '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
       };
 
-      var chart = new google.visualization.PieChart
+      let chart = new google.visualization.PieChart
           (document.getElementById('race-piechart'));
+      chart.draw(data, options);
+    }
+
+    function drawGenderChart() {
+      let data = google.visualization.arrayToDataTable([
+        ['Gender', 'Percentage'],
+        ['Men', numMen],
+        ['Women', numWomen],
+      ]);
+
+      let options = {
+        title: 'Breakdown by Gender',
+        pieHole: 0.4,
+        colors: ['#D4EBD0', '#A4C5C6'],
+      };
+
+      let chart = new google.visualization.PieChart
+          (document.getElementById('gender-piechart'));
       chart.draw(data, options);
     }
   });
