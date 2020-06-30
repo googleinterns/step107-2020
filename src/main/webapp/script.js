@@ -45,7 +45,9 @@
  * school.school_url
  * school.state
  * school.main_campus
+ * school.branches
  */
+
 function getSchoolInfo() {
   // Get school data from API.
 
@@ -53,7 +55,6 @@ function getSchoolInfo() {
   .then((response) => response.text())
   .then((data) => {
     parsedData = JSON.parse(data);
-    console.log(parsedData.results);
 
     let dataResults = [];
     let sateliteCampusesList = [];
@@ -71,8 +72,6 @@ function getSchoolInfo() {
       // get data result to be main campus
       // get satellites links and names
     }
-    console.log(sateliteCampusesList);
-    console.log(dataResults);
 
     // Basic School Information.
     let ownership = '';
@@ -143,7 +142,8 @@ function getSchoolInfo() {
     
     const studentsDiv = document.getElementById("students");
     studentsDiv.append('Population: ' + numStudents + ' Students');
-    studentsDiv.append('4 Year Graduation Rate: ' + graduationRate4yr * 100 + '%');
+    studentsDiv.append('4 Year Graduation Rate: ' + graduationRate4yr * 100 + 
+        '%');
 
     function drawRaceChart() {
       let data = google.visualization.arrayToDataTable([
@@ -160,7 +160,8 @@ function getSchoolInfo() {
       let options = {
         title: 'Breakdown by Race',
         pieHole: 0.4,
-        colors: ['#C6ACA4', '#A4C5C6', '#FFEB99', '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
+        colors: ['#C6ACA4', '#A4C5C6', '#FFEB99', 
+            '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
       };
 
       let chart = new google.visualization.PieChart
@@ -208,3 +209,4 @@ function getLink(schoolName) {
       '.demographics.women,latest.completion.completion_rate_4yr_100nt,' +
       'school.main_campus,school.institutional_characteristics.level')
 }
+
