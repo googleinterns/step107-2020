@@ -1,0 +1,141 @@
+#content {
+  margin: auto;
+  max-width: 100%;
+}
+
+div.header {
+  background: #856C8B;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  height: 100px;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+}
+
+div.header h1 {
+  color: #FFFFFF;
+  font-family: Ruluko;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: normal;
+  height: 89px;
+  line-height: 69px;
+  margin-left: 20px;
+  margin-top: 15px;
+  width: 340px;
+}
+
+input {
+  display: block;  
+  height: 25px;
+  margin-bottom: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1035px;
+}
+
+input:hover {
+  opacity: 0.7;
+}
+
+textarea {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: block;  
+  height: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1035px; 
+}
+
+textarea:hover {
+  opacity: 0.7;
+}
+
+#data-holder {
+  color: black;
+  font-size: 25px;
+  margin-bottom: 50px;
+  margin-top: 40px;
+}
+
+#comments-container {
+  background: #FFFFFF;
+  border: 0.25px solid black;  
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  height: 379px;
+  margin: auto;
+  width: 1035px;
+}
+
+#comments-header {
+  color: #856C8B; 
+  font-family: Aksara Bali Galang;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: normal;
+  height: 58.54px;
+  line-height: 86px; 
+  margin: auto;
+  margin-bottom: 15px;
+  text-align: center;
+  width: 1035px;
+}
+
+button {
+  background-color: #856C8B;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  margin: auto;
+  margin-bottom: 15px;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+a {
+  color: #856C8B;  
+  font-family: Aksara Bali Galang;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: normal;
+  height: 39px;
+  line-height: 43px;
+  text-decoration: none;
+  width: 1035px;
+}
+
+h5 {
+  color: #787878;  
+  display: block;
+  font-family: Aksara Bali Galang;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  height: 25.71px;
+  line-height: 49px;
+  margin: auto;
+  margin-bottom: 15px;
+  width: 955.07px;
+}
+
+p {
+  border-bottom: 1px solid #787878;  
+  color: #000000;  
+  display: block;
+  font-family: Aksara Bali Galang;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  height: 25.21px;
+  line-height: 25px;
+  margin: auto;
+  width: 959.74px;
+}
