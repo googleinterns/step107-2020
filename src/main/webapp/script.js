@@ -51,7 +51,10 @@
 function getSchoolInfo() {
   // Get school data from API.
 
-  fetch(getLink('Rutgers University'))
+  const schoolSearch = document.getElementById('school-search').value;
+  document
+
+  fetch(getLink(schoolSearch))
   .then((response) => response.text())
   .then((data) => {
     parsedData = JSON.parse(data);
@@ -85,6 +88,7 @@ function getSchoolInfo() {
     const state = dataResults['school.state']
 
     const schoolDesc = document.getElementById('school-desc');
+    schoolDesc.innerHTML = '';
     schoolDesc.append(name + ' is a ' + ownership + 
         ' University in ' + city + ', ' + state);
     
@@ -92,6 +96,7 @@ function getSchoolInfo() {
     const inStateTuition = dataResults['latest.cost.tuition.in_state'];
     const outOfStateTuition = dataResults['latest.cost.tuition.out_of_state']
     const costDiv = document.getElementById('cost');
+    costDiv.innerHTML = '';
     costDiv.append('In-State Tuition: $' + inStateTuition);
     costDiv.append('Out-of-State Tuition: $' + outOfStateTuition);
     
@@ -125,10 +130,12 @@ function getSchoolInfo() {
         dataResults['latest.completion.completion_rate_4yr_100nt'];
 
     schoolHeader = document.getElementById('school-name');
+    schoolHeader.innerHTML = '';
     schoolHeader.append(dataResults['school.name']);
 
     // Admissions Divs
     const admissionsDiv = document.getElementById('admissions');
+    admissionsDiv.innerHTML = '';
     admissionsDiv.append('Acceptance Rate: ' + acceptanceRate + '%');
     admissionsDiv.append('Average SAT Score: ' + avgSAT);
     admissionsDiv.append('Average ACT Score: ' + avgACT);
@@ -141,6 +148,7 @@ function getSchoolInfo() {
     google.charts.setOnLoadCallback(drawGenderChart);
     
     const studentsDiv = document.getElementById("students");
+    studentsDiv.innerHTML = '';
     studentsDiv.append('Population: ' + numStudents + ' Students');
     studentsDiv.append('4 Year Graduation Rate: ' + graduationRate4yr * 100 + 
         '%');

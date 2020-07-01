@@ -6,7 +6,9 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="script.js"></script>
   </head>
-  <body onload="getSchoolInfo()">
+  <body>
+    <input type="text" id="school-search"> 
+    <button onclick="getSchoolInfo()">Search</button>
     <h1 id="school-name"></h1>
     <h3 id="school-desc"></h3>
     <div id="students"></div>
