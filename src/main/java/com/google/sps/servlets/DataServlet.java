@@ -41,7 +41,6 @@ public class DataServlet extends HttpServlet {
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
     Query query = new Query(Comment.MESSAGE_KEY).addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -49,7 +48,6 @@ public class DataServlet extends HttpServlet {
 
     ArrayList<Comment> comments = new ArrayList<Comment>(); 
 
-    // limit 10 comments
     for(Entity entity : results.asIterable(FetchOptions.Builder.withLimit(10))) {
       String name = (String) entity.getProperty(Comment.NAME_KEY);
       String message = (String) entity.getProperty(Comment.MESSAGE_KEY);
