@@ -1,5 +1,5 @@
 body {
-background-color: #ECECEC;
+  background-color: #ECECEC;
 }
 
 #content {
@@ -29,6 +29,24 @@ div.header h1 {
   margin-left: 20px;
   margin-top: 15px;
 }
+
+#school-search {
+  float: right; 
+  height: 35px; 
+  position: absolute;
+  right: 45px;
+  top: 35px;
+  width: 300.29px;
+}
+
+search-button {
+  cursor: pointer;
+  float: right;
+  position: absolute;
+  right: 57px;
+  top: 47px;  
+}
+
 
 input {
   display: block;  

@@ -48,7 +48,9 @@ public class DataServlet extends HttpServlet {
 
     ArrayList<Comment> comments = new ArrayList<Comment>(); 
 
-    for(Entity entity : results.asIterable(FetchOptions.Builder.withLimit(10))) {
+    // For MVP, only fetch the first 10 comments.
+    Iterable<Entity> entities = results.asIterable(FetchOptions.Builder.withLimit(10));
+    for (Entity entity : entities) {
       String name = (String) entity.getProperty(Comment.NAME_KEY);
       String message = (String) entity.getProperty(Comment.MESSAGE_KEY);
       long timestamp = (long) entity.getProperty(Comment.TIMESTAMP_KEY);
@@ -70,7 +72,7 @@ public class DataServlet extends HttpServlet {
     String message = getParameter(request, "text-input", "");
     long timestamp = System.currentTimeMillis();
 
-    Date date = new Date(timestamp);
+    Date date = new Date();
     String time = dateFormat.format(date);
 
     Entity commentEntity = new Entity(Comment.MESSAGE_KEY);

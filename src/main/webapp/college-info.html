@@ -6,13 +6,15 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="script.js"></script>
   </head>
-  <body onload="getSchoolInfo()">
+  <body>
     <div class="header">
       <h1>Black Student Insight</h1>
+      <input type="text" id="school-search"> 
+      <search-button onclick="getSchoolInfo()">Search</search-button> 
     </div>
-
+    
     <div class="school-header">
-      <div id="school-name"></div>
+      <div id="school-name"></div> 
     </div>
 
     <div class="school-info">
