@@ -46,6 +46,7 @@
  * school.state
  * school.main_campus
  * school.branches
+ * root.id
  */
 
 function getSchoolInfo() {
@@ -81,9 +82,14 @@ function getSchoolInfo() {
     } else {
       ownership = 'private';
     }
+    const id = dataResults['root.id']
     const name = dataResults['school.name'];
     const city = dataResults['school.city'];
     const state = dataResults['school.state']
+
+    const header = document.getElementById('header');
+    header.innerHTML = '';
+    header.append(name);
 
     const schoolDesc = document.getElementById('school-desc');
     schoolDesc.innerHTML = '';
