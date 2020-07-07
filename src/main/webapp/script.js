@@ -49,11 +49,9 @@
  */
 
 function getSchoolInfo() {
-  // Get school data from API.
-
   const schoolSearch = document.getElementById('school-search').value;
-  document
 
+  // Get School Data from API.
   fetch(getLink(schoolSearch))
   .then((response) => response.text())
   .then((data) => {
