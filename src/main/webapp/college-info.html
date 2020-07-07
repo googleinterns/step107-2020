@@ -7,12 +7,31 @@
     <script src="script.js"></script>
   </head>
   <body onload="getSchoolInfo()">
-    <h1 id="school-name"></h1>
-    <h3 id="school-desc"></h3>
-    <div id="students"></div>
-    <div id="race-piechart" style="width: 900px; height: 500px;"></div>
-    <div id="gender-piechart" style="width: 900px; height: 500px;"></div>
-    <div id="admissions"></div>
-    <div id="cost"></div>
+    <div class="header">
+      <h1>Black Student Insight</h1>
+    </div>
+
+    <div class="school-header">
+      <div id="school-name"></div>
+    </div>
+
+    <div class="school-info">
+      <div id="school-desc"></div>
+      <div id="students"></div>
+    </div>  
+    
+    <div class="admissions-info">
+      <div id="admissions"></div>
+      <div id="cost"></div>
+    </div>
+
+    <div class="demographics">  
+      <div id="race-piechart"></div>
+      <div id="gender-piechart"></div>
+    </div>
+
+    <div class="reviews-footer">
+      <a class="reviews-button" href="comments.html">Student Reviews ></a>
+    </div>  
   </body>
 </html>

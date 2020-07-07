@@ -146,7 +146,7 @@ p {
   margin: auto;
   margin-top: 20px;
   width: 1035px;
-  height: 70px;
+  height: 80px;
   background: #FFFFFF;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -155,7 +155,7 @@ p {
   margin: auto;
   font-size: 30px;
   text-align: center;
-  padding-top: 18px;
+  padding-top: 22px;
   color: #856C8B;
 }
 
@@ -257,13 +257,12 @@ p {
   color: white;
   cursor: pointer;
   display: block;
-  font-size: 15px;
   float: right;
   margin-bottom: 50px;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 10px;
+  padding-top: 8px;
   text-align: center;  
   font-family: Aksara Bali Galang;
 }
