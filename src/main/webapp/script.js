@@ -12,54 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Varaibles for API data
- * latest.admissions.act_scores.midpoint.cumulative
- * latest.admissions.admission_rate.overall
- * latest.admissions.sat_scores.average.overall
- * latest.completion.completion_rate_4yr_100nt
- * latest.cost.avg_net_price.other_academic_year
- * latest.cost.avg_net_price.overall
- * latest.cost.avg_net_price.private
- * latest.cost.avg_net_price.program_year
- * latest.cost.avg_net_price.public
- * latest.cost.tuition.in_state
- * latest.cost.tuition.out_of_state
- * latest.cost.tuition.program_year
- * latest.student.demographics.men
- * latest.student.demographics.race_ethnicity.aian
- * latest.student.demographics.race_ethnicity.asian
- * latest.student.demographics.race_ethnicity.black
- * latest.student.demographics.race_ethnicity.hispanic
- * latest.student.demographics.race_ethnicity.nhpi
- * latest.student.demographics.race_ethnicity.non_resident_alien
- * latest.student.demographics.race_ethnicity.two_or_more
- * latest.student.demographics.race_ethnicity.unknown
- * latest.student.demographics.race_ethnicity.white
- * latest.student.demographics.women
- * latest.student.size
- * school.city
- * school.minority_serving.historically_black
- * school.name
- * school.ownership
- * school.school_url
- * school.state
- * school.main_campus
- * school.branches
- * root.id
- */
-
 function getSchoolInfo() {
-  const schoolSearch = document.getElementById('school-search').value;
-
   // Get School Data from API.
-  fetch(getLink(schoolSearch))
+  fetch(getLink(document.getElementById('school-search').value))
   .then((response) => response.text())
   .then((data) => {
     parsedData = JSON.parse(data);
 
     let dataResults = [];
     let sateliteCampusesList = [];
+    
     // Checks if there is main campus 
     if (parsedData.length == 1) {
       dataResults = data[0];
@@ -71,8 +33,6 @@ function getSchoolInfo() {
           sateliteCampusesList.push(campus)
         }
       });
-      // get data result to be main campus
-      // get satellites links and names
     }
 
     // Basic School Information.
