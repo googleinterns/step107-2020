@@ -7,21 +7,19 @@
   </head>
   <body>
     <div id="content">
-      <div class="header">
-        <h1>Black Student Insight</h1>
-      </div>   
-      <div id="form-div">
+      <header><h1>Black Student Insight</h1></header>   
+      <div>
         <a href="college-info.html">Back to Profile Home</a>  
-        <div id="comments-header">Student Reviews</div>
+        <h2>Student Reviews</h2>
         <div id="comments-container">
           <h5>Student • June 2, 2020</h5>
           <p>I love this school and recommend it 100%! The professors are caring and the administration is as well.</p>
         </div>
+        <h2>Leave a Review</h2>
         <form action="/data" method="POST">
-          <div id="comments-header">Leave a review:</div>
           <input name="name-input" placeholder="Name...">
           <textarea name="text-input" placeholder="Message..."></textarea>
-          <div><button type="submit">Submit</button></div>
+          <button type="submit">Submit</button>
         </form>
       </div>
     </div>  

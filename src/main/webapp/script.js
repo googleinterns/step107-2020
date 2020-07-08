@@ -216,13 +216,13 @@ function getLink(schoolName) {
       'school.main_campus,school.institutional_characteristics.level')
 }
 
-// Adds comments to page
+/** Adds comments to page. */
 function loadComments() {
   fetch('/data').then(response => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comments-container');
     comments.forEach((comment) => {
       commentListElement.appendChild(createCommentElement(comment.name,
-        comment.message, comment.time));
+          comment.message, comment.time));
     });
   });
 }
@@ -231,6 +231,7 @@ function loadComments() {
  * @param {string} name The name of the user who commented.
  * @param {string} message The message body of a comment post.
  * @param {string} time The time of a comment post.
+   @return {HTMLLIElement} commentElement.
  */
 function createCommentElement(name, message, time) {
   const commentElement = document.createElement('li');

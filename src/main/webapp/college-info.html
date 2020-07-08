@@ -7,33 +7,31 @@
     <script src="script.js"></script>
   </head>
   <body>
-    <div class="header">
+    <header>
       <h1>Black Student Insight</h1>
       <input type="text" id="school-search"> 
       <search-button onclick="getSchoolInfo()">Search</search-button> 
-    </div>
-    
-    <div class="school-header">
-      <div id="school-name"></div> 
-    </div>
+    </header>
+    <main>
+      <div class="school-header">
+        <h1 id="school-name"></h1> 
+      </div>
 
-    <div class="school-info">
-      <div id="school-desc"></div>
-      <div id="students"></div>
-    </div>  
-    
-    <div class="admissions-info">
-      <div id="admissions"></div>
-      <div id="cost"></div>
-    </div>
+      <section>
+        <p id="school-desc"></p>
+        <p id="students"></p>
+      </section>  
+        
+      <section>
+        <p id="admissions"></p>
+        <p id="cost"></p>
+      </section>
 
-    <div class="demographics">  
-      <div id="race-piechart"></div>
-      <div id="gender-piechart"></div>
-    </div>
-
-    <div class="reviews-footer">
+      <section>  
+        <p id="race-piechart"></p>
+        <p id="gender-piechart"></p>
+      </section>
       <a class="reviews-button" href="comments.html">Student Reviews ></a>
-    </div>  
+    </main>  
   </body>
 </html>
