@@ -24,9 +24,10 @@ function loadSchoolInfo() {
       .then((response) => response.text())
       .then((data) => {
         const parsedData = JSON.parse(data);
+        let schools = parsedData['results'];
         
         // Get main campus
-        let dataResults = getMainCampus(parsedData);
+        let dataResults = getMainCampus(schools);
 
         // Basic School Information Variables.
         const ownership = getOwnership(dataResults)
@@ -91,12 +92,7 @@ function loadSchoolInfo() {
         studentsDiv.append(`Population: ${numStudents} Students`);
         studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
 
-        // Load the Visualization API and the corechart package.
-        google.charts.load('current', {'packages':['corechart']});
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(drawRaceChart);
-        google.charts.setOnLoadCallback(drawGenderChart);
 
         // Draw charts.
         drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents, 
@@ -113,25 +109,32 @@ function loadSchoolInfo() {
  * @param {string} schoolName
  */
 function getLink(schoolName) {
-  return (`https://api.data.gov/ed/collegescorecard/v1/schools.json?
-      api_key=C8Uyh2jQCmfjfKN3qwqwcJOi77c5k3V6zM7cRFgJ&school.name= 
-      ${schoolName}&fields=id,school.city,school.name,school.state,school
-      .school_url,school.ownership,school.minority_serving.
-      historically_black,latest.admissions.admission_rate.overall,
-      latest.admissions.sat_scores.average.overall,latest.admissions
-      .act_scores.midpoint.cumulative,latest.cost.tuition,latest.cost
-      .avg_net_price,latest.student.size,latest.student.demographics
-      .race_ethnicity.white,latest.student.demographics.race_ethnicity
-      .black,latest.student.demographics.race_ethnicity.hispanic,
-      latest.student.demographics.race_ethnicity.asian,latest
-      .student.demographics.race_ethnicity.aian,latest.student.demographics
-      .race_ethnicity.nhpi,latest.student.demographics.race_ethnicity
-      .two_or_more,latest.student.demographics.race_ethnicity
-      .non_resident_alien,latest.student.demographics.race_ethnicity
-      .unknown,latest.student.demographics.men,latest.student
-      .demographics.women,latest.completion.completion_rate_4yr_100nt,
-      school.main_campus,school.institutional_characteristics.level`);
+  return ('https://api.data.gov/ed/collegescorecard/v1/schools.json?' +
+      'api_key=C8Uyh2jQCmfjfKN3qwqwcJOi77c5k3V6zM7cRFgJ&school.name=' +
+      `${schoolName}&fields=id,school.city,school.name,school.state,school` +
+      '.school_url,school.ownership,school.minority_serving.' +
+      'historically_black,latest.admissions.admission_rate.overall,' +
+      'latest.admissions.sat_scores.average.overall,latest.admissions' +
+      '.act_scores.midpoint.cumulative,latest.cost.tuition,latest.cost' +
+      '.avg_net_price,latest.student.size,latest.student.demographics' +
+      '.race_ethnicity.white,latest.student.demographics.race_ethnicity' +
+      '.black,latest.student.demographics.race_ethnicity.hispanic,' +
+      'latest.student.demographics.race_ethnicity.asian,latest' +
+      '.student.demographics.race_ethnicity.aian,latest.student.demographics' +
+      '.race_ethnicity.nhpi,latest.student.demographics.race_ethnicity' +
+      '.two_or_more,latest.student.demographics.race_ethnicity' +
+      '.non_resident_alien,latest.student.demographics.race_ethnicity' +
+      '.unknown,latest.student.demographics.men,latest.student' +
+      '.demographics.women,latest.completion.completion_rate_4yr_100nt,' +
+      'school.main_campus,school.institutional_characteristics.level');
 }
+
+// Load the Visualization API and the corechart package.
+google.charts.load('current', {'packages':['corechart']});
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.charts.setOnLoadCallback(drawRaceChart);
+google.charts.setOnLoadCallback(drawGenderChart);
 
 /**
  * Creates Donut Pie Chart displaying racial breakdown.
@@ -193,11 +196,13 @@ function getMainCampus(schools) {
   if (schools.length == 1) {
     return schools[0];
   } else {
-    schools.results.forEach((campus) => {
+    main = {}
+    schools.forEach((campus) => {
         if (campus['school.main_campus'] == 1) {
-          return campus;
-        } 
+          main = campus;
+        }
     });
+    return main;
     }
 }
 
