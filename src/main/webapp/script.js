@@ -25,7 +25,7 @@ function loadSchoolInfo() {
       .then((data) => {
         const parsedData = JSON.parse(data);
         let schools = parsedData['results'];
-        
+
         // Get main campus
         let dataResults = getMainCampus(schools);
 
@@ -39,7 +39,7 @@ function loadSchoolInfo() {
         // Cost Statistics Variables.
         const inStateTuition = getCostInfo(dataResults, 'in_state');
         const outOfStateTuition = getCostInfo(dataResults, 'out_of_state');
-        
+
         // Admissions Statistics Variables.
         const acceptanceRate = getAcceptanceRate(dataResults);
         const avgSAT = getSATInfo(dataResults, 'average.overall');
@@ -72,7 +72,7 @@ function loadSchoolInfo() {
         schoolDesc.innerHTML = '';
         schoolDesc.append(`${name} is a ${ownership} University 
             in ${city}, ${state}`);
-        
+
         // Cost Section.
         const costDiv = document.getElementById('cost');
         costDiv.innerHTML = '';
@@ -93,7 +93,7 @@ function loadSchoolInfo() {
         studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
 
         // Draw charts.
-        drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents, 
+        drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
             numHispanicStudents, numIndigenousStudents, numMultiracialStudents, 
             numUnreportedRaceStudnets);
         drawGenderChart(numMen, numWomen);
