@@ -30,7 +30,7 @@ function loadSchoolInfo() {
         let dataResults = getMainCampus(schools);
 
         // Basic School Information Variables.
-        const ownership = getOwnership(dataResults)
+        const ownership = getOwnership(dataResults);
         const id = getID(dataResults);
         const name = getSchoolInfo(dataResults, 'name');
         const city = getSchoolInfo(dataResults, 'city');
@@ -92,20 +92,17 @@ function loadSchoolInfo() {
         studentsDiv.append(`Population: ${numStudents} Students`);
         studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
 
-
-
         // Draw charts.
         drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents, 
             numHispanicStudents, numIndigenousStudents, numMultiracialStudents, 
             numUnreportedRaceStudnets);
         drawGenderChart(numMen, numWomen);
-    
   });
 }
 
 /**
- * Inserts the school name into the API link to the college scoreboard and 
- * returns the link.
+ * Inserts the school name into the college scoreboard API link and 
+ * returns the complete link.
  * @param {string} schoolName
  */
 function getLink(schoolName) {
@@ -230,7 +227,7 @@ function getID(data) {
  * Returns basic school info.
  * @param {object} data
  * @param {string} infoName Specific info to be extracted. Name defined by
- * College Scorecard API
+ * College Scorecard API.
  */
 function getSchoolInfo(data, infoName) {
   return data[`school.${infoName}`];
@@ -240,7 +237,7 @@ function getSchoolInfo(data, infoName) {
  * Returns cost info.
  * @param {object} data
  * @param {string} infoName Specific info to be extracted. Name defined by
- * College Scorecard API
+ * College Scorecard API.
  */
 function getCostInfo(data, infoName) {
   return data[`latest.cost.tuition.${infoName}`];
@@ -258,7 +255,7 @@ function getAcceptanceRate(data) {
  * Returns SAT info.
  * @param {object} data
  * @param {string} infoName Specific SAT info to be extracted. Name defined by
- * College Scorecard API
+ * College Scorecard API.
  */
 function getSATInfo(data, infoName) {
   return data[`latest.admissions.sat_scores.${infoName}`];
@@ -268,14 +265,14 @@ function getSATInfo(data, infoName) {
  * Returns ACT info.
  * @param {object} data
  * @param {string} infoName Specific ACT info to be extracted. Name defined by
- * College Scorecard API
+ * College Scorecard API.
  */
 function getACTInfo(data, infoName) {
   return data[`latest.admissions.act_scores.${infoName}`];
 }
 
 /**
- * Returns number of students.
+ * Returns number of students in the entire school.
  * @param {object} data
  */
 function getNumStudents(data) {
@@ -283,25 +280,25 @@ function getNumStudents(data) {
 }
 
 /**
- * Returns the race count of students as decimal out of 1.
+ * Returns the race proportion of students as a decimal out of 1.
  * @param {object} data
- * @param {string} race Name defined by College Scorecard API
+ * @param {string} race Name defined by College Scorecard API.
  */
 function getRace(data, race) {
   return data[`latest.student.demographics.race_ethnicity.${race}`];
 }
 
 /**
- * Returns the race count of students as decimal out of 1.
+ * Returns the gender proportion of students as a decimal out of 1.
  * @param {object} data
- * @param {string} gender Name defined by College Scorecard API
+ * @param {string} gender Name defined by College Scorecard API.
  */
 function getGender(data, gender) {
   return data[`latest.student.demographics.${gender}`];
 }
 
 /**
- * Returns 4 year graduation rate as a percentage out of 100.
+ * Returns the 4 year graduation rate as a percentage out of 100.
  * @param {object} data
  */
 function getGraduationRate(data) {
