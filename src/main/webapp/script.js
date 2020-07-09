@@ -231,10 +231,10 @@ function loadComments() {
  * @param {string} name The name of the user who commented.
  * @param {string} message The message body of a comment post.
  * @param {string} time The time of a comment post.
-   @return {HTMLLIElement} commentElement.
+ * @return {!HTMLLIElement} A comment list item.
  */
 function createCommentElement(name, message, time) {
-  const commentElement = document.createElement('li');
+  const commentElement = document.createElement('p');
   commentElement.innerText = name + ' posted ' + message + ' on ' + time;
   return commentElement;
 }
