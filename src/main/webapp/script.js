@@ -186,6 +186,8 @@ function drawGenderChart(numMen, numWomen) {
  /**
  * Finds and returns the main campus from a list of main and satellite campuses
  * of the same name.
+ * @param {!Array<object>} schools This is the array of school objects returned
+ * from a fetch query.
  */
 function getMainCampus(schools) {
   if (schools.length == 1) {
