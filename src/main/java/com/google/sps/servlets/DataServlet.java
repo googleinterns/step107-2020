@@ -17,14 +17,13 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-import com.google.appengine.api.datastore.FetchOptions;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.IOException;
-import java.lang.Integer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,15 +37,16 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-  
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query(Comment.MESSAGE_KEY).addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING);
+    Query query =
+        new Query(Comment.MESSAGE_KEY).addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    ArrayList<Comment> comments = new ArrayList<Comment>(); 
+    ArrayList<Comment> comments = new ArrayList<Comment>();
 
     // For MVP, only fetch the first 10 comments.
     Iterable<Entity> entities = results.asIterable(FetchOptions.Builder.withLimit(10));
@@ -57,7 +57,7 @@ public class DataServlet extends HttpServlet {
       String time = (String) entity.getProperty(Comment.TIME_KEY);
 
       Comment comment = new Comment(name, message, timestamp, time);
-      comments.add(comment); 
+      comments.add(comment);
     }
 
     final Gson gson = new Gson();
@@ -80,7 +80,7 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(Comment.MESSAGE_KEY, message);
     commentEntity.setProperty(Comment.TIMESTAMP_KEY, timestamp);
     commentEntity.setProperty(Comment.TIME_KEY, time);
-    
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
