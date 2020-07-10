@@ -217,7 +217,7 @@ function getMainCampus(schools) {
 
 /**
  * Returns whether the school is public or private.
- * @param {object} data
+ * @param {!Object} data
  * @return {string}
  */
 function getOwnership(data) {
@@ -229,7 +229,7 @@ function getOwnership(data) {
 }
 
 /**
- * @param {object} data
+ * @param {!Object} data
  * @return {number} School ID.
  */
 function getId(data) {
@@ -238,7 +238,7 @@ function getId(data) {
 
 /**
  * Returns basic school info.
- * @param {object} data
+ * @param {!Object} data
  * @param {string} infoName Specific info to be extracted. Name defined by
  *     College Scorecard API.
  * @return {string} School name, city, or state.
@@ -248,7 +248,7 @@ function getSchoolInfo(data, infoName) {
 }
 
 /**
- * @param {object} data
+ * @param {!Object} data
  * @param {string} infoName Specific info to be extracted. Name defined by
  *     College Scorecard API.
  * @return {number} Cost.
@@ -258,7 +258,7 @@ function getCostInfo(data, infoName) {
 }
 
 /**
- * @param {object} data
+ * @param {!Object} data
  * @returns Acceptance rate as a percentage out of 100.
  */
 function getAcceptanceRate(data) {
@@ -266,7 +266,7 @@ function getAcceptanceRate(data) {
 }
 
 /**
- * @param {object} data
+ * @param {!Object} data
  * @param {string} infoName Specific SAT info to be extracted. Name defined by
  *     College Scorecard API.
  * @returns {number} SAT Section Score.
@@ -276,7 +276,7 @@ function getSatInfo(data, infoName) {
 }
 
 /**
- * @param {object} data
+ * @param {!Object} data
  * @param {string} infoName Specific ACT info to be extracted. Name defined by
  *     College Scorecard API.
  * @return {number} ACT Section Score
@@ -286,7 +286,7 @@ function getActInfo(data, infoName) {
 }
 
 /**
- * @param {object} data
+ * @param {!Object} data
  * @return {number} Total enrolled students.
  */
 function getNumStudents(data) {
@@ -294,7 +294,7 @@ function getNumStudents(data) {
 }
 
 /**
- * @param {object} data
+ * @param {!Object} data
  * @param {string} race Name defined by College Scorecard API.
  * @return {number} Race proportion of students as a decimal out of 1.
  */
@@ -303,7 +303,7 @@ function getRace(data, race) {
 }
 
 /**
- * @param {object} data
+ * @param {!Object} data
  * @param {string} gender Name defined by College Scorecard API.
  * @return {number} Gender proportion of students as a decimal out of 1.
  */
@@ -312,9 +312,33 @@ function getGender(data, gender) {
 }
 
 /**
- * @param {object} data
+ * @param {!Object} data
  * @return {number} 4 year graduation rate as a percentage out of 100.
  */
 function getGraduationRate(data) {
-  return (data['latest.completion.completion_rate_4yr_100nt'] * 100).toFixed(1);
+  return (data['latest.completion.completion_rate_4yr_100nt'] * 100)
+      .toFixed(1);
+}
+
+/** Adds comments to page. */
+function loadComments() {
+  fetch('/data').then(response => response.json()).then((comments) => {
+    const commentListElement = document.getElementById('comments-container');
+    comments.forEach((comment) => {
+      commentListElement.appendChild(createCommentElement(comment.name,
+          comment.message, comment.time));
+    });
+  });
+}
+
+/**
+ * @param {string} name The name of the user who commented.
+ * @param {string} message The message body of a comment post.
+ * @param {string} time The time of a comment post.
+ * @return {!HTMLParagraphElement}} A comment paragraph item.
+ */
+function createCommentElement(name, message, time) {
+  const commentElement = document.createElement('p');
+  commentElement.innerText = name + ' posted ' + message + ' on ' + time;
+  return commentElement;
 }

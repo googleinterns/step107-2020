@@ -1,28 +1,195 @@
-#content {
-  margin: auto;
-  max-width: 100%;
+body {
+  background-color: #ececec;
+  color: black;
+  font-family: Aksara Bali Galang;
 }
 
-div.header {
-  background: #856C8B;
-  border: 1px solid #000000;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  box-sizing: border-box;
-  height: 100px;
-  left: 0px;
-  top: 0px;
+main {
+  margin: auto;
+  max-width: 1035px;
+  width: 100%;  
+}
+
+h1 {
+  color: white;
+  font-family: Ruluko;
+  font-size: 40px;
+  font-weight: normal;
+  line-height: 69px;
+  margin: 10px 20px;
+}
+
+h2,
+h3 {
+  color: #856c8b;  
+  text-align: center;
+}
+
+h4 {
+  color: #787878;  
+  display: block;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 49px;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+p { 
+  color: black;  
+  display: block;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 25px;
+  margin: auto;
+  width: 960px;
+}
+
+a {
+  color: #856c8b;  
+  font-size: 20px;
+  font-style: normal;
+  font-weight: normal;
+  height: 39px;
+  line-height: 43px;
+  text-decoration: none;
+}
+
+input {
+  display: block;  
+  height: 25px;
+  margin: 8px auto;
+  max-width: 1035px;
   width: 100%;
 }
 
-div.header h1 {
-  color: #FFFFFF;
-  font-family: Ruluko;
-  font-size: 60px;
-  font-style: normal;
-  font-weight: normal;
-  height: 89px;
-  line-height: 69px;
-  margin-left: 20px;
-  margin-top: 15px;
-  width: 340px;
+input:hover {
+  opacity: 0.7;
+}
+
+textarea {
+  box-shadow: 0 4px 4px #00000040;
+  display: block;  
+  height: 70px;
+  margin: auto;
+  max-width: 1035px;
+  width: 100%;
+}
+
+textarea:hover {
+  opacity: 0.7;
+}
+
+button {
+  background-color: #856c8b;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  margin: 15px auto 25px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+header {
+  background: #856c8b;
+  border: 1px solid black;
+  box-shadow: 0 4px 4px #00000040;
+  box-sizing: border-box;
+}
+
+#school-search {
+  height: 35px; 
+  position: absolute;
+  right: 45px;
+  top: 35px;
+  width: 300px;
+}
+
+search-button {
+  cursor: pointer;
+  position: absolute;
+  right: 57px;
+  top: 55px;  
+}
+
+#comments-container {
+  background: white;
+  border: 0.25px solid black;  
+  box-shadow: 0 4px 4px #00000040;
+  height: 379px;
+  margin: auto;
+  max-width: 1035px;
+  width: 100%;
+}
+
+#data-holder {
+  font-size: 25px;
+  margin-bottom: 50px;
+  margin-top: 40px;
+}
+
+#school-name {
+  background: white;
+  box-shadow: 0 4px 4px #00000040;  
+  color: #856c8b; 
+  font-size: 30px; 
+  margin: auto;
+  margin-top: 20px;
+  padding: 22px;
+  text-align: center;  
+}
+
+#admissions,
+#cost,
+#gender-piechart,
+#race-piechart,
+#school-desc,
+#students {
+  background: white;
+  box-shadow: 0 4px 4px #00000040;  
+  margin-top: 20px;
+  padding: 25px; 
+}
+
+#admissions,
+#cost,
+#school-desc,
+#students {
+  height: 50px;
+  width: calc(50% - 60px);
+}
+
+#admissions,
+#race-piechart,
+#school-desc {
+  float: left;  
+}
+
+#cost,
+#gender-piechart,
+#students {
+  float: right;
+}
+
+#gender-piechart,
+#race-piechart { 
+  height: 475px;
+  width: calc(50% - 60px);
+}
+
+.reviews-button {
+  background-color: #856c8b;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  float: right;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  text-align: center;  
 }

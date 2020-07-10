@@ -5,6 +5,20 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="getSchoolInfo()">
+  <body>
+    <div>
+      <header><h1>Black Student Insight</h1></header>   
+      <main>
+        <a href="college-info.html">Back to Profile Home</a>  
+        <h2>Student Reviews</h2>
+        <div id="comments-container"></div>
+        <h2>Leave a Review</h2>
+        <form action="/data" method="POST">
+          <input name="name-input" placeholder="Name...">
+          <textarea name="text-input" placeholder="Message..."></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </main>
+    </div>  
   </body>
 </html>
