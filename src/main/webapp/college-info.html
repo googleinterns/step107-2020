@@ -11,7 +11,7 @@
     <header>
       <h1>Black Student Insight</h1>
       <input type="text" id="school-search">
-      <search-button>Search</search-button>
+      <search-button onclick="loadSchoolInfo()">Search</search-button>
     </header>
     <main>
       <h1 id="school-name"></h1>
@@ -32,9 +32,5 @@
       </section>
       <a class="reviews-button" href="comments.html">Student Reviews</a>
     </main>
-    <script>
-      const search = document.getElementByTagName("search-button");
-      search.addEventListener("click", loadSchoolInfo());
-    </script>
   </body>
 </html>
