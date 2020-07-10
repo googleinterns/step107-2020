@@ -13,8 +13,8 @@
 // limitations under the License.
 
 /**
- * Fethces the data from the College ScoreCard API and populates the college
- * info html page with the appropriate information.
+ * Fetches the data from the College ScoreCard API and populates the college
+ *     info html page with the appropriate information.
  */
 function loadSchoolInfo() {
   const schoolSearch = document.getElementById('school-search').value;
@@ -31,7 +31,7 @@ function loadSchoolInfo() {
 
         // Basic School Information Variables.
         const ownership = getOwnership(dataResults);
-        const id = getID(dataResults);
+        const id = getId(dataResults);
         const name = getSchoolInfo(dataResults, 'name');
         const city = getSchoolInfo(dataResults, 'city');
         const state = getSchoolInfo(dataResults, 'state');
@@ -42,14 +42,14 @@ function loadSchoolInfo() {
 
         // Admissions Statistics Variables.
         const acceptanceRate = getAcceptanceRate(dataResults);
-        const avgSAT = getSATInfo(dataResults, 'average.overall');
-        const avgACT = getACTInfo(dataResults, 'midpoint.cumulative');
+        const avgSat = getSatInfo(dataResults, 'average.overall');
+        const avgAct = getActInfo(dataResults, 'midpoint.cumulative');
 
         // Student Statistic Variables.
         const numStudents = getNumStudents(dataResults);
         const numMen = getGender(dataResults, 'men') * numStudents;
         const numWomen = getGender(dataResults, 'women') * numStudents;
-        const graduationRate4yr = getGraduationRate(data);
+        const graduationRate4yr = getGraduationRate(dataResults);
         const numWhiteStudents = getRace(dataResults, 'white') * numStudents;
         const numAsianStudents = getRace(dataResults, 'asian') * numStudents;
         const numBlackStudents = getRace(dataResults, 'black') * numStudents;
@@ -59,7 +59,7 @@ function loadSchoolInfo() {
             getRace(dataResults, 'aian') * numStudents;
         const numMultiracialStudents =
             getRace(dataResults, 'two_or_more') * numStudents;
-        const numUnreportedRaceStudnets = (getRace(dataResults, 'unknown') +
+        const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
             getRace(dataResults, 'non_resident_alien')) * numStudents;
         
         // Name Section.
@@ -83,8 +83,8 @@ function loadSchoolInfo() {
         const admissionsDiv = document.getElementById('admissions');
         admissionsDiv.innerHTML = '';
         admissionsDiv.append(`Acceptance Rate: ${acceptanceRate}%`);
-        admissionsDiv.append(`Average SAT Score: ${avgSAT}`);
-        admissionsDiv.append(`Average ACT Score: ${avgACT}`);
+        admissionsDiv.append(`Average SAT Score: ${avgSat}`);
+        admissionsDiv.append(`Average ACT Score: ${avgAct}`);
 
         // Students Section.
         const studentsDiv = document.getElementById("students");
@@ -92,17 +92,19 @@ function loadSchoolInfo() {
         studentsDiv.append(`Population: ${numStudents} Students`);
         studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
 
+
+
         // Draw charts.
         drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
             numHispanicStudents, numIndigenousStudents, numMultiracialStudents, 
-            numUnreportedRaceStudnets);
+            numUnreportedRaceStudents);
         drawGenderChart(numMen, numWomen);
   });
 }
 
 /**
  * Inserts the school name into the college scoreboard API link and 
- * returns the complete link.
+ *     returns the complete link.
  * @param {string} schoolName
  */
 function getLink(schoolName) {
@@ -127,7 +129,7 @@ function getLink(schoolName) {
 }
 
 // Load the Visualization API and the corechart package.
-google.charts.load('current', {'packages':['corechart']});
+google.charts.load('current', {packages: ['corechart']});
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(drawRaceChart);
@@ -135,10 +137,17 @@ google.charts.setOnLoadCallback(drawGenderChart);
 
 /**
  * Creates Donut Pie Chart displaying racial breakdown.
+ * @param {number} numWhiteStudents
+ * @param {number} numAsianStudents
+ * @param {number} numBlackStudents
+ * @param {number} numHispanicStudents
+ * @param {number} numIndigenousStudents
+ * @param {number} numMultiracialStudents
+ * @param {number} numUnreportedRaceStudents
  */
 function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents, 
     numHispanicStudents, numIndigenousStudents, numMultiracialStudents, 
-    numUnreportedRaceStudnets) {
+    numUnreportedRaceStudents) {
       let data = google.visualization.arrayToDataTable([
         ['Race', 'Percentage'],
         ['White', numWhiteStudents],
@@ -147,7 +156,7 @@ function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
         ['Hispanic', numHispanicStudents],
         ['Indigenous Ameircan/Alaskan', numIndigenousStudents],
         ['Two or More Races', numMultiracialStudents],
-        ["Unreported", numUnreportedRaceStudnets],
+        ["Unreported", numUnreportedRaceStudents],
       ]);
 
       let options = {
@@ -164,6 +173,8 @@ function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
 
 /**
  * Creates Donut Pie Chart displaying gender breakdown.
+ * @param {number} numMen
+ * @param {number} numWomen
  */
 function drawGenderChart(numMen, numWomen) {
   let data = google.visualization.arrayToDataTable([
@@ -183,11 +194,12 @@ function drawGenderChart(numMen, numWomen) {
   chart.draw(data, options);
 }
 
- /**
+/**
  * Finds and returns the main campus from a list of main and satellite campuses
- * of the same name.
- * @param {!Array<object>} schools This is the array of school objects returned
- * from a fetch query.
+ *     of the same name.
+ * @param {!Array<!Object>} schools The array of school objects returned from
+ *     a fetch query.
+ * @return {!Object}
  */
 function getMainCampus(schools) {
   if (schools.length == 1) {
@@ -195,17 +207,18 @@ function getMainCampus(schools) {
   } else {
     main = {}
     schools.forEach((campus) => {
-        if (campus['school.main_campus'] == 1) {
-          main = campus;
-        }
+      if (campus['school.main_campus'] == 1) {
+        main = campus;
+      }
     });
     return main;
-    }
+  }
 }
 
- /**
+/**
  * Returns whether the school is public or private.
  * @param {object} data
+ * @return {string}
  */
 function getOwnership(data) {
   if (data['school.ownership'] == 1) {
@@ -215,11 +228,11 @@ function getOwnership(data) {
   }
 }
 
- /**
- * Returns school ID.
+/**
  * @param {object} data
+ * @return {number} School ID.
  */
-function getID(data) {
+function getId(data) {
   return data['root.id'];
 }
 
@@ -227,80 +240,81 @@ function getID(data) {
  * Returns basic school info.
  * @param {object} data
  * @param {string} infoName Specific info to be extracted. Name defined by
- * College Scorecard API.
+ *     College Scorecard API.
+ * @return {string} School name, city, or state.
  */
 function getSchoolInfo(data, infoName) {
   return data[`school.${infoName}`];
 }
 
 /**
- * Returns cost info.
  * @param {object} data
  * @param {string} infoName Specific info to be extracted. Name defined by
- * College Scorecard API.
+ *     College Scorecard API.
+ * @return {number} Cost.
  */
 function getCostInfo(data, infoName) {
   return data[`latest.cost.tuition.${infoName}`];
 }
 
 /**
- * Returns acceptance rate as a percentage out of 100.
  * @param {object} data
+ * @returns Acceptance rate as a percentage out of 100.
  */
 function getAcceptanceRate(data) {
   return data['latest.admissions.admission_rate.overall'] * 100;
 }
 
 /**
- * Returns SAT info.
  * @param {object} data
  * @param {string} infoName Specific SAT info to be extracted. Name defined by
- * College Scorecard API.
+ *     College Scorecard API.
+ * @returns {number} SAT Section Score.
  */
-function getSATInfo(data, infoName) {
+function getSatInfo(data, infoName) {
   return data[`latest.admissions.sat_scores.${infoName}`];
 }
 
 /**
- * Returns ACT info.
  * @param {object} data
  * @param {string} infoName Specific ACT info to be extracted. Name defined by
- * College Scorecard API.
+ *     College Scorecard API.
+ * @return {number} ACT Section Score
  */
-function getACTInfo(data, infoName) {
+function getActInfo(data, infoName) {
   return data[`latest.admissions.act_scores.${infoName}`];
 }
 
 /**
- * Returns number of students in the entire school.
  * @param {object} data
+ * @return {number} Total enrolled students.
  */
 function getNumStudents(data) {
   return data['latest.student.size'];
 }
 
 /**
- * Returns the race proportion of students as a decimal out of 1.
  * @param {object} data
  * @param {string} race Name defined by College Scorecard API.
+ * @return {number} Race proportion of students as a decimal out of 1.
  */
 function getRace(data, race) {
   return data[`latest.student.demographics.race_ethnicity.${race}`];
 }
 
 /**
- * Returns the gender proportion of students as a decimal out of 1.
  * @param {object} data
  * @param {string} gender Name defined by College Scorecard API.
+ * @return {number} Gender proportion of students as a decimal out of 1.
  */
 function getGender(data, gender) {
   return data[`latest.student.demographics.${gender}`];
 }
 
 /**
- * Returns the 4 year graduation rate as a percentage out of 100.
  * @param {object} data
+ * @return {number} 4 year graduation rate as a percentage out of 100.
  */
 function getGraduationRate(data) {
-  return (data['latest.completion.completion_rate_4yr_100nt'] * 100);
+  return (data['latest.completion.completion_rate_4yr_100nt'] * 100).toFixed(1);
 }
