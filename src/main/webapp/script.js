@@ -304,3 +304,26 @@ function getGender(data, gender) {
 function getGraduationRate(data) {
   return (data['latest.completion.completion_rate_4yr_100nt'] * 100);
 }
+
+/** Adds comments to page. */
+function loadComments() {
+  fetch('/data').then(response => response.json()).then((comments) => {
+    const commentListElement = document.getElementById('comments-container');
+    comments.forEach((comment) => {
+      commentListElement.appendChild(createCommentElement(comment.name,
+          comment.message, comment.time));
+    });
+  });
+}
+
+/**
+ * @param {string} name The name of the user who commented.
+ * @param {string} message The message body of a comment post.
+ * @param {string} time The time of a comment post.
+ * @return {!HTMLParagraphElement}} A comment paragraph item.
+ */
+function createCommentElement(name, message, time) {
+  const commentElement = document.createElement('p');
+  commentElement.innerText = name + ' posted ' + message + ' on ' + time;
+  return commentElement;
+}
