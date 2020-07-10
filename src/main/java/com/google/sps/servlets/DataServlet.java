@@ -41,12 +41,13 @@ public class DataServlet extends HttpServlet {
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query(Comment.MESSAGE_KEY).addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING);
+    Query query = 
+        new Query(Comment.MESSAGE_KEY).addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    ArrayList<Comment> comments = new ArrayList<Comment>(); 
+    ArrayList<Comment> comments = new ArrayList<Comment>();
 
     // For MVP, only fetch the first 10 comments.
     Iterable<Entity> entities = results.asIterable(FetchOptions.Builder.withLimit(10));
@@ -57,7 +58,7 @@ public class DataServlet extends HttpServlet {
       String time = (String) entity.getProperty(Comment.TIME_KEY);
 
       Comment comment = new Comment(name, message, timestamp, time);
-      comments.add(comment); 
+      comments.add(comment);
     }
 
     final Gson gson = new Gson();

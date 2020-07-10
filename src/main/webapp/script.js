@@ -24,14 +24,13 @@ function loadSchoolInfo() {
       .then((response) => response.text())
       .then((data) => {
         const parsedData = JSON.parse(data);
-        let schools = parsedData['results'];
+        const schools = parsedData['results'];
 
         // Get main campus
-        let dataResults = getMainCampus(schools);
+        const dataResults = getMainCampus(schools);
 
         // Basic School Information Variables.
         const ownership = getOwnership(dataResults);
-        const id = getId(dataResults);
         const name = getSchoolInfo(dataResults, 'name');
         const city = getSchoolInfo(dataResults, 'city');
         const state = getSchoolInfo(dataResults, 'state');
@@ -61,7 +60,7 @@ function loadSchoolInfo() {
             getRace(dataResults, 'two_or_more') * numStudents;
         const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
             getRace(dataResults, 'non_resident_alien')) * numStudents;
-        
+
         // Name Section.
         schoolHeader = document.getElementById('school-name');
         schoolHeader.innerHTML = '';
@@ -78,7 +77,7 @@ function loadSchoolInfo() {
         costDiv.innerHTML = '';
         costDiv.append(`In-State Tuition: $${inStateTuition}`);
         costDiv.append(`Out-of-State Tuition: $${outOfStateTuition}`);
-        
+
         // Admissions Section.
         const admissionsDiv = document.getElementById('admissions');
         admissionsDiv.innerHTML = '';
@@ -87,23 +86,21 @@ function loadSchoolInfo() {
         admissionsDiv.append(`Average ACT Score: ${avgAct}`);
 
         // Students Section.
-        const studentsDiv = document.getElementById("students");
+        const studentsDiv = document.getElementById('students');
         studentsDiv.innerHTML = '';
         studentsDiv.append(`Population: ${numStudents} Students`);
         studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
 
-
-
         // Draw charts.
         drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
-            numHispanicStudents, numIndigenousStudents, numMultiracialStudents, 
+            numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
             numUnreportedRaceStudents);
         drawGenderChart(numMen, numWomen);
-  });
+      });
 }
 
 /**
- * Inserts the school name into the college scoreboard API link and 
+ * Inserts the school name into the college scoreboard API link and
  *     returns the complete link.
  * @param {string} schoolName
  */
@@ -145,10 +142,10 @@ google.charts.setOnLoadCallback(drawGenderChart);
  * @param {number} numMultiracialStudents
  * @param {number} numUnreportedRaceStudents
  */
-function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents, 
-    numHispanicStudents, numIndigenousStudents, numMultiracialStudents, 
+function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
+    numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
     numUnreportedRaceStudents) {
-      let data = google.visualization.arrayToDataTable([
+      const data = google.visualization.arrayToDataTable([
         ['Race', 'Percentage'],
         ['White', numWhiteStudents],
         ['Asian', numAsianStudents],
@@ -156,18 +153,17 @@ function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
         ['Hispanic', numHispanicStudents],
         ['Indigenous Ameircan/Alaskan', numIndigenousStudents],
         ['Two or More Races', numMultiracialStudents],
-        ["Unreported", numUnreportedRaceStudents],
+        ['Unreported', numUnreportedRaceStudents],
       ]);
 
-      let options = {
+      const options = {
         title: 'Breakdown by Race',
         pieHole: 0.4,
-        colors: ['#C6ACA4', '#A4C5C6', '#FFEB99', 
+        colors: ['#C6ACA4', '#A4C5C6', '#FFEB99',
             '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
       };
 
-      let chart = new google.visualization.PieChart
-          (document.getElementById('race-piechart'));
+      const chart = new google.visualization.PieChart(document.getElementById('race-piechart'));
       chart.draw(data, options);
 }
 
@@ -177,20 +173,19 @@ function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
  * @param {number} numWomen
  */
 function drawGenderChart(numMen, numWomen) {
-  let data = google.visualization.arrayToDataTable([
+  const data = google.visualization.arrayToDataTable([
       ['Gender', 'Percentage'],
       ['Men', numMen],
       ['Women', numWomen],
   ]);
 
-  let options = {
+  const options = {
       title: 'Breakdown by Gender',
       pieHole: 0.4,
       colors: ['#D4EBD0', '#A4C5C6'],
   };
 
-  let chart = new google.visualization.PieChart
-      (document.getElementById('gender-piechart'));
+  const chart = new google.visualization.PieChart(document.getElementById('gender-piechart'));
   chart.draw(data, options);
 }
 
@@ -205,7 +200,7 @@ function getMainCampus(schools) {
   if (schools.length == 1) {
     return schools[0];
   } else {
-    main = {}
+    main = {};
     schools.forEach((campus) => {
       if (campus['school.main_campus'] == 1) {
         main = campus;
@@ -259,7 +254,7 @@ function getCostInfo(data, infoName) {
 
 /**
  * @param {!Object} data
- * @returns Acceptance rate as a percentage out of 100.
+ * @return {number} Acceptance rate as a percentage out of 100.
  */
 function getAcceptanceRate(data) {
   return data['latest.admissions.admission_rate.overall'] * 100;
@@ -269,7 +264,7 @@ function getAcceptanceRate(data) {
  * @param {!Object} data
  * @param {string} infoName Specific SAT info to be extracted. Name defined by
  *     College Scorecard API.
- * @returns {number} SAT Section Score.
+ * @return {number} SAT Section Score.
  */
 function getSatInfo(data, infoName) {
   return data[`latest.admissions.sat_scores.${infoName}`];
@@ -322,7 +317,7 @@ function getGraduationRate(data) {
 
 /** Adds comments to page. */
 function loadComments() {
-  fetch('/data').then(response => response.json()).then((comments) => {
+  fetch('/data').then((response) => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comments-container');
     comments.forEach((comment) => {
       commentListElement.appendChild(createCommentElement(comment.name,
