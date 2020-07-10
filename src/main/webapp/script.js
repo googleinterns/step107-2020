@@ -104,6 +104,7 @@ function loadSchoolInfo() {
  * Inserts the school name into the college scoreboard API link and
  *     returns the complete link.
  * @param {string} schoolName
+ * @return {void}
  */
 function getLink(schoolName) {
   return ('https://api.data.gov/ed/collegescorecard/v1/schools.json?' +
@@ -161,7 +162,7 @@ function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
     title: 'Breakdown by Race',
     pieHole: 0.4,
     colors: ['#C6ACA4', '#A4C5C6', '#FFEB99',
-        '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
+      '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
   };
 
   const chart = new google.visualization.PieChart(document

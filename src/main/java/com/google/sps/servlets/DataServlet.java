@@ -24,7 +24,6 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.IOException;
-import java.lang.Integer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +37,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DataServlet extends HttpServlet {
 
   private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-  
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query =
@@ -81,7 +80,7 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(Comment.MESSAGE_KEY, message);
     commentEntity.setProperty(Comment.TIMESTAMP_KEY, timestamp);
     commentEntity.setProperty(Comment.TIME_KEY, time);
-    
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
