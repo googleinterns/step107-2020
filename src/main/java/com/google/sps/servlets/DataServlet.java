@@ -41,7 +41,7 @@ public class DataServlet extends HttpServlet {
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = 
+    Query query =
         new Query(Comment.MESSAGE_KEY).addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

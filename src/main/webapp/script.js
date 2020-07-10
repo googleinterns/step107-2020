@@ -163,7 +163,8 @@ function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
             '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
       };
 
-      const chart = new google.visualization.PieChart(document.getElementById('race-piechart'));
+      const chart = new google.visualization.PieChart
+          (document.getElementById('race-piechart'));
       chart.draw(data, options);
 }
 
@@ -185,7 +186,8 @@ function drawGenderChart(numMen, numWomen) {
       colors: ['#D4EBD0', '#A4C5C6'],
   };
 
-  const chart = new google.visualization.PieChart(document.getElementById('gender-piechart'));
+  const chart = new google.visualization.PieChart
+      (document.getElementById('gender-piechart'));
   chart.draw(data, options);
 }
 
@@ -221,14 +223,6 @@ function getOwnership(data) {
   } else {
     return 'private';
   }
-}
-
-/**
- * @param {!Object} data
- * @return {number} School ID.
- */
-function getId(data) {
-  return data['root.id'];
 }
 
 /**
