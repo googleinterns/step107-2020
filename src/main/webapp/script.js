@@ -30,7 +30,6 @@ function loadSchoolInfo() {
         const dataResults = getMainCampus(schools);
 
         // Basic School Information Variables.
-        const id = getId(dataResults);
         const ownership = getOwnership(dataResults);
         const name = getSchoolInfo(dataResults, 'name');
         const city = getSchoolInfo(dataResults, 'city');
@@ -225,14 +224,6 @@ function getOwnership(data) {
   } else {
     return 'private';
   }
-}
-
-/**
- * @param {!Object} data
- * @return {number} School ID.
- */
-function getId(data) {
-  return data['root.id'];
 }
 
 /**
