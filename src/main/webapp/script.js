@@ -30,6 +30,7 @@ function loadSchoolInfo() {
         const dataResults = getMainCampus(schools);
 
         // Basic School Information Variables.
+        const id = getId(dataResults);
         const ownership = getOwnership(dataResults);
         const name = getSchoolInfo(dataResults, 'name');
         const city = getSchoolInfo(dataResults, 'city');
@@ -145,27 +146,27 @@ google.charts.setOnLoadCallback(drawGenderChart);
 function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
     numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
     numUnreportedRaceStudents) {
-      const data = google.visualization.arrayToDataTable([
-        ['Race', 'Percentage'],
-        ['White', numWhiteStudents],
-        ['Asian', numAsianStudents],
-        ['Black', numBlackStudents],
-        ['Hispanic', numHispanicStudents],
-        ['Indigenous Ameircan/Alaskan', numIndigenousStudents],
-        ['Two or More Races', numMultiracialStudents],
-        ['Unreported', numUnreportedRaceStudents],
-      ]);
+  const data = google.visualization.arrayToDataTable([
+    ['Race', 'Percentage'],
+    ['White', numWhiteStudents],
+    ['Asian', numAsianStudents],
+    ['Black', numBlackStudents],
+    ['Hispanic', numHispanicStudents],
+    ['Indigenous Ameircan/Alaskan', numIndigenousStudents],
+    ['Two or More Races', numMultiracialStudents],
+    ['Unreported', numUnreportedRaceStudents],
+  ]);
 
-      const options = {
-        title: 'Breakdown by Race',
-        pieHole: 0.4,
-        colors: ['#C6ACA4', '#A4C5C6', '#FFEB99',
-            '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
-      };
+  const options = {
+    title: 'Breakdown by Race',
+    pieHole: 0.4,
+    colors: ['#C6ACA4', '#A4C5C6', '#FFEB99',
+        '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
+  };
 
-      const chart = new google.visualization.PieChart
-          (document.getElementById('race-piechart'));
-      chart.draw(data, options);
+  const chart = new google.visualization.PieChart(document
+      .getElementById('race-piechart'));
+  chart.draw(data, options);
 }
 
 /**
@@ -175,19 +176,19 @@ function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
  */
 function drawGenderChart(numMen, numWomen) {
   const data = google.visualization.arrayToDataTable([
-      ['Gender', 'Percentage'],
-      ['Men', numMen],
-      ['Women', numWomen],
+    ['Gender', 'Percentage'],
+    ['Men', numMen],
+    ['Women', numWomen],
   ]);
 
   const options = {
-      title: 'Breakdown by Gender',
-      pieHole: 0.4,
-      colors: ['#D4EBD0', '#A4C5C6'],
+    title: 'Breakdown by Gender',
+    pieHole: 0.4,
+    colors: ['#D4EBD0', '#A4C5C6'],
   };
 
-  const chart = new google.visualization.PieChart
-      (document.getElementById('gender-piechart'));
+  const chart = new google.visualization.PieChart(document
+      .getElementById('gender-piechart'));
   chart.draw(data, options);
 }
 
@@ -223,6 +224,14 @@ function getOwnership(data) {
   } else {
     return 'private';
   }
+}
+
+/**
+ * @param {!Object} data
+ * @return {number} School ID.
+ */
+function getId(data) {
+  return data['root.id'];
 }
 
 /**
