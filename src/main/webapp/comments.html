@@ -7,11 +7,18 @@
   </head>
   <body>
     <div>
-      <header><h1>Black Student Insight</h1></header>   
+      <header>
+        <a href="index.html"><h1>Black Student Insight</h1></a>
+      </header>
       <main>
-        <a href="college-info.html">Back to Profile Home</a>  
+        <div class="topnav"> 
+          <a href="college-info.html">School Info</a>
+          <a class="active" href="comments.html">Student Reviews</a> 
+        </div> 
+
         <h2>Student Reviews</h2>
         <div id="comments-container"></div>
+
         <h2>Leave a Review</h2>
         <form action="/data" method="POST">
           <input name="name-input" placeholder="Name...">
