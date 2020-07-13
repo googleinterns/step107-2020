@@ -23,7 +23,9 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import java.io.*;
 import java.io.IOException;
+import java.lang.Integer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,6 +73,7 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, "name-input", "");
     String message = getParameter(request, "text-input", "");
     long timestamp = System.currentTimeMillis();
+    int id = getId(request);
 
     Date date = new Date();
     String time = dateFormat.format(date);
@@ -80,15 +83,23 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(Comment.MESSAGE_KEY, message);
     commentEntity.setProperty(Comment.TIMESTAMP_KEY, timestamp);
     commentEntity.setProperty(Comment.TIME_KEY, time);
+    commentEntity.setProperty("SchoolId", id);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
-    response.sendRedirect("/comments.html");
+    String responseLink = String.format("/comments.html?id=%d", id);
+    response.sendRedirect(responseLink);
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     return value == null ? defaultValue : value;
+  }
+
+  /** Returns the ID of the current school. */
+  private int getId(HttpServletRequest request) {
+    int id = Integer.parseInt(request.getParameter("school-id"));
+    return id;
   }
 }

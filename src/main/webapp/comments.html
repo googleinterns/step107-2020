@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="loadComments()">
     <div>
       <header><h1>Black Student Insight</h1></header>   
       <main>
@@ -13,10 +13,11 @@
         <h2>Student Reviews</h2>
         <div id="comments-container"></div>
         <h2>Leave a Review</h2>
-        <form action="/data" method="POST">
+        <form id="submit-review" method="POST">
+          <input type="hidden" name="school-id" id="school-id"> 
           <input name="name-input" placeholder="Name...">
           <textarea name="text-input" placeholder="Message..."></textarea>
-          <button type="submit">Submit</button>
+          <button id="submit-review-button" type="submit">Submit</button>
         </form>
       </main>
     </div>  

@@ -30,6 +30,7 @@ function loadSchoolInfo() {
         const dataResults = getMainCampus(schools);
 
         // Basic School Information Variables.
+        const id = getId(dataResults);
         const ownership = getOwnership(dataResults);
         const name = getSchoolInfo(dataResults, 'name');
         const city = getSchoolInfo(dataResults, 'city');
@@ -60,6 +61,15 @@ function loadSchoolInfo() {
             getRace(dataResults, 'two_or_more') * numStudents;
         const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
             getRace(dataResults, 'non_resident_alien')) * numStudents;
+
+        // School ID.
+        const body = document.getElementById('body');
+        body.setAttribute('data-id', id);
+
+        
+        const reviewsButton = document.getElementById('reviews-button');
+        reviewsButton.setAttribute('href', `/comments.html?id=${id}`);
+
 
         // Name Section.
         schoolHeader = document.getElementById('school-name');
@@ -227,6 +237,14 @@ function getOwnership(data) {
 }
 
 /**
+ * @param {!Object} data
+ * @return {number} School ID.
+ */
+function getId(data) {
+  return data['id'];
+}
+
+/**
  * Returns basic school info.
  * @param {!Object} data
  * @param {string} infoName Specific info to be extracted. Name defined by
@@ -311,7 +329,9 @@ function getGraduationRate(data) {
 }
 
 /** Adds comments to page. */
-function loadComments() {
+function loadComments(id) {
+  setReviewsButton(id);
+  console.log(document.getElementById('submit-review'));
   fetch('/data').then((response) => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comments-container');
     comments.forEach((comment) => {
@@ -319,6 +339,7 @@ function loadComments() {
           comment.message, comment.time));
     });
   });
+  
 }
 
 /**
@@ -332,3 +353,15 @@ function createCommentElement(name, message, time) {
   commentElement.innerText = name + ' posted ' + message + ' on ' + time;
   return commentElement;
 }
+
+function setReviewsButton() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('id')
+  
+  const submitReviewForm = document.getElementById('submit-review');
+  submitReviewForm.setAttribute('action', `/data?id=${id}`);
+  const idInputElement = document.getElementById('school-id');
+  idInputElement.setAttribute('value', id);
+}
+
