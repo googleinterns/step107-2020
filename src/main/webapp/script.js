@@ -326,8 +326,8 @@ function getGraduationRate(data) {
 /** Adds comments to page. */
 function loadComments() {
   const id = setReviewsButton();
-  console.log(`/data?school-id=${id}`);
-  fetch(`/data?school-id=${id}`).then((response) => response.json()).then((comments) => {
+  fetch(`/data?school-id=${id}`)
+      .then((response) => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comments-container');
     comments.forEach((comment) => {
       commentListElement.appendChild(createCommentElement(comment.name,
@@ -348,14 +348,14 @@ function createCommentElement(name, message, time) {
   return commentElement;
 }
 
-/** 
+/**
  * Adds ID to form submission.
  * @return {number} Current school's ID.
  */
 function setReviewsButton() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get('school-id')
+  const id = urlParams.get('school-id');
 
   const submitReviewForm = document.getElementById('submit-review');
   submitReviewForm.setAttribute('action', `/data?school-id=${id}`);

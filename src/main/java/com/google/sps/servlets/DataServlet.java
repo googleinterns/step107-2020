@@ -28,7 +28,6 @@ import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.io.*;
 import java.io.IOException;
-import java.lang.Integer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,7 +49,9 @@ public class DataServlet extends HttpServlet {
     // Filter query based on current ID of school.
     Filter idFilter = new FilterPredicate("SchoolId", FilterOperator.EQUAL, id);
     Query query =
-        new Query(Comment.MESSAGE_KEY).addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING).setFilter(idFilter);
+        new Query(Comment.MESSAGE_KEY)
+            .addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING)
+            .setFilter(idFilter);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
@@ -81,7 +82,6 @@ public class DataServlet extends HttpServlet {
     String message = getParameter(request, "text-input", "");
     long timestamp = System.currentTimeMillis();
     int id = getId(request);
-
     Date date = new Date();
     String time = dateFormat.format(date);
 
