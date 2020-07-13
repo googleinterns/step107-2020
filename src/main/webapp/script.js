@@ -62,14 +62,9 @@ function loadSchoolInfo() {
         const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
             getRace(dataResults, 'non_resident_alien')) * numStudents;
 
-        // School ID.
-        const body = document.getElementById('body');
-        body.setAttribute('data-id', id);
-
-        
+        // Set School ID to link comments page.
         const reviewsButton = document.getElementById('reviews-button');
         reviewsButton.setAttribute('href', `/comments.html?id=${id}`);
-
 
         // Name Section.
         schoolHeader = document.getElementById('school-name');
@@ -329,9 +324,8 @@ function getGraduationRate(data) {
 }
 
 /** Adds comments to page. */
-function loadComments(id) {
-  setReviewsButton(id);
-  console.log(document.getElementById('submit-review'));
+function loadComments() {
+  setReviewsButton();
   fetch('/data').then((response) => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comments-container');
     comments.forEach((comment) => {
@@ -339,7 +333,6 @@ function loadComments(id) {
           comment.message, comment.time));
     });
   });
-  
 }
 
 /**
@@ -354,11 +347,12 @@ function createCommentElement(name, message, time) {
   return commentElement;
 }
 
+/** Adds ID to form submission. */
 function setReviewsButton() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('id')
-  
+
   const submitReviewForm = document.getElementById('submit-review');
   submitReviewForm.setAttribute('action', `/data?id=${id}`);
   const idInputElement = document.getElementById('school-id');
