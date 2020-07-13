@@ -8,12 +8,21 @@
     <script src="script.js"></script>
   </head>
   <body>
+      <!-- note: remember to onload hideElements when you find something to fill page -->
     <header>
-      <h1>Black Student Insight</h1>
-      <input type="text" id="school-search">
-      <search-button onclick="loadSchoolInfo()">Search</search-button>
+      <nav>
+        <ul>
+          <li><a href="index.html">Black Student Insight</a></li> 
+          <li><a href="college-info.html">Find a School</a></li>
+        <!-- <li><a href="contact-us.html">Contact Us</a><li>  -->
+          <!-- future contact page? -->
+          </ul>
+      <input type="search" id="school-search" onsearch= "loadSchoolInfo()" placeholder="Find a School">
+      <!-- <search-button onclick="loadSchoolInfo()">Search</search-button> -->
     </header>
-    <main>
+    <section>
+    
+    <main id="main">
       <h1 id="school-name"></h1>
 
       <section>
