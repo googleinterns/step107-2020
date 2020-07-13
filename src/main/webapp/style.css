@@ -90,9 +90,14 @@ header {
   box-sizing: border-box;
 }
 
+
+.topnav {
+  overflow: hidden;
+}
+
 .topnav a {
-  color: #856c8b;
-  display: inline-block;
+  color: #856c8b;  
+  float: left;
   font-size: 18px;
   margin: 15px;
   padding: 0 10px;
@@ -201,6 +206,7 @@ header {
   margin-bottom: 30px;
   width: calc(50% - 60px);
 }
+<<<<<<< HEAD
 
 li.pointer {
   cursor: pointer;
@@ -213,3 +219,5 @@ li:hover {
 ul {
   list-style-type: none;
 }
+=======
+>>>>>>> Create navigation bar for easy access to Student Reviews page.
