@@ -62,9 +62,9 @@ function loadSchoolInfo() {
         const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
             getRace(dataResults, 'non_resident_alien')) * numStudents;
 
-        // Set School ID to link comments page.
-        const reviewsButton = document.getElementById('reviews-button');
-        reviewsButton.setAttribute('href', `/comments.html?id=${id}`);
+        // Set School ID to link to reviews page.
+        const linkReviewsPage = document.getElementById('reviews-button');
+        linkReviewsPage.setAttribute('href', `/comments.html?school-id=${id}`);
 
         // Name Section.
         schoolHeader = document.getElementById('school-name');
@@ -325,8 +325,9 @@ function getGraduationRate(data) {
 
 /** Adds comments to page. */
 function loadComments() {
-  setReviewsButton();
-  fetch('/data').then((response) => response.json()).then((comments) => {
+  const id = setReviewsButton();
+  console.log(`/data?school-id=${id}`);
+  fetch(`/data?school-id=${id}`).then((response) => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comments-container');
     comments.forEach((comment) => {
       commentListElement.appendChild(createCommentElement(comment.name,
@@ -347,15 +348,20 @@ function createCommentElement(name, message, time) {
   return commentElement;
 }
 
-/** Adds ID to form submission. */
+/** 
+ * Adds ID to form submission.
+ * @return {number} Current school's ID.
+ */
 function setReviewsButton() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get('id')
+  const id = urlParams.get('school-id')
 
   const submitReviewForm = document.getElementById('submit-review');
-  submitReviewForm.setAttribute('action', `/data?id=${id}`);
+  submitReviewForm.setAttribute('action', `/data?school-id=${id}`);
   const idInputElement = document.getElementById('school-id');
   idInputElement.setAttribute('value', id);
+
+  return id;
 }
 
