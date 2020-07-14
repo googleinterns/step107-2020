@@ -364,4 +364,3 @@ function setReviewsButton() {
 
   return id;
 }
-
