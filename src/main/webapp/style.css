@@ -1,18 +1,18 @@
 body {
   background-color: #ececec;
   color: black;
-  font-family: Aksara Bali Galang;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 main {
   margin: auto;
   max-width: 1035px;
-  width: 100%;  
+  width: 100%;
 }
 
 h1 {
   color: white;
-  font-family: Ruluko;
+  font-family: 'Gill Sans', sans-serif;
   font-size: 40px;
   font-weight: normal;
   line-height: 69px;
@@ -21,12 +21,13 @@ h1 {
 
 h2,
 h3 {
-  color: #856c8b;  
+  color: #856c8b;
+  font-weight: normal;
   text-align: center;
 }
 
 h4 {
-  color: #787878;  
+  color: #787878;
   display: block;
   font-size: 18px;
   font-style: normal;
@@ -36,8 +37,8 @@ h4 {
   margin-bottom: 15px;
 }
 
-p { 
-  color: black;  
+p {
+  color: black;
   display: block;
   font-size: 16px;
   font-style: normal;
@@ -48,7 +49,7 @@ p {
 }
 
 a {
-  color: #856c8b;  
+  color: #856c8b;
   font-size: 20px;
   font-style: normal;
   font-weight: normal;
@@ -58,7 +59,7 @@ a {
 }
 
 input {
-  display: block;  
+  display: block;
   height: 25px;
   margin: 8px auto;
   max-width: 1035px;
@@ -71,7 +72,7 @@ input:hover {
 
 textarea {
   box-shadow: 0 4px 4px #00000040;
-  display: block;  
+  display: block;
   height: 70px;
   margin: auto;
   max-width: 1035px;
@@ -80,18 +81,6 @@ textarea {
 
 textarea:hover {
   opacity: 0.7;
-}
-
-button {
-  background-color: #856c8b;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: block;
-  font-size: 15px;
-  margin: 15px auto 25px;
-  padding: 10px 20px;
-  text-align: center;
 }
 
 header {
@@ -106,7 +95,7 @@ header {
 }
 
 .topnav a {
-  color: #856c8b;  
+  color: #856c8b;
   float: left;
   font-size: 18px;
   margin: 15px;
@@ -123,23 +112,37 @@ header {
 }
 
 #school-search {
-  height: 35px; 
+  height: 35px;
   position: absolute;
   right: 45px;
   top: 35px;
   width: 300px;
 }
 
-search-button {
+#search-button {
+  background-color: white;
+  border: none;
   cursor: pointer;
   position: absolute;
-  right: 57px;
-  top: 55px;  
+  right: 48px;
+  top: 55px;
+}
+
+#submit-button {
+  background-color: #856c8b;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  margin: 15px auto 25px;
+  padding: 10px 20px;
+  text-align: center;
 }
 
 #comments-container {
   background: white;
-  border: 0.25px solid black;  
+  border: 0.25px solid black;
   box-shadow: 0 4px 4px #00000040;
   height: 379px;
   margin: auto;
@@ -155,13 +158,13 @@ search-button {
 
 #school-name {
   background: white;
-  box-shadow: 0 4px 4px #00000040;  
-  color: #856c8b; 
-  font-size: 30px; 
+  box-shadow: 0 4px 4px #00000040;
+  color: #856c8b;
+  font-size: 30px;
   margin: auto;
   margin-top: 20px;
   padding: 22px;
-  text-align: center;  
+  text-align: center;
 }
 
 #admissions,
@@ -171,9 +174,9 @@ search-button {
 #school-desc,
 #students {
   background: white;
-  box-shadow: 0 4px 4px #00000040;  
+  box-shadow: 0 4px 4px #00000040;
   margin-top: 20px;
-  padding: 25px; 
+  padding: 25px;
 }
 
 #admissions,
@@ -187,7 +190,7 @@ search-button {
 #admissions,
 #race-piechart,
 #school-desc {
-  float: left;  
+  float: left;
 }
 
 #cost,
@@ -197,7 +200,7 @@ search-button {
 }
 
 #gender-piechart,
-#race-piechart { 
+#race-piechart {
   height: 475px;
   margin-bottom: 30px;
   width: calc(50% - 60px);

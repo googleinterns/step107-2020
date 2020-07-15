@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Reviews Page</title>  
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
@@ -11,10 +12,10 @@
         <a href="index.html"><h1>Black Student Insight</h1></a>
       </header>
       <main>
-        <div class="topnav"> 
+        <div class="topnav">
           <a href="college-info.html">School Info</a>
-          <a class="active" href="comments.html">Student Reviews</a> 
-        </div> 
+          <a class="active" href="comments.html">Student Reviews</a>
+        </div>
 
         <h2>Student Reviews</h2>
         <div id="comments-container"></div>
@@ -23,9 +24,9 @@
         <form action="/data" method="POST">
           <input name="name-input" placeholder="Name...">
           <textarea name="text-input" placeholder="Message..."></textarea>
-          <button type="submit">Submit</button>
+          <button id="submit-button" type="submit">Submit</button>
         </form>
       </main>
-    </div>  
+    </div>
   </body>
 </html>
