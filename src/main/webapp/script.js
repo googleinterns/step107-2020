@@ -20,7 +20,7 @@ function loadSchoolInfo() {
   const schoolSearch = document.getElementById('school-search').value;
 
   // Get School Data from API.
-  fetch(getLink(schoolSearch))
+  fetch(getLinkBySchoolName(schoolSearch))
       .then((response) => response.text())
       .then((data) => {
         const parsedData = JSON.parse(data);
@@ -30,7 +30,7 @@ function loadSchoolInfo() {
         const dataResults = getMainCampus(schools);
 
         // Basic School Information Variables.
-        const id = getId(dataResults);
+        const id = getIdFromApiData(dataResults);
         const ownership = getOwnership(dataResults);
         const name = getSchoolInfo(dataResults, 'name');
         const city = getSchoolInfo(dataResults, 'city');
@@ -110,7 +110,7 @@ function loadSchoolInfo() {
  * @param {string} schoolName
  * @return {void}
  */
-function getLink(schoolName) {
+function getLinkBySchoolName(schoolName) {
   return ('https://api.data.gov/ed/collegescorecard/v1/schools.json?' +
       'api_key=C8Uyh2jQCmfjfKN3qwqwcJOi77c5k3V6zM7cRFgJ&school.name=' +
       `${schoolName}&fields=id,school.city,school.name,school.state,school` +
@@ -235,7 +235,7 @@ function getOwnership(data) {
  * @param {!Object} data
  * @return {number} School ID.
  */
-function getId(data) {
+function getIdFromApiData(data) {
   return data['id'];
 }
 
@@ -325,7 +325,8 @@ function getGraduationRate(data) {
 
 /** Adds comments to page. */
 function loadComments() {
-  const id = setReviewsButton();
+  const id = getSchoolIdFromUrl();
+  prepReviewForm(id);
   fetch(`/data?school-id=${id}`)
       .then((response) => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comments-container');
@@ -352,15 +353,16 @@ function createCommentElement(name, message, time) {
  * Adds ID to form submission.
  * @return {number} Current school's ID.
  */
-function setReviewsButton() {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get('school-id');
-
+function prepReviewForm(id) {
   const submitReviewForm = document.getElementById('submit-review');
   submitReviewForm.setAttribute('action', `/data?school-id=${id}`);
   const idInputElement = document.getElementById('school-id');
   idInputElement.setAttribute('value', id);
+}
 
+function getSchoolIdFromUrl() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('school-id');
   return id;
 }
