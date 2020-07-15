@@ -13,6 +13,14 @@
 // limitations under the License.
 
 /**
+ * Add load school info page function to search button.
+ */
+function init() {
+  const searchButton = document.getElementById('search-button');
+  searchButton.addEventListener('click', () => {loadSchoolInfo();});
+}
+
+/**
  * Fetches the data from the College ScoreCard API and populates the college
  *     info html page with the appropriate information.
  */
@@ -63,8 +71,9 @@ function loadSchoolInfo() {
             getRace(dataResults, 'non_resident_alien')) * numStudents;
 
         // Set School ID to link to reviews page.
-        const linkReviewsPage = document.getElementById('reviews-button');
-        linkReviewsPage.setAttribute('href', `/comments.html?school-id=${id}`);
+        const reviewsPageLink = document.getElementById('reviews-button');
+        reviewsPageLink.setAttribute('href', `/comments.html?school-id=${id}`);
+        reviewsPageLink.addEventListener('click', () => {init();});
 
         // Name Section.
         schoolHeader = document.getElementById('school-name');
@@ -329,12 +338,12 @@ function loadComments() {
   prepReviewForm(id);
   fetch(`/data?school-id=${id}`)
       .then((response) => response.json()).then((comments) => {
-    const commentListElement = document.getElementById('comments-container');
-    comments.forEach((comment) => {
-      commentListElement.appendChild(createCommentElement(comment.name,
-          comment.message, comment.time));
-    });
-  });
+        const commentListElement = document.getElementById('comments-container');
+        comments.forEach((comment) => {
+          commentListElement.appendChild(createCommentElement(comment.name,
+              comment.message, comment.time));
+        });
+      });
 }
 
 /**
@@ -366,3 +375,5 @@ function getSchoolIdFromUrl() {
   const id = urlParams.get('school-id');
   return id;
 }
+
+init();
