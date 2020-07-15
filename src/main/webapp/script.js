@@ -369,7 +369,7 @@ function prepReviewForm(id) {
 }
 
 /**
- * @returns {number} ID from page URL.
+ * @return {number} ID from page URL.
  */
 function getSchoolIdFromUrl() {
   const queryString = window.location.search;
