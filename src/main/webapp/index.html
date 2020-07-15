@@ -7,12 +7,13 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="script.js"></script>
   </head>
-  <body onload="hideElements()">
+  <body onload="loadSchoolInfo()">
     <header>
       <a href="index.html"><h1>Black Student Insight</h1></a>
-      <input type="search" id="school-search" onsearch= "loadSchoolInfo()" placeholder"Find your institution">
+      <input type="search" id="school-search" onsearch="loadSchoolInfo()" placeholder="Find your institution"/>
     </header>
-    <div id= "information">  
+    
+    <div id = "information">
       <h2>Our Focus</h2>
       <p>Black Student Insight serves as a platform for current Black college students
         to share their experiences and beliefs regarding their campuses, while also
@@ -22,28 +23,29 @@
       </p>
 
       <h2>Meet The Creators</h2>
-      <figure>
-        <a href="https://www.linkedin.com/in/jalen-jenkins-b75772186"><img src="jalen"
-        alt="Jalen Jenkins" width="300" height="300">
-        <figcaption>Jalen is currently a Computer Science student in Cornell
+      <div id="headshots">
+        <figure class="inline-block">
+          <a href="https://www.linkedin.com/in/jalen-jenkins-b75772186"><img src="images/jalen.png"
+          alt="Jalen Jenkins" width="200" height="200"></a>
+          <figcaption>Jalen is currently a Computer Science student in Cornell
             University's Class of 2023. He intends to pursue a entrepreneurial endeavors
-             in the future!</figcaption>
-      </figure>
-      <figure>
-        <a href="https://www.linkedin.com/in/sydney-beasley-6b04b8168"><img src="sydney"
-        alt="Sydney Beasley" width="300" height="300">
-        <figcaption>Sydney is currently a Computer Science student in Xavier
-          University of Louisiana's Class of 2022. She aspires to become a UX Designer
-          after graduating!</figcaption>
-      </figure>
-      <figure>
-        <a href="https://www.linkedin.com/in/toba-olokungbemi"><img src="toba"
-        alt="Toba Olokungbemi" width="300" height="300">
-        <figcaption>Toba is currently a Computer Science student in Harvard
-          University's Class of 2022. He intends to become a Software Engineer
-          after graduating!</figcaption>
-      </figure>
-
+            in the future!</figcaption>
+        </figure>
+        <figure class="inline-block">
+          <a href="https://www.linkedin.com/in/sydney-beasley-6b04b8168"><img src="images/sydney.png"
+          alt="Sydney Beasley" width="200" height="200"></a>
+          <figcaption>Sydney is currently a Computer Science student in Xavier
+            University of Louisiana's Class of 2022. She aspires to become a UX Designer
+            after graduating!</figcaption>
+        </figure>
+        <figure class="inline-block">
+          <a href="https://www.linkedin.com/in/toba-olokungbemi"><img src="images/toba.png"
+          alt="Toba Olokungbemi" width="200" height="200"></a>
+          <figcaption>Toba is currently a Computer Science student in Harvard
+            University's Class of 2022. He intends to become a Software Engineer
+            after graduating!</figcaption>
+        </figure>
+      </div>
       <h2>Our Reasoning</h2>
       <p> The college application process is one of the most stressful
         periods during a teen’s academic career.  Amongst difficult

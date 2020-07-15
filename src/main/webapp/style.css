@@ -9,7 +9,11 @@ main {
   max-width: 1035px;
   width: 100%;  
 }
-
+figcaption {
+    width: 307px;
+    color: black;
+    margin-inline-start: auto
+}
 h1 {
   color: white;
   font-family: Ruluko;
@@ -46,6 +50,7 @@ p {
   line-height: 25px;
   margin: auto;
   width: 960px;
+  padding:25px;
 }
 
 a {
@@ -170,6 +175,11 @@ search-button {
   float: left;  
 }
 
+#headshots{
+  margin:auto;
+  width: 960px;
+}
+
 #cost,
 #gender-piechart,
 #students {
@@ -192,5 +202,12 @@ search-button {
   margin-bottom: 50px;
   margin-top: 20px;
   padding: 10px 20px;
-  text-align: center;  
+  text-align: center;
+}
+
+.inline-block {
+  display: inline-block;
+  margin: auto;
+  max-width: 960px;
+  text-align: center;
 }
