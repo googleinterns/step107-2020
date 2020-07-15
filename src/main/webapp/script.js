@@ -17,7 +17,7 @@
  */
 function init() {
   const searchButton = document.getElementById('search-button');
-  searchButton.addEventListener('click', () => {loadSchoolInfo();});
+  searchButton.addEventListener('click', () => loadSchoolInfo());
 }
 
 /**
@@ -73,7 +73,6 @@ function loadSchoolInfo() {
         // Set School ID to link to reviews page.
         const reviewsPageLink = document.getElementById('reviews-button');
         reviewsPageLink.setAttribute('href', `/comments.html?school-id=${id}`);
-        reviewsPageLink.addEventListener('click', () => {init();});
 
         // Name Section.
         schoolHeader = document.getElementById('school-name');
@@ -338,9 +337,9 @@ function loadComments() {
   prepReviewForm(id);
   fetch(`/data?school-id=${id}`)
       .then((response) => response.json()).then((comments) => {
-        const commentListElement = document.getElementById('comments-container');
+        const commentListItem = document.getElementById('comments-container');
         comments.forEach((comment) => {
-          commentListElement.appendChild(createCommentElement(comment.name,
+          commentListItem.appendChild(createCommentElement(comment.name,
               comment.message, comment.time));
         });
       });
@@ -360,7 +359,7 @@ function createCommentElement(name, message, time) {
 
 /**
  * Adds ID to form submission.
- * @return {number} Current school's ID.
+ * @param {number} id
  */
 function prepReviewForm(id) {
   const submitReviewForm = document.getElementById('submit-review');
@@ -369,6 +368,9 @@ function prepReviewForm(id) {
   idInputElement.setAttribute('value', id);
 }
 
+/**
+ * @returns {number} ID from page URL.
+ */
 function getSchoolIdFromUrl() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
