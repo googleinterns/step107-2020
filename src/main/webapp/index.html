@@ -9,95 +9,71 @@
   </head>
   <body onload="hideElements()">
     <header>
-      <nav>
-        <ul>
-          <li><a href="index.html">Black Student Insight</a></li> 
-          <li><a href="college-info.html">Find a School</a></li>
-        <!-- <li><a href="contact-us.html">Contact Us</a><li>  -->
-          <!-- future contact page? -->
-          </ul>
-        <input type="search" id="school-search" onsearch="loadSchoolInfo()" 
-        placeholder="Find a School" onkeypress="hideElements()"/>
-        <!-- <home-button onsearch="loadSchoolInfo()">Search</home-button> -->
-      </nav> 
+      <a href="index.html"><h1>Black Student Insight</h1></a>
+      <input type="search" id="school-search" onsearch= "loadSchoolInfo()" placeholder"Find your institution">
     </header>
-    
-    <div id= "information">
-      
+    <div id= "information">  
       <h2>Our Focus</h2>
-      <br>
-      <p>Black Student Insight serves as a platform for current minority students 
-          to share their experiences and beliefs regarding their campuses, but also 
-          allows prospective students to look at diversity breakdowns, as well as
-          average admissions statistics for their university of interest.
+      <p>Black Student Insight serves as a platform for current Black college students
+        to share their experiences and beliefs regarding their campuses, while also
+        providing prospective students with general information about the schools,
+        such as overall student diversity demographics, admissions statistics, and
+        tuition for their university of interest.
       </p>
-      <br>
-      <!-- insert diversity-image.jpg
-      <br> -->
-<!-- note: get images from sydney & toba to add to this section of home page
+
       <h2>Meet The Creators</h2>
       <figure>
-        <a href="https://www.linkedin.com/in/jalen-jenkins-b75772186"><img src="jalen" 
+        <a href="https://www.linkedin.com/in/jalen-jenkins-b75772186"><img src="jalen"
         alt="Jalen Jenkins" width="300" height="300">
         <figcaption>Jalen is currently a Computer Science student in Cornell
             University's Class of 2023. He intends to pursue a entrepreneurial endeavors
              in the future!</figcaption>
       </figure>
       <figure>
-        <a href="https://www.linkedin.com/in/sydney-beasley-6b04b8168"><img src="sydney" 
+        <a href="https://www.linkedin.com/in/sydney-beasley-6b04b8168"><img src="sydney"
         alt="Sydney Beasley" width="300" height="300">
         <figcaption>Sydney is currently a Computer Science student in Xavier
-            University of Louisiana's Class of 2022. She aspires to become a UX Designer 
-            after graduating!</figcaption>
+          University of Louisiana's Class of 2022. She aspires to become a UX Designer
+          after graduating!</figcaption>
       </figure>
       <figure>
-        <a href="https://www.linkedin.com/in/toba-olokungbemi"><img src="toba" 
+        <a href="https://www.linkedin.com/in/toba-olokungbemi"><img src="toba"
         alt="Toba Olokungbemi" width="300" height="300">
         <figcaption>Toba is currently a Computer Science student in Harvard
-            University's Class of 2022. He intends to become a Software Engineer 
-            after graduating!</figcaption>
-      </figure> -->
-      
-      <br>
+          University's Class of 2022. He intends to become a Software Engineer
+          after graduating!</figcaption>
+      </figure>
+
       <h2>Our Reasoning</h2>
-      <br>
       <p> The college application process is one of the most stressful
-          periods during a teen’s academic career.  Amongst difficult 
-          course work, standardized testing, multiple questions probing
-          into their qualifications and life story, high schoolers are
-          constantly being reminded that the decisions made during this
-          time will determine the course of the rest of their lives.
-          Consequently, the pressure to find the “perfect college” drives
-          students to scour the internet searching for videos, articles,
-          and reviews that could provide any insight into what their life
-          would look like on a particular campus. Sites like Niche.com or
-          StudentReviews.com offer students this by allowing students that
-          actually attend the school to rate and review their experiences. 
+        periods during a teen’s academic career.  Amongst difficult
+        course work, standardized testing, multiple questions probing
+        into their qualifications and life story, high schoolers are
+        constantly being reminded that the decisions made during this
+        time will determine the course of the rest of their lives.
+        Consequently, the pressure to find the “perfect college” drives
+        students to scour the internet searching for videos, articles,
+        and reviews that could provide any insight into what their life
+        would look like on a particular campus. Sites like Niche.com or
+        StudentReviews.com offer students this by allowing students that
+        actually attend the school to rate and review their experiences.
       </p>
-      <br>
       <p>As once prospective high school applicants and now college
-          students, one thing the creators noticed is that it is very difficult for
-          minority students to find insightful information about the cultural
-          communities on these websites. Especially in predominantly white
-          institutions, the minority communities often make up just a small
-          percentage of the school. Despite being a fraction of the overall
-          population, they often have very strong, active communities to the
-          point that the experience of a minority student will be vastly
-          different than that of their white counterparts. Because these
-          communities only make up a small percentage of the school, these
-          experiences are not highly visible on these college rating sites.
-          The sentiments expressed on these websites do not necessarily provide
-          minority prospective students that foresight into what their own
-          lives will be like.
+        students, one thing the creators noticed is that it is very difficult for
+        minority students to find insightful information about the cultural
+        communities on these websites. Especially in predominantly white
+        institutions, the minority communities often make up just a small
+        percentage of the school. Despite being a fraction of the overall
+        population, they often have very strong, active communities to the
+        point that the experience of a minority student will be vastly
+        different than that of their white counterparts. Because these
+        communities only make up a small percentage of the school, these
+        experiences are not highly visible on these college rating sites.
+        The sentiments expressed on these websites do not necessarily provide
+        minority prospective students that foresight into what their own
+        lives will be like.
       </p>
-      <br>
-    
     </div>
-<!-- Second Search Bar (POST MVP)     
-    <div id="search bar">
-      <input type="text" id="school-search" onkeypress="hideElements()"/>
-      <home-button onclick="loadSchoolInfo()">Search</home-button>
-    </div> -->
     <main id="main">
       <h1 id="school-name"></h1>
 
