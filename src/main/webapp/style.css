@@ -90,14 +90,13 @@ header {
   box-sizing: border-box;
 }
 
-
 .topnav {
   overflow: hidden;
 }
 
 .topnav a {
   color: #856c8b;
-  float: left;
+  display: inline-block;
   font-size: 18px;
   margin: 15px;
   padding: 0 10px;
@@ -206,7 +205,6 @@ header {
   margin-bottom: 30px;
   width: calc(50% - 60px);
 }
-<<<<<<< HEAD
 
 li.pointer {
   cursor: pointer;
