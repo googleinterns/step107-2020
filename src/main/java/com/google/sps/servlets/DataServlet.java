@@ -104,8 +104,15 @@ public class DataServlet extends HttpServlet {
     return value == null ? defaultValue : value;
   }
 
-  /** Returns the ID of the current school. */
+  /** Returns the ID of the current school as an integer. */
   private int getId(HttpServletRequest request) {
-    return Integer.parseInt(request.getParameter("school-id"));
+    int fail = -1;
+    try {
+       return Integer.parseInt(request.getParameter("school-id"));
+    }
+    catch (NumberFormatException exception) {
+      System.out.println("getID Invalid parametr: ID request is not a valid number.");
+    }
+    return fail;
   }
 }
