@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Add load school info page function to search button.
+ * Adds load school info page function to search button.
  */
 function init() {
   const searchButton = document.getElementById('search-button');

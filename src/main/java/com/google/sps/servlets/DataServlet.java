@@ -106,7 +106,6 @@ public class DataServlet extends HttpServlet {
 
   /** Returns the ID of the current school. */
   private int getId(HttpServletRequest request) {
-    int id = Integer.parseInt(request.getParameter("school-id"));
-    return id;
+    return Integer.parseInt(request.getParameter("school-id"));
   }
 }
