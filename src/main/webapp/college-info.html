@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="script.js"></script>
   </head>
   <body>
     <header>
       <h1>Black Student Insight</h1>
       <input type="text" id="school-search">
-      <search-button onclick="loadSchoolInfo()">Search</search-button>
+      <search-button id="search-button">Search</search-button>
     </header>
     <main>
       <h1 id="school-name"></h1>
@@ -30,7 +29,8 @@
         <p id="race-piechart"></p>
         <p id="gender-piechart"></p>
       </section>
-      <a class="reviews-button" href="comments.html">Student Reviews</a>
+      <a class="reviews-button" id="reviews-button">Student Reviews</a>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
