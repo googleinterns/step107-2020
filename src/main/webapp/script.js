@@ -23,6 +23,14 @@ function hideElements() {
     document.getElementById('information').style.display = 'none';
   }
 }
+
+ * Adds load school info page function to search button.
+ */
+function init() {
+  const searchButton = document.getElementById('search-button');
+  searchButton.addEventListener('click', () => loadSchoolInfo());
+}
+
 /**
  * Fetches the data from the College ScoreCard API and populates the college
  *     info html page with the appropriate information.
@@ -31,7 +39,7 @@ function loadSchoolInfo() {
   const schoolSearch = document.getElementById('school-search').value;
 
   // Get School Data from API.
-  fetch(getLink(schoolSearch))
+  fetch(getLinkBySchoolName(schoolSearch))
       .then((response) => response.text())
       .then((data) => {
         const parsedData = JSON.parse(data);
@@ -41,6 +49,7 @@ function loadSchoolInfo() {
         const dataResults = getMainCampus(schools);
 
         // Basic School Information Variables.
+        const id = getIdFromApiData(dataResults);
         const ownership = getOwnership(dataResults);
         const name = getSchoolInfo(dataResults, 'name');
         const city = getSchoolInfo(dataResults, 'city');
@@ -71,6 +80,10 @@ function loadSchoolInfo() {
             getRace(dataResults, 'two_or_more') * numStudents;
         const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
             getRace(dataResults, 'non_resident_alien')) * numStudents;
+
+        // Set School ID to link to reviews page.
+        const reviewsPageLink = document.getElementById('reviews-button');
+        reviewsPageLink.setAttribute('href', `/comments.html?school-id=${id}`);
 
         // Name Section.
         schoolHeader = document.getElementById('school-name');
@@ -116,7 +129,7 @@ function loadSchoolInfo() {
  * @param {string} schoolName
  * @return {void}
  */
-function getLink(schoolName) {
+function getLinkBySchoolName(schoolName) {
   return ('https://api.data.gov/ed/collegescorecard/v1/schools.json?' +
       'api_key=C8Uyh2jQCmfjfKN3qwqwcJOi77c5k3V6zM7cRFgJ&school.name=' +
       `${schoolName}&fields=id,school.city,school.name,school.state,school` +
@@ -238,6 +251,14 @@ function getOwnership(data) {
 }
 
 /**
+ * @param {!Object} data
+ * @return {number} School ID.
+ */
+function getIdFromApiData(data) {
+  return data['id'];
+}
+
+/**
  * Returns basic school info.
  * @param {!Object} data
  * @param {string} infoName Specific info to be extracted. Name defined by
@@ -323,13 +344,16 @@ function getGraduationRate(data) {
 
 /** Adds comments to page. */
 function loadComments() {
-  fetch('/data').then((response) => response.json()).then((comments) => {
-    const commentListElement = document.getElementById('comments-container');
-    comments.forEach((comment) => {
-      commentListElement.appendChild(createCommentElement(comment.name,
-          comment.message, comment.time));
-    });
-  });
+  const id = getSchoolIdFromUrl();
+  prepReviewForm(id);
+  fetch(`/data?school-id=${id}`)
+      .then((response) => response.json()).then((comments) => {
+        const commentListItem = document.getElementById('comments-container');
+        comments.forEach((comment) => {
+          commentListItem.appendChild(createCommentElement(comment.name,
+              comment.message, comment.time));
+        });
+      });
 }
 
 /**
@@ -343,3 +367,26 @@ function createCommentElement(name, message, time) {
   commentElement.innerText = name + ' posted ' + message + ' on ' + time;
   return commentElement;
 }
+
+/**
+ * Adds ID to form submission.
+ * @param {number} id
+ */
+function prepReviewForm(id) {
+  const submitReviewForm = document.getElementById('submit-review');
+  submitReviewForm.setAttribute('action', `/data?school-id=${id}`);
+  const idInputElement = document.getElementById('school-id');
+  idInputElement.setAttribute('value', id);
+}
+
+/**
+ * @return {number} ID from page URL.
+ */
+function getSchoolIdFromUrl() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('school-id');
+  return id;
+}
+
+init();
