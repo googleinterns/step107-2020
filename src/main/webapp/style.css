@@ -7,7 +7,7 @@ body {
 main {
   margin: auto;
   max-width: 1035px;
-  width: 100%; 
+  width: 100%;
 }
 
 figcaption {
@@ -43,7 +43,7 @@ h4 {
   margin-bottom: 15px;
 }
 
-p { 
+p {
   color: black;
   display: block;
   font-size: 16px;
@@ -52,7 +52,7 @@ p {
   line-height: 25px;
   margin: auto;
   width: 960px;
-  padding:25px;
+  padding: 25px;
 }
 
 a {
@@ -110,7 +110,7 @@ header {
 }
 
 #school-search {
-  height: 35px; 
+  height: 35px;
   position: absolute;
   right: 45px;
   top: 35px;
@@ -121,7 +121,7 @@ search-button {
   cursor: pointer;
   position: absolute;
   right: 57px;
-  top: 55px;  
+  top: 55px;
 }
 
 #comments-container {
@@ -178,7 +178,7 @@ search-button {
 }
 
 #headshots {
-  margin:auto;
+  margin: auto;
   width: 960px;
 }
 
