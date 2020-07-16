@@ -23,7 +23,7 @@ function hideElements() {
     document.getElementById('information').style.display = 'none';
   }
 }
-
+/**
  * Adds load school info page function to search button.
  */
 function init() {
