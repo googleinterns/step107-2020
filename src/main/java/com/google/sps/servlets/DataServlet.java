@@ -107,12 +107,12 @@ public class DataServlet extends HttpServlet {
   }
 
   /** Returns the ID of the current school as an integer. */
-  // TODO:  Add throw exception and display an error message to the end users.
   private int getId(HttpServletRequest request) {
     int fail = -1;
     try {
-      return Integer.parseInt(request.getParameter("id"));
-    } catch (NumberFormatException exception) {
+       return Integer.parseInt(request.getParameter("school-id"));
+    }
+    catch (NumberFormatException exception) {
       System.out.println("getID Invalid parametr: ID request is not a valid number.");
     }
     return fail;
