@@ -20,9 +20,13 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import java.io.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,8 +44,14 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    int id = getId(request);
+
+    // Filter query based on current ID of school.
+    Filter idFilter = new FilterPredicate("SchoolId", FilterOperator.EQUAL, id);
     Query query =
-        new Query(Comment.MESSAGE_KEY).addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING);
+        new Query(Comment.MESSAGE_KEY)
+            .addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING)
+            .setFilter(idFilter);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
@@ -71,7 +81,7 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, "name-input", "");
     String message = getParameter(request, "text-input", "");
     long timestamp = System.currentTimeMillis();
-
+    int id = getId(request);
     Date date = new Date();
     String time = dateFormat.format(date);
 
@@ -80,15 +90,22 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(Comment.MESSAGE_KEY, message);
     commentEntity.setProperty(Comment.TIMESTAMP_KEY, timestamp);
     commentEntity.setProperty(Comment.TIME_KEY, time);
+    commentEntity.setProperty("SchoolId", id);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
-    response.sendRedirect("/comments.html");
+    String responseLink = String.format("/comments.html?school-id=%d", id);
+    response.sendRedirect(responseLink);
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     return value == null ? defaultValue : value;
+  }
+
+  /** Returns the ID of the current school. */
+  private int getId(HttpServletRequest request) {
+    return Integer.parseInt(request.getParameter("school-id"));
   }
 }

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Reviews Page</title>
+    <title>Student Reviews</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
   </head>
-  <body>
+  <body id="comment-body">
     <div>
       <header>
         <a href="index.html"><h1>Black Student Insight</h1></a>
@@ -14,19 +13,24 @@
       <main>
         <div class="topnav">
           <a href="college-info.html">School Info</a>
-          <a class="active" href="comments.html">Student Reviews</a>
+          <a class="active">Student Reviews</a>
         </div>
 
         <h2>Student Reviews</h2>
         <div id="comments-container"></div>
 
         <h2>Leave a Review</h2>
-        <form action="/data" method="POST">
+        <form id="submit-review" method="POST">
+          <input type="hidden" name="school-id" id="school-id">
           <input name="name-input" placeholder="Name...">
           <textarea name="text-input" placeholder="Message..."></textarea>
           <button id="submit-button" type="submit">Submit</button>
         </form>
       </main>
     </div>
+    <script src="script.js"></script>
+    <script>
+      loadComments();
+    </script>
   </body>
 </html>
