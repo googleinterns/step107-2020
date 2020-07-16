@@ -7,12 +7,15 @@ body {
 main {
   margin: auto;
   max-width: 1035px;
-  width: 100%;  
+  width: 100%; 
 }
+
 figcaption {
-    color: black;
-    margin-inline-start: auto
+  color: black;
+  margin-inline-start: auto;
+  width: 307px;
 }
+
 h1 {
   color: white;
   font-family: Ruluko;
@@ -25,12 +28,12 @@ h1 {
 h2,
 h3 {
   background-color: #ececec;
-  color: #856c8b;  
+  color: #856c8b;
   text-align: center;
 }
 
 h4 {
-  color: #787878;  
+  color: #787878;
   display: block;
   font-size: 18px;
   font-style: normal;
@@ -41,7 +44,7 @@ h4 {
 }
 
 p { 
-  color: black;  
+  color: black;
   display: block;
   font-size: 16px;
   font-style: normal;
@@ -53,7 +56,7 @@ p {
 }
 
 a {
-  color: white;  
+  color: white;
   font-size: 20px;
   font-style: normal;
   font-weight: normal;
@@ -63,7 +66,7 @@ a {
 }
 
 input {
-  display: block;  
+  display: block;
   height: 25px;
   margin: 8px auto;
   max-width: 1035px;
@@ -76,7 +79,7 @@ input:hover {
 
 textarea {
   box-shadow: 0 4px 4px #00000040;
-  display: block;  
+  display: block;
   height: 70px;
   margin: auto;
   max-width: 1035px;
@@ -123,7 +126,7 @@ search-button {
 
 #comments-container {
   background: white;
-  border: 0.25px solid black;  
+  border: 0.25px solid black;
   box-shadow: 0 4px 4px #00000040;
   height: 379px;
   margin: auto;
@@ -139,13 +142,13 @@ search-button {
 
 #school-name {
   background: white;
-  box-shadow: 0 4px 4px #00000040;  
-  color: #856c8b; 
-  font-size: 30px; 
+  box-shadow: 0 4px 4px #00000040;
+  color: #856c8b;
+  font-size: 30px;
   margin: auto;
   margin-top: 20px;
   padding: 22px;
-  text-align: center;  
+  text-align: center;
 }
 
 #admissions,
@@ -155,9 +158,9 @@ search-button {
 #school-desc,
 #students {
   background: white;
-  box-shadow: 0 4px 4px #00000040;  
+  box-shadow: 0 4px 4px #00000040;
   margin-top: 20px;
-  padding: 25px; 
+  padding: 25px;
 }
 
 #admissions,
@@ -171,10 +174,10 @@ search-button {
 #admissions,
 #race-piechart,
 #school-desc {
-  float: left;  
+  float: left;
 }
 
-#headshots{
+#headshots {
   margin:auto;
   width: 960px;
 }
@@ -186,7 +189,7 @@ search-button {
 }
 
 #gender-piechart,
-#race-piechart { 
+#race-piechart {
   height: 475px;
   width: calc(50% - 60px);
 }
