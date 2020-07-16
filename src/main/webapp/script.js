@@ -16,7 +16,7 @@
  *Hides styling for search results if a search has not been made.
  */
 function hideElements() {
-  if(document.getElementById('school-search').value == '') {
+  if (document.getElementById('school-search').value == '') {
     document.getElementById('main').style.display = 'none';
   } else {
     document.getElementById('main').style.display = 'initial';

@@ -7,10 +7,11 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="script.js"></script>
   </head>
-  <body onload="loadSchoolInfo()">
+  <body onload="hideElements()">
     <header>
       <a href="index.html"><h1>Black Student Insight</h1></a>
-      <input type="search" id="school-search" onsearch="loadSchoolInfo()" placeholder="Find your institution"/>
+      <input type="search" id="school-search" onsearch="loadSchoolInfo();hideElements();"
+      placeholder="Find your institution"/>
     </header>
     
     <div id = "information">
@@ -28,8 +29,8 @@
           <a href="https://www.linkedin.com/in/jalen-jenkins-b75772186"><img src="images/jalen.png"
           alt="Jalen Jenkins" width="200" height="200"></a>
           <figcaption>Jalen is currently a Computer Science student in Cornell
-            University's Class of 2023. He intends to pursue a entrepreneurial endeavors
-            in the future!</figcaption>
+          University's Class of 2023. He intends to pursue a entrepreneurial endeavors
+          in the future!</figcaption>
         </figure>
         <figure class="inline-block">
           <a href="https://www.linkedin.com/in/sydney-beasley-6b04b8168"><img src="images/sydney.png"
@@ -95,6 +96,5 @@
       </section>
       <a class="reviews-button" href="comments.html">Student Reviews</a>
     </main>
-
   </body>
 </html>
