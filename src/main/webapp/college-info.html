@@ -29,8 +29,24 @@
         <p id="race-piechart"></p>
         <p id="gender-piechart"></p>
       </section>
+
+      <a href="college-info.html">Back to Profile Home</a>
+        <h2>Student Reviews</h2>
+        <div id="comments-container"></div>
+        <h2>Leave a Review</h2>
+        <form id="submit-review" method="POST">
+          <input type="hidden" name="school-id" id="school-id">
+          <input name="name-input" placeholder="Name...">
+          <textarea name="text-input" placeholder="Message..."></textarea>
+          <button type="submit">Submit</button>
+        </form>
+        
       <a class="reviews-button" id="reviews-button">Student Reviews</a>
     </main>
     <script src="script.js"></script>
+    <script src="college-info.js"></script>
+    <script>
+      loadComments();
+    </script>
   </body>
 </html>
