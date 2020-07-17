@@ -13,15 +13,15 @@
 // limitations under the License.
 
 /**
- *Hides styling for search results if a search has not been made.
+ * Hides styling for search results if a search has not been made.
  */
-function hideElements() {
-  if (document.getElementById('school-search').value == '') {
-    document.getElementById('main').style.display = 'none';
-  } else {
-    document.getElementById('main').style.display = 'initial';
-    document.getElementById('information').style.display = 'none';
-  }
+function hideReviews() {
+  document.getElementById('comment-body').style.display = 'none';
+  document.getElementsByTagName('main').style.display = 'initial';
+}
+function hideSchoolInfo() {
+  document.getElementById('comment-body').style.display = 'initial';
+  document.getElementsByTagName('main').style.display = 'none';
 }
 /**
  * Adds load school info page function to search button.

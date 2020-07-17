@@ -27,7 +27,6 @@ h1 {
 
 h2,
 h3 {
-  background-color: #ececec;
   color: #856c8b;
   text-align: center;
 }
@@ -51,8 +50,8 @@ p {
   font-weight: normal;
   line-height: 25px;
   margin: auto;
-  width: 960px;
   padding: 25px;
+  width: 960px;
 }
 
 a {
@@ -88,18 +87,6 @@ textarea {
 
 textarea:hover {
   opacity: 0.7;
-}
-
-button {
-  background-color: #856c8b;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: block;
-  font-size: 15px;
-  margin: 15px auto 25px;
-  padding: 10px 20px;
-  text-align: center;
 }
 
 header {
