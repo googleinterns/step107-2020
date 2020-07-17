@@ -108,9 +108,8 @@ public class DataServlet extends HttpServlet {
   private int getId(HttpServletRequest request) {
     int fail = -1;
     try {
-       return Integer.parseInt(request.getParameter("school-id"));
-    }
-    catch (NumberFormatException exception) {
+      return Integer.parseInt(request.getParameter("school-id"));
+    } catch (NumberFormatException exception) {
       System.out.println("getID Invalid parametr: ID request is not a valid number.");
     }
     return fail;
