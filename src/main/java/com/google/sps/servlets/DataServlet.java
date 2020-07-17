@@ -105,6 +105,7 @@ public class DataServlet extends HttpServlet {
   }
 
   /** Returns the ID of the current school as an integer. */
+  /** TODO:  Add throw exception and display an error message to the end users*/
   private int getId(HttpServletRequest request) {
     int fail = -1;
     try {
