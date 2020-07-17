@@ -47,9 +47,9 @@ public class DataServlet extends HttpServlet {
     int id = getId(request);
 
     // Filter query based on current ID of school.
-    Filter idFilter = new FilterPredicate("SchoolId", FilterOperator.EQUAL, id);
+    Filter idFilter = new FilterPredicate(Comment.SCHOOL_ID_KEY, FilterOperator.EQUAL, id);
     Query query =
-        new Query(Comment.MESSAGE_KEY)
+        new Query(Comment.COMMENT_ENTITY)
             .addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING)
             .setFilter(idFilter);
 
@@ -66,7 +66,7 @@ public class DataServlet extends HttpServlet {
       long timestamp = (long) entity.getProperty(Comment.TIMESTAMP_KEY);
       String time = (String) entity.getProperty(Comment.TIME_KEY);
 
-      Comment comment = new Comment(name, message, timestamp, time);
+      Comment comment = new Comment(name, message, timestamp, time, id);
       comments.add(comment);
     }
 
@@ -85,12 +85,12 @@ public class DataServlet extends HttpServlet {
     Date date = new Date();
     String time = dateFormat.format(date);
 
-    Entity commentEntity = new Entity(Comment.MESSAGE_KEY);
+    Entity commentEntity = new Entity(Comment.COMMENT_ENTITY);
     commentEntity.setProperty(Comment.NAME_KEY, name);
     commentEntity.setProperty(Comment.MESSAGE_KEY, message);
     commentEntity.setProperty(Comment.TIMESTAMP_KEY, timestamp);
     commentEntity.setProperty(Comment.TIME_KEY, time);
-    commentEntity.setProperty("SchoolId", id);
+    commentEntity.setProperty(Comment.SCHOOL_ID_KEY, id);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
