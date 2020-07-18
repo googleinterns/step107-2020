@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/**
+ * Initializer function to load page info.
+ */
 function init() {
   loadSchoolInfo();
   loadComments();
@@ -24,6 +27,9 @@ function init() {
 function loadSchoolInfo() {
   const dataResults = JSON.parse(localStorage.getItem('currentSchool'));
   console.log(dataResults);
+
+  // Load the Visualization API and the corechart package.
+  chartsPromise = google.charts.load('current', {packages: ['corechart']})
   // Get School Data from API.
 
   // Basic School Information Variables.
@@ -94,19 +100,13 @@ function loadSchoolInfo() {
   studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
 
   // Draw charts.
-  drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
-      numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
-      numUnreportedRaceStudents);
-  drawGenderChart(numMen, numWomen);
-
+  chartsPromise.then(() => {
+    drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
+        numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
+        numUnreportedRaceStudents);
+    drawGenderChart(numMen, numWomen);
+  })
 }
-
-// Load the Visualization API and the corechart package.
-google.charts.load('current', {packages: ['corechart']});
-
-// Set a callback to run when the Google Visualization API is loaded.
-google.charts.setOnLoadCallback(drawRaceChart);
-google.charts.setOnLoadCallback(drawGenderChart);
 
 /**
  * Creates Donut Pie Chart displaying racial breakdown.
