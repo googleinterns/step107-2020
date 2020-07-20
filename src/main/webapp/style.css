@@ -12,7 +12,7 @@ main {
 
 figcaption {
   color: black;
-  margin-inline-start: auto;
+  margin-left: auto;
   width: 307px;
 }
 
@@ -28,6 +28,7 @@ h1 {
 h2,
 h3 {
   color: #856c8b;
+  font-weight: normal;
   text-align: center;
 }
 
@@ -55,7 +56,7 @@ p {
 }
 
 a {
-  color: white;
+  color: #856c8b;
   font-size: 20px;
   font-style: normal;
   font-weight: normal;
@@ -96,6 +97,23 @@ header {
   box-sizing: border-box;
 }
 
+.topnav a {
+  color: #856c8b;
+  display: inline-block;
+  font-size: 18px;
+  margin: 15px;
+  padding: 0 10px;
+}
+
+.topnav a:hover {
+  color: #856c8b;
+  opacity: 0.6;
+}
+
+.topnav a.active {
+  border-bottom: 5px solid #856c8b;
+}
+
 #school-search {
   height: 35px;
   position: absolute;
@@ -111,6 +129,18 @@ header {
   position: absolute;
   right: 48px;
   top: 55px;
+}
+
+#submit-button {
+  background-color: #856c8b;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  margin: 15px auto 25px;
+  padding: 10px 20px;
+  text-align: center;
 }
 
 #comments-container {
@@ -180,20 +210,8 @@ header {
 #gender-piechart,
 #race-piechart {
   height: 475px;
+  margin-bottom: 30px;
   width: calc(50% - 60px);
-}
-
-.reviews-button {
-  background-color: #856c8b;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: block;
-  float: right;
-  margin-bottom: 50px;
-  margin-top: 20px;
-  padding: 10px 20px;
-  text-align: center;
 }
 
 .inline-block {

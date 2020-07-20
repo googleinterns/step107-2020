@@ -13,15 +13,19 @@
 // limitations under the License.
 
 /**
- * Hides styling for search results if a search has not been made.
+ * Hides reviews when client wantes to see college-info.
  */
 function hideReviews() {
-  document.getElementById('comment-body').style.display = 'none';
-  document.getElementsByTagName('main').style.display = 'initial';
+  document.getElementById('comment-body').style.visibility = 'hidden';
+  document.getElementsById('main-info').style.display = 'initial';
 }
+
+/**
+ * Hides college info when client requests to see reviews
+ */
 function hideSchoolInfo() {
   document.getElementById('comment-body').style.display = 'initial';
-  document.getElementsByTagName('main').style.display = 'none';
+  document.getElementsById('main-info').style.visibility = 'hidden';
 }
 /**
  * Adds load school info page function to search button.
@@ -36,7 +40,7 @@ function init() {
  *     info html page with the appropriate information.
  */
 function loadSchoolInfo() {
-  const schoolSearch = document.getElementById('school-search').value;
+  const schoolSearch = sessionStorage.getItem('schoolList');
 
   // Get School Data from API.
   fetch(getLinkBySchoolName(schoolSearch))
@@ -95,7 +99,6 @@ function loadSchoolInfo() {
         schoolDesc.innerHTML = '';
         schoolDesc.append(`${name} is a ${ownership} University 
             in ${city}, ${state}`);
-
         // Cost Section.
         const costDiv = document.getElementById('cost');
         costDiv.innerHTML = '';
@@ -387,6 +390,13 @@ function getSchoolIdFromUrl() {
   const urlParams = new URLSearchParams(queryString);
   const id = urlParams.get('school-id');
   return id;
+}
+
+function storeAndRedirect() {
+  sessionStorage.clear();
+  const schoolList = document.getElementById('school-search').value;
+  sessionStorage.setItem('schoolList', schoolList);
+  window.location.href = 'college-info.html';
 }
 
 init();
