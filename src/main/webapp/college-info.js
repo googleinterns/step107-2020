@@ -26,7 +26,6 @@ function init() {
  */
 function loadSchoolInfo() {
   const dataResults = JSON.parse(localStorage.getItem('currentSchool'));
-  console.log(dataResults);
 
   // Load the Visualization API and the corechart package.
   chartsPromise = google.charts.load('current', {packages: ['corechart']})
@@ -290,11 +289,9 @@ function getGraduationRate(data) {
 /** Adds comments to page. */
 function loadComments() {
   const id = localStorage.getItem('schoolId');
-  console.log(id);
   prepReviewForm(id);
   fetch(`/data?id=${id}`)
       .then((response) => response.json()).then((comments) => {
-        console.log(comments);
         const commentListItem = document.getElementById('comments-container');
         comments.forEach((comment) => {
           commentListItem.appendChild(createCommentElement(comment.name,

@@ -193,3 +193,15 @@ search-button {
   padding: 10px 20px;
   text-align: center;  
 }
+
+li.pointer {
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: rgba(255, 235, 153, 0.328);
+}
+
+ul {
+  list-style-type: none;
+}

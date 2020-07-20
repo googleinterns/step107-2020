@@ -21,7 +21,6 @@ function init() {
  */
 function loadSearchListPage() {
   const schoolsDataList = JSON.parse(localStorage.getItem('schoolsDataList'));
-  console.log(schoolsDataList);
   const resultsList = document.getElementById('results-list');
 
   schoolsDataList.forEach((school) => {
@@ -38,7 +37,7 @@ function loadSearchListPage() {
     // Add each link to the HTML list as a link to the college page.
     listItem = document.createElement('li');
     listItem.appendChild(link);
-    console.log(listItem); 
+    listItem.setAttribute('class', 'pointer');
     resultsList.appendChild(listItem);
   })
 }

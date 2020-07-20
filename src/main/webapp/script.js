@@ -101,7 +101,6 @@ function loadSearchResults() {
 
           schoolsDataList.push(schoolData);
         });
-        console.log(JSON.stringify(schoolsDataList));
         localStorage.setItem('schoolsDataList', 
             JSON.stringify(schoolsDataList));
         location.href = '/search-results.html';
