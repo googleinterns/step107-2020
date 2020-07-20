@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Adds load school info page function to search button.
+ * Initializes page.
  */
 function init() {
   prepSearchButton();
@@ -65,9 +65,7 @@ function getBasicSchoolInfo(data, infoName) {
   return data[`school.${infoName}`];
 }
 
-/**
- * Sets the event listener to search school.
- */
+/** Sets the event listener to search school. */
 function prepSearchButton() {
   const searchButton = document.getElementById('search-button');
   searchButton.addEventListener('click', () => loadSearchResults());

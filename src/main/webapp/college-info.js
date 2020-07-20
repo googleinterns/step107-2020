@@ -21,8 +21,7 @@ function init() {
 }
 
 /**
- * Fetches the data from the College ScoreCard API and populates the college
- *     info html page with the appropriate information.
+ * Loads the college data from an object passed in local storage.
  */
 function loadSchoolInfo() {
   const dataResults = JSON.parse(localStorage.getItem('currentSchool'));

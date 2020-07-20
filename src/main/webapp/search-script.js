@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/** Initializes page. */
 function init() {
   loadSearchListPage();
 }
@@ -42,6 +43,11 @@ function loadSearchListPage() {
   })
 }
 
+/**
+ * Iterates over array of different schools data and saves the school that
+ * matches the schoolId into local storage.
+ * @param {number} schoolId
+ */
 function loadSchool(schoolId) {
   const schoolsFetchedDataList = JSON.parse(localStorage.getItem('schoolsFetchedDataList'));
   schoolsFetchedDataList.forEach((school) => {
