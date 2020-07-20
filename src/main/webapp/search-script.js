@@ -47,6 +47,7 @@ function loadSchool(schoolId) {
   const schoolsFetchedDataList = JSON.parse(localStorage.getItem('schoolsFetchedDataList'));
   schoolsFetchedDataList.forEach((school) => {
     if (schoolId == school['id']) {
+      localStorage.setItem('schoolId', schoolId);
       localStorage.setItem('currentSchool', JSON.stringify(school));
       location.href = `/college-info.html?id=${schoolId}`;
       

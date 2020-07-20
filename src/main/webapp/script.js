@@ -65,54 +65,6 @@ function getBasicSchoolInfo(data, infoName) {
   return data[`school.${infoName}`];
 }
 
-
-/** Adds comments to page. */
-function loadComments() {
-  const id = getSchoolIdFromUrl();
-  prepReviewForm(id);
-  fetch(`/data?school-id=${id}`)
-      .then((response) => response.json()).then((comments) => {
-        const commentListItem = document.getElementById('comments-container');
-        comments.forEach((comment) => {
-          commentListItem.appendChild(createCommentElement(comment.name,
-              comment.message, comment.time));
-        });
-      });
-}
-
-/**
- * @param {string} name The name of the user who commented.
- * @param {string} message The message body of a comment post.
- * @param {string} time The time of a comment post.
- * @return {!HTMLParagraphElement}} A comment paragraph item.
- */
-function createCommentElement(name, message, time) {
-  const commentElement = document.createElement('p');
-  commentElement.innerText = `${name} posted ${message} on ${time}`;
-  return commentElement;
-}
-
-/**
- * Adds ID to form submission.
- * @param {number} id
- */
-function prepReviewForm(id) {
-  const submitReviewForm = document.getElementById('submit-review');
-  submitReviewForm.setAttribute('action', `/data?school-id=${id}`);
-  const idInputElement = document.getElementById('school-id');
-  idInputElement.setAttribute('value', id);
-}
-
-/**
- * @return {number} ID from page URL.
- */
-function getSchoolIdFromUrl() {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get('school-id');
-  return id;
-}
-
 /**
  * Sets the event listener to search school.
  */

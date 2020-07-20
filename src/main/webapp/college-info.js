@@ -30,10 +30,8 @@ function loadSchoolInfo() {
 
   // Load the Visualization API and the corechart package.
   chartsPromise = google.charts.load('current', {packages: ['corechart']})
-  // Get School Data from API.
 
   // Basic School Information Variables.
-  const id = getIdFromApiData(dataResults);
   const ownership = getOwnership(dataResults);
   const name = getBasicSchoolInfo(dataResults, 'name');
   const city = getBasicSchoolInfo(dataResults, 'city');
@@ -64,10 +62,6 @@ function loadSchoolInfo() {
       getRace(dataResults, 'two_or_more') * numStudents;
   const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
       getRace(dataResults, 'non_resident_alien')) * numStudents;
-
-  // Set School ID to link to reviews page.
-  const reviewsPageLink = document.getElementById('reviews-button');
-  reviewsPageLink.setAttribute('href', `/comments.html?school-id=${id}`);
 
   // Name Section.
   schoolHeader = document.getElementById('school-name');
@@ -105,7 +99,7 @@ function loadSchoolInfo() {
         numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
         numUnreportedRaceStudents);
     drawGenderChart(numMen, numWomen);
-  })
+  });
 }
 
 /**
@@ -295,10 +289,12 @@ function getGraduationRate(data) {
 
 /** Adds comments to page. */
 function loadComments() {
-  const id = getSchoolIdFromUrl();
+  const id = localStorage.getItem('schoolId');
+  console.log(id);
   prepReviewForm(id);
-  fetch(`/data?school-id=${id}`)
+  fetch(`/data?id=${id}`)
       .then((response) => response.json()).then((comments) => {
+        console.log(comments);
         const commentListItem = document.getElementById('comments-container');
         comments.forEach((comment) => {
           commentListItem.appendChild(createCommentElement(comment.name,
@@ -325,7 +321,7 @@ function createCommentElement(name, message, time) {
  */
 function prepReviewForm(id) {
   const submitReviewForm = document.getElementById('submit-review');
-  submitReviewForm.setAttribute('action', `/data?school-id=${id}`);
+  submitReviewForm.setAttribute('action', `/data?id=${id}`);
   const idInputElement = document.getElementById('school-id');
   idInputElement.setAttribute('value', id);
 }
