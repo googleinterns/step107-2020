@@ -391,7 +391,9 @@ function getSchoolIdFromUrl() {
   const id = urlParams.get('school-id');
   return id;
 }
-
+/**
+ * Redirects home search to college info page after storing user input.
+ */
 function storeAndRedirect() {
   sessionStorage.clear();
   const schoolList = document.getElementById('school-search').value;
