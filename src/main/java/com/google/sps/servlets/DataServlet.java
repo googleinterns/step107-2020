@@ -48,6 +48,7 @@ public class DataServlet extends HttpServlet {
 
     // Filter query based on current ID of school.
     Filter idFilter = new FilterPredicate(Comment.SCHOOL_ID_KEY, FilterOperator.EQUAL, id);
+
     Query query =
         new Query(Comment.COMMENT_ENTITY)
             .addSort(Comment.TIMESTAMP_KEY, SortDirection.DESCENDING)
@@ -95,7 +96,8 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
-    String responseLink = String.format("/comments.html?school-id=%d", id);
+    String responseLink = String.format("/college-info.html?id=%d", id);
+
     response.sendRedirect(responseLink);
   }
 
@@ -109,7 +111,7 @@ public class DataServlet extends HttpServlet {
   private int getId(HttpServletRequest request) {
     int fail = -1;
     try {
-      return Integer.parseInt(request.getParameter("school-id"));
+      return Integer.parseInt(request.getParameter("id"));
     } catch (NumberFormatException exception) {
       System.out.println("getID Invalid parametr: ID request is not a valid number.");
     }
