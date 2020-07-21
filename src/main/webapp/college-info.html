@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>College Info</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
+  <body>
+    <header>
+      <a href="index.html"><h1>Black Student Insight</h1></a>
+      <input type="text" id="school-search" placeholder="Find your institution">
+      <button id="search-button">Search</button>
+    </header>
+    <main>
+      <nav class="topnav">
+        <a class="active" href="college-info.html">School Info</a>
+        <a id="reviews-button">Student Reviews</a>
+      </nav>
+      <h2 id="school-name"></h2>
+
+      <section>
+        <p id="school-desc"></p>
+        <p id="students"></p>
+      </section>
+
+      <section>
+        <p id="admissions"></p>
+        <p id="cost"></p>
+      </section>
+
+      <section>
+        <p id="race-piechart"></p>
+        <p id="gender-piechart"></p>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
