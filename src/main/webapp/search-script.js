@@ -49,7 +49,7 @@ function loadSearchListPage() {
  * @param {number} schoolId
  */
 function loadSchool(schoolId) {
-  const schoolsFetchedDataList = 
+  const schoolsFetchedDataList =
       JSON.parse(localStorage.getItem('schoolsFetchedDataList'));
   schoolsFetchedDataList.forEach((school) => {
     if (schoolId == school['id']) {
@@ -57,7 +57,7 @@ function loadSchool(schoolId) {
       localStorage.setItem('currentSchool', JSON.stringify(school));
       location.href = `/college-info.html?id=${schoolId}`;
     }
-  })
+  });
 }
 
 init();
