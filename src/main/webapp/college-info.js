@@ -27,7 +27,7 @@ function loadSchoolInfo() {
   const dataResults = JSON.parse(localStorage.getItem('currentSchool'));
 
   // Load the Visualization API and the corechart package.
-  chartsPromise = google.charts.load('current', {packages: ['corechart']})
+  chartsPromise = google.charts.load('current', {packages: ['corechart']});
 
   // Basic School Information Variables.
   const ownership = getOwnership(dataResults);
@@ -160,27 +160,6 @@ function drawGenderChart(numMen, numWomen) {
 }
 
 /**
- * Finds and returns the main campus from a list of main and satellite campuses
- *     of the same name.
- * @param {!Array<!Object>} schools The array of school objects returned from
- *     a fetch query.
- * @return {!Object}
- */
-function getMainCampus(schools) {
-  if (schools.length == 1) {
-    return schools[0];
-  } else {
-    main = {};
-    schools.forEach((campus) => {
-      if (campus['school.main_campus'] == 1) {
-        main = campus;
-      }
-    });
-    return main;
-  }
-}
-
-/**
  * Returns whether the school is public or private.
  * @param {!Object} data
  * @return {string}
@@ -191,14 +170,6 @@ function getOwnership(data) {
   } else {
     return 'private';
   }
-}
-
-/**
- * @param {!Object} data
- * @return {number} School ID.
- */
-function getIdFromApiData(data) {
-  return data['id'];
 }
 
 /**
@@ -320,16 +291,6 @@ function prepReviewForm(id) {
   submitReviewForm.setAttribute('action', `/data?id=${id}`);
   const idInputElement = document.getElementById('school-id');
   idInputElement.setAttribute('value', id);
-}
-
-/**
- * @return {number} ID from page URL.
- */
-function getSchoolIdFromUrl() {
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const id = urlParams.get('school-id');
-  return id;
 }
 
 init();
