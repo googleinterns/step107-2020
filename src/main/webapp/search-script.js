@@ -32,7 +32,7 @@ function loadSearchListPage() {
 
     // Create a link for the school that redirects to college info page.
     link = document.createElement('a');
-    link.setAttribute('onclick', `loadSchool(${id})`);
+    link.addEventListener('click', loadSchool(id));
     link.innerText = `${name} - ${city}, ${state}`;
 
     // Add each link to the HTML list as a link to the college page.
@@ -40,7 +40,7 @@ function loadSearchListPage() {
     listItem.appendChild(link);
     listItem.setAttribute('class', 'pointer');
     resultsList.appendChild(listItem);
-  })
+  });
 }
 
 /**
@@ -49,13 +49,13 @@ function loadSearchListPage() {
  * @param {number} schoolId
  */
 function loadSchool(schoolId) {
-  const schoolsFetchedDataList = JSON.parse(localStorage.getItem('schoolsFetchedDataList'));
+  const schoolsFetchedDataList = 
+      JSON.parse(localStorage.getItem('schoolsFetchedDataList'));
   schoolsFetchedDataList.forEach((school) => {
     if (schoolId == school['id']) {
       localStorage.setItem('schoolId', schoolId);
       localStorage.setItem('currentSchool', JSON.stringify(school));
       location.href = `/college-info.html?id=${schoolId}`;
-      
     }
   })
 }
