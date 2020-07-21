@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Initializer function to load page info.
+ * Loads page info.
  */
 function init() {
   loadSchoolInfo();
@@ -165,7 +165,7 @@ function drawGenderChart(numMen, numWomen) {
  * @return {string}
  */
 function getOwnership(data) {
-  if (data['school.ownership'] == 1) {
+  if (data['school.ownership']) {
     return 'public';
   } else {
     return 'private';
@@ -176,7 +176,7 @@ function getOwnership(data) {
  * Returns basic school info.
  * @param {!Object} data
  * @param {string} infoName Specific info to be extracted. Name defined by
- *     College Scorecard API.
+ * College Scorecard API.
  * @return {string} School name, city, or state.
  */
 function getBasicSchoolInfo(data, infoName) {
