@@ -47,8 +47,7 @@ public class DataServlet extends HttpServlet {
     int id = getId(request);
 
     // Filter query based on current ID of school.
-    Filter idFilter =
-        new FilterPredicate(Comment.SCHOOL_ID_KEY, FilterOperator.EQUAL, id);
+    Filter idFilter = new FilterPredicate(Comment.SCHOOL_ID_KEY, FilterOperator.EQUAL, id);
 
     Query query =
         new Query(Comment.COMMENT_ENTITY)
