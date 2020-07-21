@@ -80,26 +80,26 @@ function loadSearchResults() {
       .then((data) => {
         const parsedData = JSON.parse(data);
         schoolsFetchedDataList = parsedData['results'];
-        localStorage.setItem('schoolsFetchedDataList', 
+        localStorage.setItem('schoolsFetchedDataList',
             JSON.stringify(schoolsFetchedDataList));
-        let schoolsDataList = [];
+        const schoolsDataList = [];
 
         schoolsFetchedDataList.forEach((school) => {
           const id = getIdFromApiData(school);
-          const name = getBasicSchoolInfo(school,'name');
+          const name = getBasicSchoolInfo(school, 'name');
           const city = getBasicSchoolInfo(school, 'city');
           const state = getBasicSchoolInfo(school, 'state');
 
           const schoolData = {
-              id: id,
-              name: name,
-              city: city,
-              state: state,
+            id: id,
+            name: name,
+            city: city,
+            state: state,
           };
 
           schoolsDataList.push(schoolData);
         });
-        localStorage.setItem('schoolsDataList', 
+        localStorage.setItem('schoolsDataList',
             JSON.stringify(schoolsDataList));
         location.href = '/search-results.html';
       });
