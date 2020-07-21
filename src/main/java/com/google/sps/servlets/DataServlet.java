@@ -69,7 +69,6 @@ public class DataServlet extends HttpServlet {
 
       Comment comment = new Comment(name, message, timestamp, time, id);
       comments.add(comment);
-
     }
 
     final Gson gson = new Gson();
@@ -98,6 +97,7 @@ public class DataServlet extends HttpServlet {
     datastore.put(commentEntity);
 
     String responseLink = String.format("/college-info.html?id=%d", id);
+
     response.sendRedirect(responseLink);
   }
 
