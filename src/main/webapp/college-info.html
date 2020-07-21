@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>College Info</title>
+    <title>Black Student Insight</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -33,7 +33,18 @@
         <p id="race-piechart"></p>
         <p id="gender-piechart"></p>
       </section>
+
+      <h2>Student Reviews</h2>
+      <div id="comments-container"></div>
+      <h2>Leave a Review</h2>
+      <form id="submit-review" method="POST">
+        <input type="hidden" name="school-id" id="school-id">
+        <input name="name-input" placeholder="Name...">
+        <textarea name="text-input" placeholder="Message..."></textarea>
+        <button type="submit">Submit</button>
+      </form>
     </main>
     <script src="script.js"></script>
+    <script src="college-info.js"></script>
   </body>
 </html>
