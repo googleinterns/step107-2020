@@ -31,12 +31,12 @@ function loadSearchListPage() {
     const state = school.state;
 
     // Create a link for the school that redirects to college info page.
-    link = document.createElement('a');
+    const link = document.createElement('a');
     link.addEventListener('click', loadSchool(id));
     link.innerText = `${name} - ${city}, ${state}`;
 
     // Add each link to the HTML list as a link to the college page.
-    listItem = document.createElement('li');
+    const listItem = document.createElement('li');
     listItem.appendChild(link);
     listItem.setAttribute('class', 'pointer');
     resultsList.appendChild(listItem);
