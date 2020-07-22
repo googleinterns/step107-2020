@@ -24,17 +24,17 @@ function init() {
  * Loads the college data from an object passed in local storage.
  */
 function loadSchoolInfo() {
-  const statsDivId = 'stats';
+  const infoDivId = 'info';
   const reviewsDivId = 'reviews';
 
-  const infoNavButton = document.getElementById(`${statsDivId}-nav`);
+  const infoNavButton = document.getElementById(`${infoDivId}-nav`);
   const reviewsNavButton = document.getElementById(`${reviewsDivId}-nav`);
 
   infoNavButton.classList.add('active');
   infoNavButton.addEventListener('click',
-      () => toggleElementsDisplay(statsDivId, reviewsDivId));
+      () => toggleElementsDisplay(infoDivId, reviewsDivId));
   reviewsNavButton.addEventListener('click',
-      () => toggleElementsDisplay(reviewsDivId, statsDivId));
+      () => toggleElementsDisplay(reviewsDivId, infoDivId));
 
   const dataResults = JSON.parse(localStorage.getItem('currentSchool'));
 
