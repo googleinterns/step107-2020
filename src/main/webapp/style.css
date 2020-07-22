@@ -10,6 +10,13 @@ main {
   width: 100%;
 }
 
+figcaption {
+  color: black;
+  margin-left: auto;
+  margin-bottom: 10px;
+  width: 307px;
+}
+
 h1 {
   color: white;
   font-family: 'Gill Sans', sans-serif;
@@ -17,12 +24,14 @@ h1 {
   font-weight: normal;
   line-height: 69px;
   margin: 10px 20px;
+  padding: 25px;
 }
 
 h2,
 h3 {
   color: #856c8b;
   font-weight: normal;
+  padding: 10px;
   text-align: center;
 }
 
@@ -37,6 +46,17 @@ h4 {
   margin-bottom: 15px;
 }
 
+#headshots {
+  margin: auto;
+  width: 960px;
+}
+
+.inline-block {
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+}
+
 p {
   color: black;
   display: block;
@@ -45,6 +65,7 @@ p {
   font-weight: normal;
   line-height: 25px;
   margin: auto;
+  padding: 25px;
   width: 960px;
 }
 
