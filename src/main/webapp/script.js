@@ -15,7 +15,7 @@
 /**
  * Hides reviews when client wantes to see college-info.
  */
-function hideReviews() {
+function showSchoolInfo() {
   document.getElementById('comment-body').style.visibility = 'hidden';
   document.getElementsById('main-info').style.display = 'initial';
 }
@@ -23,9 +23,9 @@ function hideReviews() {
 /**
  * Hides college info when client requests to see reviews
  */
-function hideSchoolInfo() {
-  document.getElementById('comment-body').style.display = 'initial';
-  document.getElementsById('main-info').style.visibility = 'hidden';
+function showReviews() {
+  document.getElementById('comment-body').style.visibility = 'visible';
+  document.getElementsById('main-info').style.display = 'none';
 }
 /**
  * Adds load school info page function to search button.
@@ -394,7 +394,7 @@ function getSchoolIdFromUrl() {
 /**
  * Redirects home search to college info page after storing user input.
  */
-function storeAndRedirect() {
+function storeInputAndRedirectPage() {
   sessionStorage.clear();
   const schoolList = document.getElementById('school-search').value;
   sessionStorage.setItem('schoolList', schoolList);
