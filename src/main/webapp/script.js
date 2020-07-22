@@ -258,4 +258,5 @@ function storeInputAndRedirectPage() {
   sessionStorage.setItem('schoolList', schoolList);
   window.location.href = 'college-info.html';
 }
+
 init();
