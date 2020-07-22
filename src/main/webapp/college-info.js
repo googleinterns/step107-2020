@@ -323,7 +323,7 @@ function toggleElementsDisplay(showId, hideId) {
 
   const navButtonToHide = document.getElementById(`${hideId}-nav`);
   const navButtonToShow = document.getElementById(`${showId}-nav`);
-  
+
   navButtonToHide.classList.remove('active');
   navButtonToShow.classList.add('active');
 }
