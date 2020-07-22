@@ -219,3 +219,15 @@ header {
   margin: auto;
   text-align: center;
 }
+
+li.pointer {
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #ffeb9953;
+}
+
+ul {
+  list-style-type: none;
+}
