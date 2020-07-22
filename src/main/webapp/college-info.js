@@ -24,6 +24,18 @@ function init() {
  * Loads the college data from an object passed in local storage.
  */
 function loadSchoolInfo() {
+  const statsDivId = 'stats';
+  const reviewsDivId = 'reviews';
+
+  const infoNavButton = document.getElementById(`${statsDivId}-nav`);
+  const reviewsNavButton = document.getElementById(`${reviewsDivId}-nav`);
+
+  infoNavButton.classList.add('active');
+  infoNavButton.addEventListener('click',
+      () => toggleElementsDisplay(statsDivId, reviewsDivId));
+  reviewsNavButton.addEventListener('click',
+      () => toggleElementsDisplay(reviewsDivId, statsDivId));
+
   const dataResults = JSON.parse(localStorage.getItem('currentSchool'));
 
   // Load the Visualization API and the corechart package.
@@ -258,6 +270,8 @@ function getGraduationRate(data) {
 
 /** Adds comments to page. */
 function loadComments() {
+  const reviewsDiv = document.getElementById('reviews');
+  reviewsDiv.style.display = 'none';
   const id = localStorage.getItem('schoolId');
   prepReviewForm(id);
   fetch(`/data?id=${id}`)
@@ -291,6 +305,27 @@ function prepReviewForm(id) {
   submitReviewForm.setAttribute('action', `/data?id=${id}`);
   const idInputElement = document.getElementById('school-id');
   idInputElement.setAttribute('value', id);
+}
+
+/**
+ * Sets the hidden elements to be shown and the shown elements hidden.
+ * ID for buttons that will be used to show an element must be the same as the
+ * name of that element ID with "-nav" at the end.
+ * @param {string} showId HTML ID of element that is hidden and will be shown.
+ * @param {string} hideId HTML ID of element that is shown and will be hidden.
+ */
+function toggleElementsDisplay(showId, hideId) {
+  const elemnetToHide = document.getElementById(hideId);
+  const elementToShow = document.getElementById(showId);
+
+  elemnetToHide.style.display = 'none';
+  elementToShow.style.display = 'block';
+
+  const navButtonToHide = document.getElementById(`${hideId}-nav`);
+  const navButtonToShow = document.getElementById(`${showId}-nav`);
+  
+  navButtonToHide.classList.remove('active');
+  navButtonToShow.classList.add('active');
 }
 
 init();
