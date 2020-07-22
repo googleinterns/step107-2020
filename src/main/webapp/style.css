@@ -10,6 +10,12 @@ main {
   width: 100%;
 }
 
+figcaption {
+  color: black;
+  margin-left: auto;
+  width: 307px;
+}
+
 h1 {
   color: white;
   font-family: 'Gill Sans', sans-serif;
@@ -45,6 +51,7 @@ p {
   font-weight: normal;
   line-height: 25px;
   margin: auto;
+  padding: 25px;
   width: 960px;
 }
 
@@ -189,6 +196,11 @@ header {
   float: left;
 }
 
+#headshots {
+  margin: auto;
+  width: 960px;
+}
+
 #cost,
 #gender-piechart,
 #students {
@@ -200,6 +212,12 @@ header {
   height: 475px;
   margin-bottom: 30px;
   width: calc(50% - 60px);
+}
+
+.inline-block {
+  display: inline-block;
+  margin: auto;
+  text-align: center;
 }
 
 li.pointer {

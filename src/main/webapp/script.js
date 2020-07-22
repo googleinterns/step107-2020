@@ -13,6 +13,118 @@
 // limitations under the License.
 
 /**
+ * Hides reviews when client wantes to see college-info.
+ */
+function showSchoolInfo() {
+  document.getElementById('comment-body').style.visibility = 'hidden';
+  document.getElementsById('main-info').style.display = 'initial';
+}
+
+/**
+ * Hides college info when client requests to see reviews
+ */
+function showReviews() {
+  document.getElementById('comment-body').style.visibility = 'visible';
+  document.getElementsById('main-info').style.display = 'none';
+}
+/**
+ * Adds load school info page function to search button.
+ */
+function init() {
+  const searchButton = document.getElementById('search-button');
+  searchButton.addEventListener('click', () => loadSchoolInfo());
+}
+
+/**
+ * Fetches the data from the College ScoreCard API and populates the college
+ *     info html page with the appropriate information.
+ */
+function loadSchoolInfo() {
+  const schoolSearch = sessionStorage.getItem('schoolList');
+
+  // Get School Data from API.
+  fetch(getLinkBySchoolName(schoolSearch))
+      .then((response) => response.text())
+      .then((data) => {
+        const parsedData = JSON.parse(data);
+        const schools = parsedData['results'];
+
+        // Get main campus
+        const dataResults = getMainCampus(schools);
+
+        // Basic School Information Variables.
+        const id = getIdFromApiData(dataResults);
+        const ownership = getOwnership(dataResults);
+        const name = getSchoolInfo(dataResults, 'name');
+        const city = getSchoolInfo(dataResults, 'city');
+        const state = getSchoolInfo(dataResults, 'state');
+
+        // Cost Statistics Variables.
+        const inStateTuition = getCostInfo(dataResults, 'in_state');
+        const outOfStateTuition = getCostInfo(dataResults, 'out_of_state');
+
+        // Admissions Statistics Variables.
+        const acceptanceRate = getAcceptanceRate(dataResults);
+        const avgSat = getSatInfo(dataResults, 'average.overall');
+        const avgAct = getActInfo(dataResults, 'midpoint.cumulative');
+
+        // Student Statistic Variables.
+        const numStudents = getNumStudents(dataResults);
+        const numMen = getGender(dataResults, 'men') * numStudents;
+        const numWomen = getGender(dataResults, 'women') * numStudents;
+        const graduationRate4yr = getGraduationRate(dataResults);
+        const numWhiteStudents = getRace(dataResults, 'white') * numStudents;
+        const numAsianStudents = getRace(dataResults, 'asian') * numStudents;
+        const numBlackStudents = getRace(dataResults, 'black') * numStudents;
+        const numHispanicStudents =
+            getRace(dataResults, 'hispanic') * numStudents;
+        const numIndigenousStudents =
+            getRace(dataResults, 'aian') * numStudents;
+        const numMultiracialStudents =
+            getRace(dataResults, 'two_or_more') * numStudents;
+        const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
+            getRace(dataResults, 'non_resident_alien')) * numStudents;
+
+        // Set School ID to link to reviews page.
+        const reviewsPageLink = document.getElementById('reviews-button');
+        reviewsPageLink.setAttribute('href', `/comments.html?school-id=${id}`);
+
+        // Name Section.
+        schoolHeader = document.getElementById('school-name');
+        schoolHeader.innerHTML = '';
+        schoolHeader.append(dataResults['school.name']);
+
+        // Description Section.
+        const schoolDesc = document.getElementById('school-desc');
+        schoolDesc.innerHTML = '';
+        schoolDesc.append(`${name} is a ${ownership} University 
+            in ${city}, ${state}`);
+        // Cost Section.
+        const costDiv = document.getElementById('cost');
+        costDiv.innerHTML = '';
+        costDiv.append(`In-State Tuition: $${inStateTuition}`);
+        costDiv.append(`Out-of-State Tuition: $${outOfStateTuition}`);
+
+        // Admissions Section.
+        const admissionsDiv = document.getElementById('admissions');
+        admissionsDiv.innerHTML = '';
+        admissionsDiv.append(`Acceptance Rate: ${acceptanceRate}%`);
+        admissionsDiv.append(`Average SAT Score: ${avgSat}`);
+        admissionsDiv.append(`Average ACT Score: ${avgAct}`);
+
+        // Students Section.
+        const studentsDiv = document.getElementById('students');
+        studentsDiv.innerHTML = '';
+        studentsDiv.append(`Population: ${numStudents} Students`);
+        studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
+
+        // Draw charts.
+        drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
+            numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
+            numUnreportedRaceStudents);
+        drawGenderChart(numMen, numWomen);
+      });
+/**
  * Initializes page.
  */
 function init() {
@@ -103,6 +215,48 @@ function loadSearchResults() {
             JSON.stringify(schoolsDataList));
         location.href = '/search-results.html';
       });
+}
+
+/**
+ * @param {string} name The name of the user who commented.
+ * @param {string} message The message body of a comment post.
+ * @param {string} time The time of a comment post.
+ * @return {!HTMLParagraphElement}} A comment paragraph item.
+ */
+function createCommentElement(name, message, time) {
+  const commentElement = document.createElement('p');
+  commentElement.innerText = name + ' posted ' + message + ' on ' + time;
+  return commentElement;
+}
+
+/**
+ * Adds ID to form submission.
+ * @param {number} id
+ */
+function prepReviewForm(id) {
+  const submitReviewForm = document.getElementById('submit-review');
+  submitReviewForm.setAttribute('action', `/data?school-id=${id}`);
+  const idInputElement = document.getElementById('school-id');
+  idInputElement.setAttribute('value', id);
+}
+
+/**
+ * @return {number} ID from page URL.
+ */
+function getSchoolIdFromUrl() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.get('school-id');
+  return id;
+}
+/**
+ * Redirects home search to college info page after storing user input.
+ */
+function storeInputAndRedirectPage() {
+  sessionStorage.clear();
+  const schoolList = document.getElementById('school-search').value;
+  sessionStorage.setItem('schoolList', schoolList);
+  window.location.href = 'college-info.html';
 }
 
 init();
