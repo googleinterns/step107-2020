@@ -32,7 +32,7 @@ function loadSearchListPage() {
 
     // Create a link for the school that redirects to college info page.
     const link = document.createElement('a');
-    link.addEventListener('click', loadSchool(id));
+    link.addEventListener('click', () => loadSchool(id));
     link.innerText = `${name} - ${city}, ${state}`;
 
     // Add each link to the HTML list as a link to the college page.
