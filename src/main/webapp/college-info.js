@@ -16,6 +16,7 @@
  * Loads page info.
  */
 function init() {
+  loadToggle()
   loadSchoolInfo();
   loadComments();
 }
@@ -24,18 +25,6 @@ function init() {
  * Loads the college data from an object passed in local storage.
  */
 function loadSchoolInfo() {
-  const infoDivId = 'info';
-  const reviewsDivId = 'reviews';
-
-  const infoNavButton = document.getElementById(`${infoDivId}-nav`);
-  const reviewsNavButton = document.getElementById(`${reviewsDivId}-nav`);
-
-  infoNavButton.classList.add('active');
-  infoNavButton.addEventListener('click',
-      () => toggleElementsDisplay(infoDivId, reviewsDivId));
-  reviewsNavButton.addEventListener('click',
-      () => toggleElementsDisplay(reviewsDivId, infoDivId));
-
   const dataResults = JSON.parse(localStorage.getItem('currentSchool'));
 
   // Load the Visualization API and the corechart package.
@@ -270,8 +259,6 @@ function getGraduationRate(data) {
 
 /** Adds comments to page. */
 function loadComments() {
-  const reviewsDiv = document.getElementById('reviews');
-  reviewsDiv.style.display = 'none';
   const id = localStorage.getItem('schoolId');
   prepReviewForm(id);
   fetch(`/data?id=${id}`)
@@ -314,18 +301,28 @@ function prepReviewForm(id) {
  * @param {string} showId HTML ID of element that is hidden and will be shown.
  * @param {string} hideId HTML ID of element that is shown and will be hidden.
  */
-function toggleElementsDisplay(showId, hideId) {
-  const elemnetToHide = document.getElementById(hideId);
-  const elementToShow = document.getElementById(showId);
+function toggleElementsDisplay(showElement, hideElement, showElementNavButton, 
+    hideElementNavButton) {
+  showElement.classList.remove('is-hidden');
+  hideElement.classList.add('is-hidden');
 
-  elemnetToHide.style.display = 'none';
-  elementToShow.style.display = 'block';
+  showElementNavButton.classList.add('active');
+  hideElementNavButton.classList.remove('active');
+}
 
-  const navButtonToHide = document.getElementById(`${hideId}-nav`);
-  const navButtonToShow = document.getElementById(`${showId}-nav`);
+function loadToggle() {
+  const infoDiv = document.getElementById('info');
+  const reviewsDiv = document.getElementById('reviews');
+  const infoNavButton = document.getElementById('info-nav');
+  const reviewsNavButton = document.getElementById('reviews-nav');
+  reviewsDiv.classList = 'is-hidden';
 
-  navButtonToHide.classList.remove('active');
-  navButtonToShow.classList.add('active');
+  infoNavButton.addEventListener('click',
+      () => toggleElementsDisplay(infoDiv, reviewsDiv,
+          infoNavButton, reviewsNavButton));
+  reviewsNavButton.addEventListener('click',
+      () => toggleElementsDisplay(reviewsDiv, infoDiv,
+          reviewsNavButton, infoNavButton));
 }
 
 init();

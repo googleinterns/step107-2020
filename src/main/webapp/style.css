@@ -213,3 +213,7 @@ li:hover {
 ul {
   list-style-type: none;
 }
+
+.is-hidden {
+  display: none;
+}
