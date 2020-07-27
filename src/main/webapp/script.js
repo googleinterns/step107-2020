@@ -81,8 +81,11 @@ function loadSearchResults() {
         const parsedData = JSON.parse(data);
         schoolsFetchedDataList = parsedData['results'];
 
+        // Holds basic school data to be displayed on search results page.
         const schoolsDataList = [];
-        const schoolsFetchedDataById = {};
+
+        // Holds schoolId => schoolInfo in data dictionary for O(1) retrieval.
+        const schoolIdToInfoDataDictionary = {};
 
         schoolsFetchedDataList.forEach((school) => {
           const id = getIdFromApiData(school);
@@ -101,13 +104,13 @@ function loadSearchResults() {
           schoolsDataList.push(schoolData);
 
           // Saves complete school data as object for O(1) retrieval.
-          schoolsFetchedDataById[id] = school;
+          schoolIdToInfoDataDictionary[id] = school;
         });
 
         localStorage.setItem('schoolsDataList',
             JSON.stringify(schoolsDataList));
-        localStorage.setItem('schoolsFetchedDataById',
-            JSON.stringify(schoolsFetchedDataById));
+        localStorage.setItem('schoolIdToInfoDataDictionary',
+            JSON.stringify(schoolIdToInfoDataDictionary));
         location.href = '/search-results.html';
       });
 }

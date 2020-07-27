@@ -56,9 +56,9 @@ function loadSearchListPage() {
  * @param {number} schoolId
  */
 function loadSchool(schoolId) {
-  const schoolsFetchedDataById =
-      JSON.parse(localStorage.getItem('schoolsFetchedDataById'));
-  const currentSchool = schoolsFetchedDataById[schoolId];
+  const schoolIdToInfoDataDictionary =
+      JSON.parse(localStorage.getItem('schoolIdToInfoDataDictionary'));
+  const currentSchool = schoolIdToInfoDataDictionary[schoolId];
 
   localStorage.setItem('schoolId', schoolId);
   localStorage.setItem('currentSchool', JSON.stringify(currentSchool));
