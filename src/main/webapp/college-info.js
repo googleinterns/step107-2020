@@ -16,9 +16,9 @@
  * Loads page info.
  */
 function init() {
-  loadToggle()
   loadSchoolInfo();
   loadComments();
+  loadToggle();
 }
 
 /**
@@ -91,6 +91,9 @@ function loadSchoolInfo() {
   studentsDiv.innerHTML = '';
   studentsDiv.append(`Population: ${numStudents} Students`);
   studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
+
+
+  
 
   // Draw charts.
   chartsPromise.then(() => {
@@ -290,6 +293,12 @@ function createCommentElement(name, message, time) {
 function prepReviewForm(id) {
   const submitReviewForm = document.getElementById('submit-review');
   submitReviewForm.setAttribute('action', `/data?id=${id}`);
+  
+  // Add page variable that will tell page to reload on review form.
+  const submitButton = document.getElementById('submit-button');
+  submitButton.addEventListener('click', () => {
+    localStorage.setItem('page', 'reviews');
+  });
   const idInputElement = document.getElementById('school-id');
   idInputElement.setAttribute('value', id);
 }
@@ -315,7 +324,13 @@ function loadToggle() {
   const reviewsDiv = document.getElementById('reviews');
   const infoNavButton = document.getElementById('info-nav');
   const reviewsNavButton = document.getElementById('reviews-nav');
-  reviewsDiv.classList = 'is-hidden';
+
+  if (localStorage.getItem('page') == 'reviews') {
+    infoDiv.classList = 'is-hidden';
+    localStorage.setItem('page', '');
+  } else {
+    reviewsDiv.classList = 'is-hidden';
+  }
 
   infoNavButton.addEventListener('click',
       () => toggleElementsDisplay(infoDiv, reviewsDiv,
