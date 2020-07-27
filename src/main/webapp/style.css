@@ -203,11 +203,11 @@ header {
   width: calc(50% - 60px);
 }
 
-li.pointer {
+.pointer {
   cursor: pointer;
 }
 
-li:hover {
+li.pointer:hover {
   background-color: #ffeb9953;
 }
 
