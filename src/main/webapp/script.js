@@ -80,16 +80,17 @@ function loadSearchResults() {
       .then((data) => {
         const parsedData = JSON.parse(data);
         schoolsFetchedDataList = parsedData['results'];
-        localStorage.setItem('schoolsFetchedDataList',
-            JSON.stringify(schoolsFetchedDataList));
+        
         const schoolsDataList = [];
+        const schoolsFetchedDataById = {};
 
         schoolsFetchedDataList.forEach((school) => {
           const id = getIdFromApiData(school);
           const name = getBasicSchoolInfo(school, 'name');
           const city = getBasicSchoolInfo(school, 'city');
           const state = getBasicSchoolInfo(school, 'state');
-
+          
+          // Save school info that willl be displayed in search list.
           const schoolData = {
             id: id,
             name: name,
@@ -98,9 +99,14 @@ function loadSearchResults() {
           };
 
           schoolsDataList.push(schoolData);
+
+          //Save complete school data as object for O(1) retrieval.
+          schoolsFetchedDataById[id] = school;
         });
         localStorage.setItem('schoolsDataList',
             JSON.stringify(schoolsDataList));
+        localStorage.setItem('schoolsFetchedDataById',
+            JSON.stringify(schoolsFetchedDataById));
         location.href = '/search-results.html';
       });
 }
