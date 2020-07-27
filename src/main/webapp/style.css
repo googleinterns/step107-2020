@@ -10,13 +10,6 @@ main {
   width: 100%;
 }
 
-figcaption {
-  color: black;
-  margin-bottom: 10px;
-  margin-left: auto;
-  width: 307px;
-}
-
 h1 {
   color: white;
   font-family: 'Gill Sans', sans-serif;
@@ -24,14 +17,12 @@ h1 {
   font-weight: normal;
   line-height: 69px;
   margin: 10px 20px;
-  padding: 25px;
 }
 
 h2,
 h3 {
   color: #856c8b;
   font-weight: normal;
-  padding: 10px;
   text-align: center;
 }
 
@@ -46,17 +37,6 @@ h4 {
   margin-bottom: 15px;
 }
 
-#headshots {
-  margin: auto;
-  width: 960px;
-}
-
-.inline-block {
-  display: inline-block;
-  margin: auto;
-  text-align: center;
-}
-
 p {
   color: black;
   display: block;
@@ -65,7 +45,6 @@ p {
   font-weight: normal;
   line-height: 25px;
   margin: auto;
-  padding: 25px;
   width: 960px;
 }
 
@@ -109,10 +88,6 @@ header {
   border: 1px solid black;
   box-shadow: 0 4px 4px #00000040;
   box-sizing: border-box;
-}
-
-.topnav {
-  overflow: hidden;
 }
 
 .topnav a {
@@ -225,16 +200,4 @@ header {
   height: 475px;
   margin-bottom: 30px;
   width: calc(50% - 60px);
-}
-
-li.pointer {
-  cursor: pointer;
-}
-
-li:hover {
-  background-color: #ffeb9953;
-}
-
-ul {
-  list-style-type: none;
 }
