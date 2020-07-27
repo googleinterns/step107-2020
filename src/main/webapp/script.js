@@ -103,7 +103,7 @@ function loadSearchResults() {
           // Saves complete school data as object for O(1) retrieval.
           schoolsFetchedDataById[id] = school;
         });
-        
+
         localStorage.setItem('schoolsDataList',
             JSON.stringify(schoolsDataList));
         localStorage.setItem('schoolsFetchedDataById',
