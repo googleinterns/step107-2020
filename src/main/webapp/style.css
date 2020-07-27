@@ -69,7 +69,8 @@ p {
   width: 960px;
 }
 
-a {
+a,
+li {
   color: #856c8b;
   font-size: 20px;
   font-style: normal;
@@ -227,11 +228,11 @@ header {
   width: calc(50% - 60px);
 }
 
-li.pointer {
+.pointer {
   cursor: pointer;
 }
 
-li:hover {
+li.pointer:hover {
   background-color: #ffeb9953;
 }
 
