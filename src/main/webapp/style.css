@@ -228,11 +228,11 @@ header {
   width: calc(50% - 60px);
 }
 
-.pointer {
+.clickable {
   cursor: pointer;
 }
 
-li.pointer:hover {
+li.clickable:hover {
   background-color: #ffeb9953;
 }
 

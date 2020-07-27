@@ -25,7 +25,7 @@ function loadSearchListPage() {
   const resultsList = document.getElementById('results-list');
 
   // Check if no schools match that result.
-  if (schoolsDataList.length == 0) {
+  if (!schoolsDataList.length) {
     const listItem = document.createElement('li');
     listItem.innerText = 'No Schools Match Your Search';
     resultsList.appendChild(listItem);
@@ -44,7 +44,7 @@ function loadSearchListPage() {
       // Add each link to the HTML list as a link to the college page.
       const listItem = document.createElement('li');
       listItem.appendChild(link);
-      listItem.setAttribute('class', 'pointer');
+      listItem.setAttribute('class', 'clickable');
       resultsList.appendChild(listItem);
     });
   }
