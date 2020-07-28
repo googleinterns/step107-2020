@@ -301,7 +301,7 @@ function prepReviewForm(id) {
  * @param {HTMLElement} showElementNavButton HTML nav button to activate.
  * @param {HTMLElement} hideElementNavButton HTML nav button to deactivate.
  */
-function toggleElementsDisplay(showElement, hideElement, showElementNavButton,
+function toggleSectionDisplay(showElement, hideElement, showElementNavButton,
     hideElementNavButton) {
   showElement.classList.remove('is-hidden');
   hideElement.classList.add('is-hidden');
@@ -322,17 +322,17 @@ function loadToggle() {
   // Gets location hash from URL to show/hide appropriate section when the
   // page initially loads.
   if (location.hash == '#reviews') {
-    infoDiv.classList = 'is-hidden';
+    infoDiv.classList.add('is-hidden');
   } else {
     location.hash = 'info';
-    reviewsDiv.classList = 'is-hidden';
+    reviewsDiv.classList.add('is-hidden');
     infoNavButton.classList.add('active');
   }
 
   // Adds toggle function to tab buttons.
   infoNavButton.addEventListener('click',
       () => {
-        toggleElementsDisplay(infoDiv, reviewsDiv,
+        toggleSectionDisplay(infoDiv, reviewsDiv,
             infoNavButton, reviewsNavButton);
 
         // Loads hash and refreshes page to show reload charts.
@@ -341,7 +341,7 @@ function loadToggle() {
       });
   reviewsNavButton.addEventListener('click',
       () => {
-        toggleElementsDisplay(reviewsDiv, infoDiv,
+        toggleSectionDisplay(reviewsDiv, infoDiv,
             reviewsNavButton, infoNavButton);
       });
 }
