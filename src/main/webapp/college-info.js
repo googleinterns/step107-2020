@@ -301,13 +301,13 @@ function prepReviewForm(id) {
 
 /**
  * Sets the hidden elements to be shown and the shown elements to be hidden.
- * @param {HTMLElement} showElement HTML element that is hidden and will be shown.
- * @param {HTMLElement} hideElement HTML element that is shown and will be hidden.
+ * @param {HTMLElement} showElement HTML element that is hidden/will be shown.
+ * @param {HTMLElement} hideElement HTML element that is shown/will be hidden.
  * @param {HTMLElement} showElementNavButton HTML nav button to activate.
  * @param {HTMLElement} hideElementNavButton HTML nav button to deactivate.
  */
-function toggleElementsDisplay(showElement, hideElement, showElementNavButton, 
-    hideElementNavButton) {   
+function toggleElementsDisplay(showElement, hideElement, showElementNavButton,
+    hideElementNavButton) {
   showElement.classList.remove('is-hidden');
   hideElement.classList.add('is-hidden');
 
@@ -337,17 +337,17 @@ function loadToggle() {
   // Adds toggle function to tab buttons.
   infoNavButton.addEventListener('click',
       () => {
-          toggleElementsDisplay(infoDiv, reviewsDiv,
-          infoNavButton, reviewsNavButton);
+        toggleElementsDisplay(infoDiv, reviewsDiv,
+        infoNavButton, reviewsNavButton);
 
-          // Loads hash and refreshes page to show reload charts.
-          location.hash = 'info';
-          location.reload();
+        // Loads hash and refreshes page to show reload charts.
+        location.hash = 'info';
+        location.reload();
       });
   reviewsNavButton.addEventListener('click',
       () => {
         toggleElementsDisplay(reviewsDiv, infoDiv,
-          reviewsNavButton, infoNavButton);
+            reviewsNavButton, infoNavButton);
       });
 }
 
