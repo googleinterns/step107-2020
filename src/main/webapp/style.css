@@ -90,7 +90,7 @@ header {
   box-sizing: border-box;
 }
 
-.topnav button {
+.topnav a {
   color: #856c8b;
   display: inline-block;
   font-size: 18px;
@@ -98,12 +98,12 @@ header {
   padding: 0 10px;
 }
 
-.topnav button:hover {
+.topnav a:hover {
   color: #856c8b;
   opacity: 0.6;
 }
 
-.topnav button.active {
+.topnav a.active {
   border-bottom: 5px solid #856c8b;
 }
 

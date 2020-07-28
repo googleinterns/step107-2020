@@ -328,6 +328,7 @@ function loadToggle() {
   } else {
     location.hash = 'info';
     reviewsDiv.classList = 'is-hidden';
+    infoNavButton.classList.add('active');
   }
 
   // Adds toggle function to tab buttons.
