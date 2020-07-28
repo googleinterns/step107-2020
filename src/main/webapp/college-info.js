@@ -92,10 +92,6 @@ function loadSchoolInfo() {
   studentsDiv.append(`Population: ${numStudents} Students`);
   studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
 
-
-  
-
-  // Draw charts.
   chartsPromise.then(() => {
     drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
         numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
@@ -311,7 +307,7 @@ function prepReviewForm(id) {
  * @param {string} hideId HTML ID of element that is shown and will be hidden.
  */
 function toggleElementsDisplay(showElement, hideElement, showElementNavButton, 
-    hideElementNavButton) {
+    hideElementNavButton) {   
   showElement.classList.remove('is-hidden');
   hideElement.classList.add('is-hidden');
 
@@ -325,19 +321,30 @@ function loadToggle() {
   const infoNavButton = document.getElementById('info-nav');
   const reviewsNavButton = document.getElementById('reviews-nav');
 
-  if (localStorage.getItem('page') == 'reviews') {
+  // Gets location hash from URL to show/hide appropriate section when the
+  // page initially loads.
+  if (location.hash == '#reviews') {
     infoDiv.classList = 'is-hidden';
-    localStorage.setItem('page', '');
   } else {
+    location.hash = 'info';
     reviewsDiv.classList = 'is-hidden';
   }
 
+  // Adds toggle function to tab buttons.
   infoNavButton.addEventListener('click',
-      () => toggleElementsDisplay(infoDiv, reviewsDiv,
-          infoNavButton, reviewsNavButton));
+      () => {
+          toggleElementsDisplay(infoDiv, reviewsDiv,
+          infoNavButton, reviewsNavButton);
+
+          // Loads hash and refreshes page to show reload charts.
+          location.hash = 'info';
+          location.reload();
+      });
   reviewsNavButton.addEventListener('click',
-      () => toggleElementsDisplay(reviewsDiv, infoDiv,
-          reviewsNavButton, infoNavButton));
+      () => {
+        toggleElementsDisplay(reviewsDiv, infoDiv,
+          reviewsNavButton, infoNavButton);
+      });
 }
 
 init();
