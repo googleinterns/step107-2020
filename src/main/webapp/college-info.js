@@ -289,7 +289,7 @@ function createCommentElement(name, message, time) {
 function prepReviewForm(id) {
   const submitReviewForm = document.getElementById('submit-review');
   submitReviewForm.setAttribute('action', `/data?id=${id}`);
-  
+
   // Add page variable that will tell page to reload on review form.
   const submitButton = document.getElementById('submit-button');
   submitButton.addEventListener('click', () => {
@@ -300,11 +300,11 @@ function prepReviewForm(id) {
 }
 
 /**
- * Sets the hidden elements to be shown and the shown elements hidden.
- * ID for buttons that will be used to show an element must be the same as the
- * name of that element ID with "-nav" at the end.
- * @param {string} showId HTML ID of element that is hidden and will be shown.
- * @param {string} hideId HTML ID of element that is shown and will be hidden.
+ * Sets the hidden elements to be shown and the shown elements to be hidden.
+ * @param {HTMLElement} showElement HTML element that is hidden and will be shown.
+ * @param {HTMLElement} hideElement HTML element that is shown and will be hidden.
+ * @param {HTMLElement} showElementNavButton HTML nav button to activate.
+ * @param {HTMLElement} hideElementNavButton HTML nav button to deactivate.
  */
 function toggleElementsDisplay(showElement, hideElement, showElementNavButton, 
     hideElementNavButton) {   
@@ -315,6 +315,9 @@ function toggleElementsDisplay(showElement, hideElement, showElementNavButton,
   hideElementNavButton.classList.remove('active');
 }
 
+/**
+ * Sets the toggle functions to the nav bar buttons.
+ */
 function loadToggle() {
   const infoDiv = document.getElementById('info');
   const reviewsDiv = document.getElementById('reviews');
