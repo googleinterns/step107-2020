@@ -338,7 +338,7 @@ function loadToggle() {
   infoNavButton.addEventListener('click',
       () => {
         toggleElementsDisplay(infoDiv, reviewsDiv,
-        infoNavButton, reviewsNavButton);
+            infoNavButton, reviewsNavButton);
 
         // Loads hash and refreshes page to show reload charts.
         location.hash = 'info';
