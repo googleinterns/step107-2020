@@ -290,11 +290,6 @@ function prepReviewForm(id) {
   const submitReviewForm = document.getElementById('submit-review');
   submitReviewForm.setAttribute('action', `/data?id=${id}`);
 
-  // Add page variable that will tell page to reload on review form.
-  const submitButton = document.getElementById('submit-button');
-  submitButton.addEventListener('click', () => {
-    localStorage.setItem('page', 'reviews');
-  });
   const idInputElement = document.getElementById('school-id');
   idInputElement.setAttribute('value', id);
 }
