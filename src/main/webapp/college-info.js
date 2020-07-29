@@ -19,6 +19,7 @@ function init() {
   loadSchoolInfo();
   loadComments();
   loadToggle();
+  loadLogin();
 }
 
 /**
@@ -349,21 +350,32 @@ function loadToggle() {
 /**
  * Determines if user is logged in and displays comment submission if logged.
  */
-function getLogin() {
-  fetch('/user').then((response) => response.text()).then((loginStatus) => { 
+function loadLogin() {
+  const id = localStorage.getItem('schoolId');
+  fetch(`/user?id=${id}`).then((response) => response.text()).then((loginStatus) => { 
     loginObj = JSON.parse(loginStatus);
 
+    // Creates a a element for login/logout link.
     const logLink = document.createElement('a');
     logLink.innerText = 'Here';
 
+    // Grabs the login/logout div and clears it of past elements.
+    loginDiv = document.getElementById('login');
+    loginDiv.innerHTML = '';
+
+    // Checks the status of login.
     if (loginObj.isLoggedIn) {
-      document.getElementById('comment-form').classList.remove('isHidden');
+      // Removes hidden class is user is logged in.
+      document.getElementById('submit-review-container').classList.remove('is-hidden');
+
+      // Sets logout link.
       logLink.setAttribute('href', loginObj.logoutURL);
-      document.getElementById('comments').append('Logout', logLink);
+      loginDiv.append('Logout', logLink);
+
     } else {
+      // Sets login link.
       logLink.setAttribute('href', loginObj.loginURL);
-      document.getElementById('comments')
-          .append('Sign in', logLink, 'to leave a comment');
+      loginDiv.append('Sign in', logLink, 'to leave a comment');
     }
   });
 }

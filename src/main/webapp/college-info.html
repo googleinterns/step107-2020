@@ -41,13 +41,16 @@
       <div id="reviews">
         <h2>Student Reviews</h2>
         <div id="comments-container"></div>
-        <h2>Leave a Review</h2>
-        <form id="submit-review" method="POST">
-          <input type="hidden" name="school-id" id="school-id">
-          <input name="name-input" placeholder="Name...">
-          <textarea name="text-input" placeholder="Message..."></textarea>
-          <button type="submit" id="submit-button">Submit</button>
-        </form>
+        <div id="submit-review-container" class="is-hidden">
+          <h2>Leave a Review</h2>
+          <form id="submit-review" method="POST">
+            <input type="hidden" name="school-id" id="school-id">
+            <input name="name-input" placeholder="Name...">
+            <textarea name="text-input" placeholder="Message..."></textarea>
+            <button type="submit" id="submit-button">Submit</button>
+          </form>
+        </div>
+        <div id="login"></div> 
       </div>
 
     </main>

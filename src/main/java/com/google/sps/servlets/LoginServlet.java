@@ -42,12 +42,14 @@ public class LoginServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
     Map loginStatusInfoMap = new HashMap();
+    int id = getId(request);
+    String reviewsPageLink = String.format("/college-info.html?id=%d#reviews", id);
 
     if (userService.isUserLoggedIn()) {
       // Get user credentials.
       User user = userService.getCurrentUser();
       String userEmail = user.getEmail();
-      String logoutURL = userService.createLogoutURL("/");
+      String logoutURL = userService.createLogoutURL(reviewsPageLink);
 
       // Load credentials into JSON object.
       loginStatusInfoMap.put("email", userEmail);
@@ -55,7 +57,7 @@ public class LoginServlet extends HttpServlet {
       loginStatusInfoMap.put("isLoggedIn", new Boolean(true));
 
     } else {
-      String loginURL = userService.createLoginURL("/");
+      String loginURL = userService.createLoginURL(reviewsPageLink);
 
       // Load credentials into JSON object.
       loginStatusInfoMap.put("loginURL", loginURL);
@@ -66,5 +68,22 @@ public class LoginServlet extends HttpServlet {
     Gson gson = new Gson();
     response.setContentType("application/json");
     response.getWriter().println(gson.toJson(loginStatusInfoMap));
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    return value == null ? defaultValue : value;
+  }
+
+  /** Returns the ID of the current school as an integer. */
+  // TODO:  Add throw exception and display an error message to the end users.
+  private int getId(HttpServletRequest request) {
+    int fail = -1;
+    try {
+      return Integer.parseInt(request.getParameter("id"));
+    } catch (NumberFormatException exception) {
+      System.out.println("getID Invalid parametr: ID request is not a valid number.");
+    }
+    return fail;
   }
 }
