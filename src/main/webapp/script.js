@@ -69,7 +69,7 @@ function getBasicSchoolInfo(data, infoName) {
 function prepSearchButton() {
   const searchButton = document.getElementById('search-button');
   const schoolSearch = document.getElementById('school-search');
-  
+
   searchButton.addEventListener('click', () => loadSearchResults());
   schoolSearch.addEventListener('keyup', function(event) {
     if (event.keyCode === 13) {
