@@ -26,6 +26,7 @@ import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import com.google.sps.data.Request;
 import java.io.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -44,7 +45,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int id = getId(request);
+    int id = Request.getId(request);
 
     // Filter query based on current ID of school.
     Filter idFilter = new FilterPredicate(Comment.SCHOOL_ID_KEY, FilterOperator.EQUAL, id);
@@ -82,7 +83,7 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, "name-input", "");
     String message = getParameter(request, "text-input", "");
     long timestamp = System.currentTimeMillis();
-    int id = getId(request);
+    int id = Request.getId(request);
     Date date = new Date();
     String time = dateFormat.format(date);
 
@@ -104,17 +105,5 @@ public class DataServlet extends HttpServlet {
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     return value == null ? defaultValue : value;
-  }
-
-  /** Returns the ID of the current school as an integer. */
-  // TODO:  Add throw exception and display an error message to the end users.
-  private int getId(HttpServletRequest request) {
-    int fail = -1;
-    try {
-      return Integer.parseInt(request.getParameter("id"));
-    } catch (NumberFormatException exception) {
-      System.out.println("getID Invalid parametr: ID request is not a valid number.");
-    }
-    return fail;
   }
 }

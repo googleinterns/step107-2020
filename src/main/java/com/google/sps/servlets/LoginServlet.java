@@ -26,6 +26,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.oauth.OAuthServiceFailureException;
 import com.google.gson.Gson;
+import com.google.sps.data.Request;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -42,7 +43,7 @@ public class LoginServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
     Map loginStatusInfoMap = new HashMap();
-    int id = getId(request);
+    int id = Request.getId(request);
     String reviewsPageLink = String.format("/college-info.html?id=%d#reviews", id);
 
     if (userService.isUserLoggedIn()) {
@@ -73,17 +74,5 @@ public class LoginServlet extends HttpServlet {
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     return value == null ? defaultValue : value;
-  }
-
-  /** Returns the ID of the current school as an integer. */
-  // TODO:  Add throw exception and display an error message to the end users.
-  private int getId(HttpServletRequest request) {
-    int fail = -1;
-    try {
-      return Integer.parseInt(request.getParameter("id"));
-    } catch (NumberFormatException exception) {
-      System.out.println("getID Invalid parametr: ID request is not a valid number.");
-    }
-    return fail;
   }
 }
