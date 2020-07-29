@@ -17,12 +17,14 @@ h1 {
   font-weight: normal;
   line-height: 69px;
   margin: 10px 20px;
+  padding: 25px;
 }
 
 h2,
 h3 {
   color: #856c8b;
   font-weight: normal;
+  padding: 10px;
   text-align: center;
 }
 
@@ -37,18 +39,26 @@ h4 {
   margin-bottom: 15px;
 }
 
+.inline-block {
+  display: inline-block;
+  margin: auto;
+  text-align: center;
+}
+
 p {
   color: black;
   display: block;
-  font-size: 16px;
+  font-size: 20px;
   font-style: normal;
   font-weight: normal;
   line-height: 25px;
   margin: auto;
+  padding: 25px;
   width: 960px;
 }
 
-a {
+a,
+li {
   color: #856c8b;
   font-size: 20px;
   font-style: normal;
@@ -90,6 +100,10 @@ header {
   box-sizing: border-box;
 }
 
+.topnav {
+  overflow: hidden;
+}
+
 .topnav a {
   color: #856c8b;
   display: inline-block;
@@ -122,6 +136,18 @@ header {
   position: absolute;
   right: 48px;
   top: 55px;
+}
+
+figcaption {
+  color: black;
+  margin-bottom: 10px;
+  margin-left: auto;
+  width: 307px;
+}
+
+#headshots {
+  margin: auto;
+  width: 960px;
 }
 
 #submit-button {
@@ -200,4 +226,16 @@ header {
   height: 475px;
   margin-bottom: 30px;
   width: calc(50% - 60px);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+li.clickable:hover {
+  background-color: #ffeb9953;
+}
+
+ul {
+  list-style-type: none;
 }
