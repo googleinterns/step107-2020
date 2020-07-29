@@ -293,4 +293,27 @@ function prepReviewForm(id) {
   idInputElement.setAttribute('value', id);
 }
 
+
+/**
+ * Determines if user is logged in and displays comment submission if logged.
+ */
+function getLogin() {
+  fetch('/user').then((response) => response.text()).then((loginStatus) => { 
+    loginObj = JSON.parse(loginStatus);
+
+    const logLink = document.createElement('a');
+    logLink.innerText = 'Here';
+
+    if (loginObj.isLoggedIn) {
+      document.getElementById('comment-form').classList.remove('isHidden');
+      logLink.setAttribute('href', loginObj.logoutURL);
+      document.getElementById('comments').append('Logout', logLink);
+    } else {
+      logLink.setAttribute('href', loginObj.loginURL);
+      document.getElementById('comments')
+          .append('Sign in', logLink, 'to leave a comment');
+    }
+  });
+}
+
 init();
