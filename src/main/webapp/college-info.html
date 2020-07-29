@@ -13,35 +13,43 @@
       <button id="search-button">Search</button>
     </header>
     <main>
+
       <nav class="topnav">
-        <a class="active" href="college-info.html">School Info</a>
-        <a href="comments.html">Student Reviews</a>
+        <a id="info-nav" href="#info">School Info</a>
+        <a id="reviews-nav" href="#reviews">Student Reviews</a>
       </nav>
-      <h2 id="school-name"></h2>
-      <section>
-        <p id="school-desc"></p>
-        <p id="students"></p>
-      </section>
 
-      <section>
-        <p id="admissions"></p>
-        <p id="cost"></p>
-      </section>
+      <div id="info">
+        <h2 id="school-name"></h2>
 
-      <section>
-        <p id="race-piechart"></p>
-        <p id="gender-piechart"></p>
-      </section>
+        <section>
+          <p id="school-desc"></p>
+          <p id="students"></p>
+        </section>
 
-      <h2>Student Reviews</h2>
-      <div id="comments-container"></div>
-      <h2>Leave a Review</h2>
-      <form id="submit-review" method="POST">
-        <input type="hidden" name="school-id" id="school-id">
-        <input name="name-input" placeholder="Name...">
-        <textarea name="text-input" placeholder="Message..."></textarea>
-        <button type="submit" id="submit-button">Submit</button>
-      </form>
+        <section>
+          <p id="admissions"></p>
+          <p id="cost"></p>
+        </section>
+
+        <section>
+          <p id="race-piechart"></p>
+          <p id="gender-piechart"></p>
+        </section>
+      </div>
+
+      <div id="reviews">
+        <h2>Student Reviews</h2>
+        <div id="comments-container"></div>
+        <h2>Leave a Review</h2>
+        <form id="submit-review" method="POST">
+          <input type="hidden" name="school-id" id="school-id">
+          <input name="name-input" placeholder="Name...">
+          <textarea name="text-input" placeholder="Message..."></textarea>
+          <button type="submit" id="submit-button">Submit</button>
+        </form>
+      </div>
+
     </main>
     <script src="script.js"></script>
     <script src="college-info.js"></script>
