@@ -78,7 +78,6 @@ function prepSearchButton() {
   });
 }
 
-
 /** Fetches search results from API and saves in local storage. */
 function loadSearchResults() {
   const searchValue = document.getElementById('school-search').value;
@@ -120,7 +119,7 @@ function loadSearchResults() {
         localStorage.setItem('schoolIdToInfoDataDictionary',
             JSON.stringify(schoolIdToInfoDataDictionary));
         location.href = '/search-results.html';
-      });  
+      });
 }
 
 init();
