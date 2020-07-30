@@ -39,6 +39,14 @@ h4 {
   margin-bottom: 15px;
 }
 
+h5 {
+  color: #856c8b;
+  font-size: 19px;
+  margin: unset;
+  margin-bottom: 6px;
+  margin-top: -14px;
+}
+
 .inline-block {
   display: inline-block;
   margin: auto;
@@ -48,13 +56,11 @@ h4 {
 p {
   color: black;
   display: block;
-  font-size: 20px;
+  font-size: 19px;
   font-style: normal;
   font-weight: normal;
-  line-height: 25px;
   margin: auto;
-  padding: 25px;
-  width: 960px;
+  max-width: 920px;
 }
 
 a,
@@ -91,6 +97,11 @@ textarea {
 
 textarea:hover {
   opacity: 0.7;
+}
+
+text {
+  fill: black;  
+  font-size: 18px;
 }
 
 header {
@@ -133,9 +144,11 @@ header {
   background-color: white;
   border: none;
   cursor: pointer;
+  height: 37px;
+  max-height: 37px;
   position: absolute;
-  right: 48px;
-  top: 55px;
+  right: 46px;
+  top: 45px;
 }
 
 figcaption {
