@@ -18,6 +18,7 @@
 function init() {
   loadSchoolInfo();
   loadComments();
+  loadToggle();
 }
 
 /**
@@ -328,8 +329,61 @@ function createCommentElement(name, message, time) {
 function prepReviewForm(id) {
   const submitReviewForm = document.getElementById('submit-review');
   submitReviewForm.setAttribute('action', `/data?id=${id}`);
+
   const idInputElement = document.getElementById('school-id');
   idInputElement.setAttribute('value', id);
+}
+
+/**
+ * Sets the hidden elements to be shown and the shown elements to be hidden.
+ * @param {HTMLElement} showElement HTML element that is hidden/will be shown.
+ * @param {HTMLElement} hideElement HTML element that is shown/will be hidden.
+ * @param {HTMLElement} showElementNavButton HTML nav button to activate.
+ * @param {HTMLElement} hideElementNavButton HTML nav button to deactivate.
+ */
+function toggleSectionDisplay(showElement, hideElement, showElementNavButton,
+    hideElementNavButton) {
+  showElement.classList.remove('is-hidden');
+  hideElement.classList.add('is-hidden');
+
+  showElementNavButton.classList.add('active');
+  hideElementNavButton.classList.remove('active');
+}
+
+/**
+ * Sets the toggle functions to the nav bar buttons.
+ */
+function loadToggle() {
+  const infoDiv = document.getElementById('info');
+  const reviewsDiv = document.getElementById('reviews');
+  const infoNavButton = document.getElementById('info-nav');
+  const reviewsNavButton = document.getElementById('reviews-nav');
+
+  // Gets location hash from URL to show/hide appropriate section when the
+  // page initially loads.
+  if (location.hash == '#reviews') {
+    infoDiv.classList.add('is-hidden');
+  } else {
+    location.hash = 'info';
+    reviewsDiv.classList.add('is-hidden');
+    infoNavButton.classList.add('active');
+  }
+
+  // Adds toggle function to tab buttons.
+  infoNavButton.addEventListener('click',
+      () => {
+        toggleSectionDisplay(infoDiv, reviewsDiv,
+            infoNavButton, reviewsNavButton);
+
+        // Loads hash and refreshes page to show reload charts.
+        location.hash = 'info';
+        location.reload();
+      });
+  reviewsNavButton.addEventListener('click',
+      () => {
+        toggleSectionDisplay(reviewsDiv, infoDiv,
+            reviewsNavButton, infoNavButton);
+      });
 }
 
 init();
