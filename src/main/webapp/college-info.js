@@ -67,7 +67,9 @@ function loadSchoolInfo() {
   schoolHeader.innerHTML = '';
   schoolHeader.append(dataResults['school.name']);
 
-  // School Description.
+  /**
+  * Loads school description to page.
+  */
   function getSchoolDesc() {
     const schoolDesc = document.getElementById('school-desc');
     const header = document.createElement('h5');
@@ -75,49 +77,60 @@ function loadSchoolInfo() {
     const title = document.createTextNode('About');
     header.appendChild(title);
     para.append(`${name} is a ${ownership} University 
-        in ${city}, ${state}`)
+        in ${city}, ${state}`);
     schoolDesc.appendChild(header);
     schoolDesc.appendChild(para);
   }
 
-  // Population and Graduation Rate.
+  /**
+  * Loads school population and graduation rate to page.
+  */
   function getPopulation() {
     const population = document.getElementById('students');
     const header = document.createElement('h5');
     const para = document.createElement('p');
     const title = document.createTextNode('Population and Graduation Rate');
     header.appendChild(title);
-    para.append(`${numStudents} students, 4 Year Graduation Rate of ${graduationRate4yr}%`);
+    para.append(`${numStudents} students, 4 Year Graduation Rate of
+        ${graduationRate4yr}%`);
     population.appendChild(header);
     population.appendChild(para);
   }
 
-  // Admissions Numbers.
+  /**
+  * Loads admissions statistics to page.
+  */
   function getAdmissions() {
     const admissions = document.getElementById('admissions');
     const header = document.createElement('h5');
     const para = document.createElement('p');
     const title = document.createTextNode('Admissions');
     header.appendChild(title);
-    para.append(`Acceptance Rate is ${acceptanceRate}%, Average SAT Score is ${avgSat},
+    para.append(`Acceptance Rate is ${acceptanceRate}%,
+        Average SAT Score is ${avgSat},
         Average ACT Score is ${avgAct}`);
     admissions.appendChild(header);
     admissions.appendChild(para);
   }
 
-  // Cost Section.
+  /**
+  * Loads cost of attendance to page.
+  */
   function getCost() {
     const cost = document.getElementById('cost');
     const header = document.createElement('h5');
     const para = document.createElement('p');
     const title = document.createTextNode('Cost of Attendance');
     header.appendChild(title);
-    para.append(`In-State Tuition is $${inStateTuition}, Out-of-State Tuition is $${outOfStateTuition}`);
+    para.append(`In-State Tuition is $${inStateTuition}, 
+        Out-of-State Tuition is $${outOfStateTuition}`);
     cost.appendChild(header);
     cost.appendChild(para);
   }
 
-  // Draw Charts.
+  /**
+  * Loads demographic charts to page.
+  */
   function getCharts() {
     const charts = document.getElementById('race-piechart');
     const para = document.createElement('p');
@@ -130,7 +143,7 @@ function loadSchoolInfo() {
     );
     charts.appendChild(para);
   }
-  
+
   document.body.onload = function() {
     getSchoolDesc();
     getPopulation();
