@@ -324,6 +324,7 @@ function loadToggle() {
   // page initially loads.
   if (location.hash == '#reviews') {
     infoDiv.classList.add('is-hidden');
+    reviewsNavButton.classList.add('active');
   } else {
     location.hash = 'info';
     reviewsDiv.classList.add('is-hidden');
