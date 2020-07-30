@@ -338,7 +338,7 @@ function loadToggle() {
 
         // Loads hash and refreshes page to show reload charts.
         location.hash = 'info';
-        loction.reload();
+        location.reload();
       });
   reviewsNavButton.addEventListener('click',
       () => {
