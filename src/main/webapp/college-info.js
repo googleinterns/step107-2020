@@ -323,6 +323,7 @@ function loadToggle() {
   // page initially loads.
   if (location.hash == '#reviews') {
     infoDiv.classList.add('is-hidden');
+    reviewsNavButton.classList.add('active');
   } else {
     location.hash = 'info';
     reviewsDiv.classList.add('is-hidden');
@@ -337,7 +338,7 @@ function loadToggle() {
 
         // Loads hash and refreshes page to show reload charts.
         location.hash = 'info';
-        location.reload();
+        loction.reload();
       });
   reviewsNavButton.addEventListener('click',
       () => {
