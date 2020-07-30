@@ -45,6 +45,7 @@ public class LoginServlet extends HttpServlet {
     Map loginStatusInfoMap = new HashMap();
     int id = Request.getId(request);
     String reviewsPageLink = String.format("/college-info.html?id=%d#reviews", id);
+    String nicknameLink = String.format("/nickname.html?id=%d", id);
 
     if (userService.isUserLoggedIn()) {
       // Get user credentials.
@@ -58,7 +59,7 @@ public class LoginServlet extends HttpServlet {
       loginStatusInfoMap.put("isLoggedIn", new Boolean(true));
 
     } else {
-      String loginURL = userService.createLoginURL(reviewsPageLink);
+      String loginURL = userService.createLoginURL("/nickname.html");
 
       // Load credentials into JSON object.
       loginStatusInfoMap.put("loginURL", loginURL);
@@ -69,6 +70,30 @@ public class LoginServlet extends HttpServlet {
     Gson gson = new Gson();
     response.setContentType("application/json");
     response.getWriter().println(gson.toJson(loginStatusInfoMap));
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
+    if (!userService.isUserLoggedIn()) {
+      response.sendRedirect("/nickname.html");
+      return;
+    }
+
+    String nickname = request.getParameter("nickname");
+    String userId = userService.getCurrentUser().getUserId();
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Entity entity = new Entity("UserInfo", userId);
+    entity.setProperty("userId", userId);
+    entity.setProperty("nickname", nickname);
+    // The put() function automatically inserts new data or updates existing data based on ID
+    datastore.put(entity);
+
+    int id = Request.getId(request);
+    String reviewsPageLink = String.format("/college-info.html?id=%d#reviews", id);
+
+    response.sendRedirect(reviewsPageLink);
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
