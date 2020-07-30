@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns comments.*/
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
@@ -89,11 +89,12 @@ public class DataServlet extends HttpServlet {
     Date date = new Date();
     String time = dateFormat.format(date);
 
-    // Get current user nickname.
+    // Gets current user nickname from logged in user.
     UserService userService = UserServiceFactory.getUserService();
     String userId = userService.getCurrentUser().getUserId();
     String nickname = getUserNickname(userId);
 
+    // Creates comment entity.
     Entity commentEntity = new Entity(Comment.COMMENT_ENTITY);
     commentEntity.setProperty(Comment.NAME_KEY, nickname);
     commentEntity.setProperty(Comment.MESSAGE_KEY, message);
@@ -101,11 +102,12 @@ public class DataServlet extends HttpServlet {
     commentEntity.setProperty(Comment.TIME_KEY, time);
     commentEntity.setProperty(Comment.SCHOOL_ID_KEY, id);
 
+    // Stores comment entity,
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
+    // Redirects to stay on the reviews page.
     String responseLink = String.format("/college-info.html?id=%d#reviews", id);
-
     response.sendRedirect(responseLink);
   }
 
