@@ -76,7 +76,7 @@ public class LoginServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
-      response.sendRedirect("/nickname.html");
+      response.sendRedirect("/user");
       return;
     }
 
@@ -87,7 +87,7 @@ public class LoginServlet extends HttpServlet {
     Entity entity = new Entity("UserInfo", userId);
     entity.setProperty("userId", userId);
     entity.setProperty("nickname", nickname);
-    // The put() function automatically inserts new data or updates existing data based on ID
+    // The put() function automatically inserts new data or updates existing data based on ID.
     datastore.put(entity);
 
     int id = Request.getId(request);

@@ -24,6 +24,8 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import com.google.sps.data.Request;
@@ -87,8 +89,13 @@ public class DataServlet extends HttpServlet {
     Date date = new Date();
     String time = dateFormat.format(date);
 
+    // Get current user nickname.
+    UserService userService = UserServiceFactory.getUserService();
+    String userId = userService.getCurrentUser().getUserId();
+    String nickname = getUserNickname(userId);
+
     Entity commentEntity = new Entity(Comment.COMMENT_ENTITY);
-    commentEntity.setProperty(Comment.NAME_KEY, name);
+    commentEntity.setProperty(Comment.NAME_KEY, nickname);
     commentEntity.setProperty(Comment.MESSAGE_KEY, message);
     commentEntity.setProperty(Comment.TIMESTAMP_KEY, timestamp);
     commentEntity.setProperty(Comment.TIME_KEY, time);
@@ -105,5 +112,20 @@ public class DataServlet extends HttpServlet {
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     return value == null ? defaultValue : value;
+  }
+
+  /** Returns the nickname of the user with id, or null if the user has not set a nickname. */
+  private String getUserNickname(String userId) {
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Query query =
+        new Query("UserInfo")
+            .setFilter(new Query.FilterPredicate("userId", Query.FilterOperator.EQUAL, userId));
+    PreparedQuery results = datastore.prepare(query);
+    Entity entity = results.asSingleEntity();
+    if (entity == null) {
+      return null;
+    }
+    String nickname = (String) entity.getProperty("nickname");
+    return nickname;
   }
 }
