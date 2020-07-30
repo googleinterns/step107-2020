@@ -139,8 +139,7 @@ function loadSchoolInfo() {
           numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
           numUnreportedRaceStudents);
       drawGenderChart(numMen, numWomen);
-      })
-    );
+    }));
     charts.appendChild(para);
   }
 
