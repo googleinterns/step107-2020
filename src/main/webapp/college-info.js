@@ -353,7 +353,8 @@ function loadToggle() {
  */
 function loadLogin() {
   const id = localStorage.getItem('schoolId');
-  fetch(`/user?id=${id}`).then((response) => response.text()).then((loginStatus) => { 
+  fetch(`/user?id=${id}`).then((response) => response.text())
+      .then((loginStatus) => {
     loginObj = JSON.parse(loginStatus);
 
     // Creates an element for login/logout link.
@@ -367,12 +368,12 @@ function loadLogin() {
     // Checks the status of login.
     if (loginObj.isLoggedIn) {
       // Removes hidden class is user is logged in.
-      document.getElementById('submit-review-container').classList.remove('is-hidden');
+      document.getElementById('submit-review-container').classList
+          .remove('is-hidden');
 
       // Sets logout link.
       logLink.setAttribute('href', loginObj.logoutURL);
       loginDiv.append('Logout', logLink);
-
     } else {
       // Sets login link.
       logLink.setAttribute('href', loginObj.loginURL);

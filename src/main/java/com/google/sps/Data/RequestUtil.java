@@ -7,7 +7,7 @@ public final class RequestUtil {
 
   /** Returns the ID of the current school as an integer. */
   // TODO:  Add throw exception and display an error message to the end users.
-  static public int getId(HttpServletRequest request) {
+  public static int getId(HttpServletRequest request) {
     try {
       return Integer.parseInt(request.getParameter("id"));
     } catch (NumberFormatException exception) {
