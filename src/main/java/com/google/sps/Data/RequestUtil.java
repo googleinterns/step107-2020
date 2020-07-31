@@ -1,6 +1,5 @@
 package com.google.sps.data;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 public final class RequestUtil {

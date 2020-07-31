@@ -355,31 +355,31 @@ function loadLogin() {
   const id = localStorage.getItem('schoolId');
   fetch(`/user?id=${id}`).then((response) => response.text())
       .then((loginStatus) => {
-    loginObj = JSON.parse(loginStatus);
+        loginObj = JSON.parse(loginStatus);
 
-    // Creates an element for login/logout link.
-    const logLink = document.createElement('a');
-    logLink.innerText = 'Here';
+        // Creates an element for login/logout link.
+        const logLink = document.createElement('a');
+        logLink.innerText = 'Here';
 
-    // Grabs the login/logout div and clears it of past elements.
-    loginDiv = document.getElementById('login');
-    loginDiv.innerHTML = '';
+        // Grabs the login/logout div and clears it of past elements.
+        loginDiv = document.getElementById('login');
+        loginDiv.innerHTML = '';
 
-    // Checks the status of login.
-    if (loginObj.isLoggedIn) {
-      // Removes hidden class is user is logged in.
-      document.getElementById('submit-review-container').classList
-          .remove('is-hidden');
+        // Checks the status of login.
+        if (loginObj.isLoggedIn) {
+          // Removes hidden class is user is logged in.
+          document.getElementById('submit-review-container').classList
+              .remove('is-hidden');
 
-      // Sets logout link.
-      logLink.setAttribute('href', loginObj.logoutURL);
-      loginDiv.append('Logout', logLink);
-    } else {
-      // Sets login link.
-      logLink.setAttribute('href', loginObj.loginURL);
-      loginDiv.append('Sign in', logLink, 'to leave a comment');
-    }
-  });
+          // Sets logout link.
+          logLink.setAttribute('href', loginObj.logoutURL);
+          loginDiv.append('Logout', logLink);
+        } else {
+          // Sets login link.
+          logLink.setAttribute('href', loginObj.loginURL);
+          loginDiv.append('Sign in', logLink, 'to leave a comment');
+        }
+      });
 }
 
 init();
