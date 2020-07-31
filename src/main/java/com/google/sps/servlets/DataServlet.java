@@ -24,8 +24,11 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
+import com.google.sps.data.RequestUtil;
 import java.io.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -36,7 +39,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns comments. */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
@@ -44,7 +47,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int id = getId(request);
+    int id = RequestUtil.getId(request);
 
     // Filter query based on current ID of school.
     Filter idFilter = new FilterPredicate(Comment.SCHOOL_ID_KEY, FilterOperator.EQUAL, id);
@@ -82,22 +85,29 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, "name-input", "");
     String message = getParameter(request, "text-input", "");
     long timestamp = System.currentTimeMillis();
-    int id = getId(request);
+    int id = RequestUtil.getId(request);
     Date date = new Date();
     String time = dateFormat.format(date);
 
+    // Gets current user nickname from logged in user.
+    UserService userService = UserServiceFactory.getUserService();
+    String userId = userService.getCurrentUser().getUserId();
+    String nickname = getUserNickname(userId);
+
+    // Creates comment entity.
     Entity commentEntity = new Entity(Comment.COMMENT_ENTITY);
-    commentEntity.setProperty(Comment.NAME_KEY, name);
+    commentEntity.setProperty(Comment.NAME_KEY, nickname);
     commentEntity.setProperty(Comment.MESSAGE_KEY, message);
     commentEntity.setProperty(Comment.TIMESTAMP_KEY, timestamp);
     commentEntity.setProperty(Comment.TIME_KEY, time);
     commentEntity.setProperty(Comment.SCHOOL_ID_KEY, id);
 
+    // Stores comment entity,
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
+    // Redirects to stay on the reviews page.
     String responseLink = String.format("/college-info.html?id=%d#reviews", id);
-
     response.sendRedirect(responseLink);
   }
 
@@ -106,15 +116,18 @@ public class DataServlet extends HttpServlet {
     return value == null ? defaultValue : value;
   }
 
-  /** Returns the ID of the current school as an integer. */
-  // TODO:  Add throw exception and display an error message to the end users.
-  private int getId(HttpServletRequest request) {
-    int fail = -1;
-    try {
-      return Integer.parseInt(request.getParameter("id"));
-    } catch (NumberFormatException exception) {
-      System.out.println("getID Invalid parametr: ID request is not a valid number.");
+  /** Returns the nickname of the user with id, or null if the user has not set a nickname. */
+  private String getUserNickname(String userId) {
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Query query =
+        new Query("UserInfo")
+            .setFilter(new Query.FilterPredicate("userId", Query.FilterOperator.EQUAL, userId));
+    PreparedQuery results = datastore.prepare(query);
+    Entity entity = results.asSingleEntity();
+    if (entity == null) {
+      return "Anonymous";
     }
-    return fail;
+    String nickname = (String) entity.getProperty("nickname");
+    return nickname;
   }
 }

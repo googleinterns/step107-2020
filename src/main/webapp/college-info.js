@@ -17,8 +17,9 @@
  */
 function init() {
   loadSchoolInfo();
-  loadComments();
   loadToggle();
+  loadLogin();
+  loadComments();
 }
 
 /**
@@ -344,6 +345,42 @@ function loadToggle() {
       () => {
         toggleSectionDisplay(reviewsDiv, infoDiv,
             reviewsNavButton, infoNavButton);
+      });
+}
+
+/**
+ * Determines if user is logged in and displays comment submission if logged.
+ */
+function loadLogin() {
+  const id = localStorage.getItem('schoolId');
+  fetch(`/user?id=${id}`).then((response) => response.text())
+      .then((loginStatus) => {
+        loginObj = JSON.parse(loginStatus);
+
+        // Creates an element for login/logout link.
+        const logLine = document.createElement('h3');
+        const logLink = document.createElement('a');
+        logLine.appendChild(logLink);
+
+        // Grabs the login/logout div and clears it of past elements.
+        loginDiv = document.getElementById('login');
+        loginDiv.innerHTML = '';
+
+        // Checks the status of login.
+        if (loginObj.isLoggedIn) {
+          // Removes hidden class is user is logged in.
+          document.getElementById('submit-review-container').classList
+              .remove('is-hidden');
+
+          // Sets logout link.
+          logLink.setAttribute('href', loginObj.logoutURL);
+          logLink.innerText = 'Logout here.';
+        } else {
+          // Sets login link.
+          logLink.setAttribute('href', loginObj.loginURL);
+          logLink.innerText = 'Sign in here to leave a comment.';
+        }
+        loginDiv.appendChild(logLine);
       });
 }
 
