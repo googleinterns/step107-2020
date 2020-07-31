@@ -374,11 +374,11 @@ function loadLogin() {
 
           // Sets logout link.
           logLink.setAttribute('href', loginObj.logoutURL);
-          logLink.innerText = 'Logout here.'
+          logLink.innerText = 'Logout here.';
         } else {
           // Sets login link.
           logLink.setAttribute('href', loginObj.loginURL);
-          logLink.innerText = 'Sign in here to leave a comment.'
+          logLink.innerText = 'Sign in here to leave a comment.';
         }
         loginDiv.appendChild(logLine);
       });
