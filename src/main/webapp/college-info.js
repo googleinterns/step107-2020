@@ -358,8 +358,9 @@ function loadLogin() {
         loginObj = JSON.parse(loginStatus);
 
         // Creates an element for login/logout link.
+        const logLine = document.createElement('h3');
         const logLink = document.createElement('a');
-        logLink.innerText = 'Here';
+        logLine.appendChild(logLink);
 
         // Grabs the login/logout div and clears it of past elements.
         loginDiv = document.getElementById('login');
@@ -373,12 +374,13 @@ function loadLogin() {
 
           // Sets logout link.
           logLink.setAttribute('href', loginObj.logoutURL);
-          loginDiv.append('Logout', logLink);
+          logLink.innerText = 'Logout here.'
         } else {
           // Sets login link.
           logLink.setAttribute('href', loginObj.loginURL);
-          loginDiv.append('Sign in', logLink, 'to leave a comment');
+          logLink.innerText = 'Sign in here to leave a comment.'
         }
+        loginDiv.appendChild(logLine);
       });
 }
 
