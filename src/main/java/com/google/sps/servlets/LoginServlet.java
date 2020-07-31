@@ -26,7 +26,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.oauth.OAuthServiceFailureException;
 import com.google.gson.Gson;
-import com.google.sps.data.Request;
+import com.google.sps.data.RequestUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     UserService userService = UserServiceFactory.getUserService();
     Map loginStatusInfoMap = new HashMap();
-    int id = Request.getId(request);
+    int id = RequestUtil.getId(request);
     String reviewsPageLink = String.format("/college-info.html?id=%d#reviews", id);
     String nicknameLink = String.format("/nickname.html?id=%d", id);
 
@@ -90,7 +90,7 @@ public class LoginServlet extends HttpServlet {
     // The put() function automatically inserts new data or updates existing data based on ID.
     datastore.put(entity);
 
-    int id = Request.getId(request);
+    int id = RequestUtil.getId(request);
     String reviewsPageLink = String.format("/college-info.html?id=%d#reviews", id);
 
     response.sendRedirect(reviewsPageLink);

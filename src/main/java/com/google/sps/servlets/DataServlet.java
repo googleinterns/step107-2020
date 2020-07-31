@@ -28,7 +28,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;
-import com.google.sps.data.Request;
+import com.google.sps.data.RequestUtil;
 import java.io.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -47,7 +47,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int id = Request.getId(request);
+    int id = RequestUtil.getId(request);
 
     // Filter query based on current ID of school.
     Filter idFilter = new FilterPredicate(Comment.SCHOOL_ID_KEY, FilterOperator.EQUAL, id);
@@ -85,7 +85,7 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, "name-input", "");
     String message = getParameter(request, "text-input", "");
     long timestamp = System.currentTimeMillis();
-    int id = Request.getId(request);
+    int id = RequestUtil.getId(request);
     Date date = new Date();
     String time = dateFormat.format(date);
 
@@ -125,7 +125,7 @@ public class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
     Entity entity = results.asSingleEntity();
     if (entity == null) {
-      return null;
+      return "Anonymous";
     }
     String nickname = (String) entity.getProperty("nickname");
     return nickname;

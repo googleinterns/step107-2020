@@ -17,9 +17,9 @@
  */
 function init() {
   loadSchoolInfo();
-  loadComments();
   loadToggle();
   loadLogin();
+  loadComments();
 }
 
 /**
@@ -356,7 +356,7 @@ function loadLogin() {
   fetch(`/user?id=${id}`).then((response) => response.text()).then((loginStatus) => { 
     loginObj = JSON.parse(loginStatus);
 
-    // Creates a a element for login/logout link.
+    // Creates an element for login/logout link.
     const logLink = document.createElement('a');
     logLink.innerText = 'Here';
 
