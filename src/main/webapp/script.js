@@ -71,7 +71,7 @@ function prepSearchButton() {
   const schoolSearch = document.getElementById('school-search');
 
   searchButton.addEventListener('click', () => loadSearchResults());
-  schoolSearch.addEventListener('keyup', function(event) {
+  schoolSearch.addEventListener('keyup', (event) => {
     if (event.keyCode === 13) {
       loadSearchResults();
     }

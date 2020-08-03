@@ -19,6 +19,10 @@ function init() {
   loadSchoolInfo();
   loadComments();
   loadToggle();
+  insertSchoolDesc();
+  insertPopulation();
+  insertAdmissions();
+  insertCost();
 }
 
 /**
@@ -67,89 +71,74 @@ function loadSchoolInfo() {
   schoolHeader.innerHTML = '';
   schoolHeader.append(dataResults['school.name']);
 
-  /**
-  * Loads school description to page.
-  */
-  function getSchoolDesc() {
-    const schoolDesc = document.getElementById('school-desc');
-    const header = document.createElement('h5');
-    const para = document.createElement('p');
-    const title = document.createTextNode('About');
-    header.appendChild(title);
-    para.append(`${name} is a ${ownership} University 
-        in ${city}, ${state}`);
-    schoolDesc.appendChild(header);
-    schoolDesc.appendChild(para);
-  }
+  // Loads demographic charts to page.
+  chartsPromise.then(() => {
+    drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
+        numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
+        numUnreportedRaceStudents);
+    drawGenderChart(numMen, numWomen);
+  });
+}
 
-  /**
-  * Loads school population and graduation rate to page.
-  */
-  function getPopulation() {
-    const population = document.getElementById('students');
-    const header = document.createElement('h5');
-    const para = document.createElement('p');
-    const title = document.createTextNode('Population and Graduation Rate');
-    header.appendChild(title);
-    para.append(`${numStudents} students, 4 Year Graduation Rate of
-        ${graduationRate4yr}%`);
-    population.appendChild(header);
-    population.appendChild(para);
-  }
+/**
+ * Loads school description to page.
+ */
+function insertSchoolDesc(name, ownership, city, state) {
+  const schoolDesc = document.getElementById('school-desc');
+  const header = document.createElement('h5');
+  const para = document.createElement('p');
+  const title = document.createTextNode('About');
+  header.appendChild(title);
+  para.append(`${name} is a ${ownership} University 
+      in ${city}, ${state}`);
+  schoolDesc.appendChild(header);
+  schoolDesc.appendChild(para);
+}
 
-  /**
-  * Loads admissions statistics to page.
-  */
-  function getAdmissions() {
-    const admissions = document.getElementById('admissions');
-    const header = document.createElement('h5');
-    const para = document.createElement('p');
-    const title = document.createTextNode('Admissions');
-    header.appendChild(title);
-    para.append(`Acceptance Rate is ${acceptanceRate}%,
-        Average SAT Score is ${avgSat},
-        Average ACT Score is ${avgAct}`);
-    admissions.appendChild(header);
-    admissions.appendChild(para);
-  }
+/**
+ * Loads school population and graduation rate to page.
+ */
+function insertPopulation(numStudents, graduationRate4yr) {
+  const population = document.getElementById('students');
+  const header = document.createElement('h5');
+  const para = document.createElement('p');
+  const title = document.createTextNode('Population and Graduation Rate');
+  header.appendChild(title);
+  para.append(`${numStudents} students, 4 Year Graduation Rate of
+      ${graduationRate4yr}%`);
+  population.appendChild(header);
+  population.appendChild(para);
+}
 
-  /**
-  * Loads cost of attendance to page.
-  */
-  function getCost() {
-    const cost = document.getElementById('cost');
-    const header = document.createElement('h5');
-    const para = document.createElement('p');
-    const title = document.createTextNode('Cost of Attendance');
-    header.appendChild(title);
-    para.append(`In-State Tuition is $${inStateTuition}, 
-        Out-of-State Tuition is $${outOfStateTuition}`);
-    cost.appendChild(header);
-    cost.appendChild(para);
-  }
+/**
+ * Loads admissions statistics to page.
+ */
+function insertAdmissions(acceptanceRate, avgSat, avgAct) {
+  const admissions = document.getElementById('admissions');
+  const header = document.createElement('h5');
+  const para = document.createElement('p');
+  const title = document.createTextNode('Admissions');
+  header.appendChild(title);
+  para.append(`Acceptance Rate is ${acceptanceRate}%,
+      Average SAT Score is ${avgSat},
+      Average ACT Score is ${avgAct}`);
+  admissions.appendChild(header);
+  admissions.appendChild(para);
+}
 
-  /**
-  * Loads demographic charts to page.
-  */
-  function getCharts() {
-    const charts = document.getElementById('race-piechart');
-    const para = document.createElement('p');
-    para.append(chartsPromise.then(() => {
-      drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
-          numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
-          numUnreportedRaceStudents);
-      drawGenderChart(numMen, numWomen);
-    }));
-    charts.appendChild(para);
-  }
-
-  document.body.onload = function() {
-    getSchoolDesc();
-    getPopulation();
-    getAdmissions();
-    getCost();
-    getCharts();
-  };
+/**
+ * Loads cost of attendance to page.
+ */
+function insertCost(inStateTuition, outOfStateTuition) {
+  const cost = document.getElementById('cost');
+  const header = document.createElement('h5');
+  const para = document.createElement('p');
+  const title = document.createTextNode('Cost of Attendance');
+  header.appendChild(title);
+  para.append(`In-State Tuition is $${inStateTuition}, 
+      Out-of-State Tuition is $${outOfStateTuition}`);
+  cost.appendChild(header);
+  cost.appendChild(para);
 }
 
 /**
