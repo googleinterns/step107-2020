@@ -38,7 +38,7 @@ function loadSchoolInfo() {
   const state = getBasicSchoolInfo(dataResults, 'state');
   insertSchoolDesc(name, ownership, city, state);
 
-  //Cost Statistics Variables.
+  // Cost Statistics Variables.
   const inStateTuition = getCostInfo(dataResults, 'in_state');
   const outOfStateTuition = getCostInfo(dataResults, 'out_of_state');
   insertCost(inStateTuition, outOfStateTuition);
@@ -83,10 +83,10 @@ function loadSchoolInfo() {
 
 /**
  * Loads school description to page.
- * @return {string} name
- * @return {string} ownership
- * @return {string} city
- * @return {string} state
+ * @param {string} name
+ * @param {string} ownership
+ * @param {string} city
+ * @param {string} state
  */
 function insertSchoolDesc(name, ownership, city, state) {
   const schoolDesc = document.getElementById('school-desc');
@@ -111,7 +111,7 @@ function insertPopulation(numStudents, graduationRate4yr) {
   const para = document.createElement('p');
   const title = document.createTextNode('Population and Graduation Rate');
   header.appendChild(title);
-  para.append(`${numStudents} students, 4 Year Graduation Rate of
+  para.append(`${numStudents} students and 4 Year Graduation Rate of
       ${graduationRate4yr}%`);
   population.appendChild(header);
   population.appendChild(para);
