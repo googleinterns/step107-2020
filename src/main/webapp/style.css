@@ -169,6 +169,7 @@ header {
   height: 379px;
   margin: auto;
   max-width: 1035px;
+  overflow: scroll;
   width: 100%;
 }
 
