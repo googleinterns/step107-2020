@@ -20,10 +20,6 @@ function init() {
   loadToggle();
   loadLogin();
   loadComments();
-  insertSchoolDesc();
-  insertPopulation();
-  insertAdmissions();
-  insertCost();
 }
 
 /**
@@ -40,21 +36,24 @@ function loadSchoolInfo() {
   const name = getBasicSchoolInfo(dataResults, 'name');
   const city = getBasicSchoolInfo(dataResults, 'city');
   const state = getBasicSchoolInfo(dataResults, 'state');
+  insertSchoolDesc(name, ownership, city, state);
 
-  // Cost Statistics Variables.
+  //Cost Statistics Variables.
   const inStateTuition = getCostInfo(dataResults, 'in_state');
   const outOfStateTuition = getCostInfo(dataResults, 'out_of_state');
+  insertCost(inStateTuition, outOfStateTuition);
 
   // Admissions Statistics Variables.
   const acceptanceRate = getAcceptanceRate(dataResults);
   const avgSat = getSatInfo(dataResults, 'average.overall');
   const avgAct = getActInfo(dataResults, 'midpoint.cumulative');
+  insertAdmissions(acceptanceRate, avgSat, avgAct);
 
   // Student Statistic Variables.
   const numStudents = getNumStudents(dataResults);
+  const graduationRate4yr = getGraduationRate(dataResults);
   const numMen = getGender(dataResults, 'men') * numStudents;
   const numWomen = getGender(dataResults, 'women') * numStudents;
-  const graduationRate4yr = getGraduationRate(dataResults);
   const numWhiteStudents = getRace(dataResults, 'white') * numStudents;
   const numAsianStudents = getRace(dataResults, 'asian') * numStudents;
   const numBlackStudents = getRace(dataResults, 'black') * numStudents;
@@ -66,6 +65,7 @@ function loadSchoolInfo() {
       getRace(dataResults, 'two_or_more') * numStudents;
   const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
       getRace(dataResults, 'non_resident_alien')) * numStudents;
+  insertPopulation(numStudents, graduationRate4yr);
 
   // Name Section.
   schoolHeader = document.getElementById('school-name');
@@ -83,6 +83,10 @@ function loadSchoolInfo() {
 
 /**
  * Loads school description to page.
+ * @return {string} name
+ * @return {string} ownership
+ * @return {string} city
+ * @return {string} state
  */
 function insertSchoolDesc(name, ownership, city, state) {
   const schoolDesc = document.getElementById('school-desc');
@@ -98,6 +102,8 @@ function insertSchoolDesc(name, ownership, city, state) {
 
 /**
  * Loads school population and graduation rate to page.
+ * @param {number} numStudents
+ * @param {number} graduationRate4yr
  */
 function insertPopulation(numStudents, graduationRate4yr) {
   const population = document.getElementById('students');
@@ -113,6 +119,9 @@ function insertPopulation(numStudents, graduationRate4yr) {
 
 /**
  * Loads admissions statistics to page.
+ * @param {number} acceptanceRate
+ * @param {number} avgSat
+ * @param {number} avgAct
  */
 function insertAdmissions(acceptanceRate, avgSat, avgAct) {
   const admissions = document.getElementById('admissions');
@@ -129,6 +138,8 @@ function insertAdmissions(acceptanceRate, avgSat, avgAct) {
 
 /**
  * Loads cost of attendance to page.
+ * @param {number} inStateTuition
+ * @param {number} outOfStateTuition
  */
 function insertCost(inStateTuition, outOfStateTuition) {
   const cost = document.getElementById('cost');
