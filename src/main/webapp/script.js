@@ -68,7 +68,14 @@ function getBasicSchoolInfo(data, infoName) {
 /** Sets the event listener to search school. */
 function prepSearchButton() {
   const searchButton = document.getElementById('search-button');
+  const schoolSearch = document.getElementById('school-search');
+
   searchButton.addEventListener('click', () => loadSearchResults());
+  schoolSearch.addEventListener('keyup', (event) => {
+    if (event.keyCode === 13) {
+      loadSearchResults();
+    }
+  });
 }
 
 /** Fetches search results from API and saves in local storage. */

@@ -36,21 +36,24 @@ function loadSchoolInfo() {
   const name = getBasicSchoolInfo(dataResults, 'name');
   const city = getBasicSchoolInfo(dataResults, 'city');
   const state = getBasicSchoolInfo(dataResults, 'state');
+  insertSchoolDesc(name, ownership, city, state);
 
   // Cost Statistics Variables.
   const inStateTuition = getCostInfo(dataResults, 'in_state');
   const outOfStateTuition = getCostInfo(dataResults, 'out_of_state');
+  insertCost(inStateTuition, outOfStateTuition);
 
   // Admissions Statistics Variables.
   const acceptanceRate = getAcceptanceRate(dataResults);
   const avgSat = getSatInfo(dataResults, 'average.overall');
   const avgAct = getActInfo(dataResults, 'midpoint.cumulative');
+  insertAdmissions(acceptanceRate, avgSat, avgAct);
 
   // Student Statistic Variables.
   const numStudents = getNumStudents(dataResults);
+  const graduationRate4yr = getGraduationRate(dataResults);
   const numMen = getGender(dataResults, 'men') * numStudents;
   const numWomen = getGender(dataResults, 'women') * numStudents;
-  const graduationRate4yr = getGraduationRate(dataResults);
   const numWhiteStudents = getRace(dataResults, 'white') * numStudents;
   const numAsianStudents = getRace(dataResults, 'asian') * numStudents;
   const numBlackStudents = getRace(dataResults, 'black') * numStudents;
@@ -62,43 +65,92 @@ function loadSchoolInfo() {
       getRace(dataResults, 'two_or_more') * numStudents;
   const numUnreportedRaceStudents = (getRace(dataResults, 'unknown') +
       getRace(dataResults, 'non_resident_alien')) * numStudents;
+  insertPopulation(numStudents, graduationRate4yr);
 
   // Name Section.
   schoolHeader = document.getElementById('school-name');
   schoolHeader.innerHTML = '';
   schoolHeader.append(dataResults['school.name']);
 
-  // Description Section.
-  const schoolDesc = document.getElementById('school-desc');
-  schoolDesc.innerHTML = '';
-  schoolDesc.append(`${name} is a ${ownership} University 
-      in ${city}, ${state}`);
-
-  // Cost Section.
-  const costDiv = document.getElementById('cost');
-  costDiv.innerHTML = '';
-  costDiv.append(`In-State Tuition: $${inStateTuition}`);
-  costDiv.append(`Out-of-State Tuition: $${outOfStateTuition}`);
-
-  // Admissions Section.
-  const admissionsDiv = document.getElementById('admissions');
-  admissionsDiv.innerHTML = '';
-  admissionsDiv.append(`Acceptance Rate: ${acceptanceRate}%`);
-  admissionsDiv.append(`Average SAT Score: ${avgSat}`);
-  admissionsDiv.append(`Average ACT Score: ${avgAct}`);
-
-  // Students Section.
-  const studentsDiv = document.getElementById('students');
-  studentsDiv.innerHTML = '';
-  studentsDiv.append(`Population: ${numStudents} Students`);
-  studentsDiv.append(`4 Year Graduation Rate: ${graduationRate4yr}%`);
-
+  // Loads demographic charts to page.
   chartsPromise.then(() => {
     drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
         numHispanicStudents, numIndigenousStudents, numMultiracialStudents,
         numUnreportedRaceStudents);
     drawGenderChart(numMen, numWomen);
   });
+}
+
+/**
+ * Loads school description to page.
+ * @param {string} name
+ * @param {string} ownership
+ * @param {string} city
+ * @param {string} state
+ */
+function insertSchoolDesc(name, ownership, city, state) {
+  const schoolDesc = document.getElementById('school-desc');
+  const header = document.createElement('h5');
+  const para = document.createElement('p');
+  const title = document.createTextNode('About');
+  header.appendChild(title);
+  para.append(`${name} is a ${ownership} University 
+      in ${city}, ${state}`);
+  schoolDesc.appendChild(header);
+  schoolDesc.appendChild(para);
+}
+
+/**
+ * Loads school population and graduation rate to page.
+ * @param {number} numStudents
+ * @param {number} graduationRate4yr
+ */
+function insertPopulation(numStudents, graduationRate4yr) {
+  const population = document.getElementById('students');
+  const header = document.createElement('h5');
+  const para = document.createElement('p');
+  const title = document.createTextNode('Population and Graduation Rate');
+  header.appendChild(title);
+  para.append(`${numStudents} students and 4 Year Graduation Rate of
+      ${graduationRate4yr}%`);
+  population.appendChild(header);
+  population.appendChild(para);
+}
+
+/**
+ * Loads admissions statistics to page.
+ * @param {number} acceptanceRate
+ * @param {number} avgSat
+ * @param {number} avgAct
+ */
+function insertAdmissions(acceptanceRate, avgSat, avgAct) {
+  const admissions = document.getElementById('admissions');
+  const header = document.createElement('h5');
+  const para = document.createElement('p');
+  const title = document.createTextNode('Admissions');
+  header.appendChild(title);
+  para.append(`Acceptance Rate is ${acceptanceRate}%,
+      Average SAT Score is ${avgSat},
+      Average ACT Score is ${avgAct}`);
+  admissions.appendChild(header);
+  admissions.appendChild(para);
+}
+
+/**
+ * Loads cost of attendance to page.
+ * @param {number} inStateTuition
+ * @param {number} outOfStateTuition
+ */
+function insertCost(inStateTuition, outOfStateTuition) {
+  const cost = document.getElementById('cost');
+  const header = document.createElement('h5');
+  const para = document.createElement('p');
+  const title = document.createTextNode('Cost of Attendance');
+  header.appendChild(title);
+  para.append(`In-State Tuition is $${inStateTuition}, 
+      Out-of-State Tuition is $${outOfStateTuition}`);
+  cost.appendChild(header);
+  cost.appendChild(para);
 }
 
 /**
@@ -127,9 +179,9 @@ function drawRaceChart(numWhiteStudents, numAsianStudents, numBlackStudents,
 
   const options = {
     title: 'Breakdown by Race',
-    pieHole: 0.4,
-    colors: ['#C6ACA4', '#A4C5C6', '#FFEB99',
-      '#856C8B', '#C6BDA4', '#D4EBD0', '#C68B77'],
+    pieHole: 0.3,
+    colors: ['#A4C5C6', '#FFEB99',
+      '#856C8B', '#C6BDA4', '#C6ACA4', '#D4EBD0', '#C68B77'],
   };
 
   const chart = new google.visualization.PieChart(document
@@ -151,7 +203,7 @@ function drawGenderChart(numMen, numWomen) {
 
   const options = {
     title: 'Breakdown by Gender',
-    pieHole: 0.4,
+    pieHole: 0.3,
     colors: ['#D4EBD0', '#A4C5C6'],
   };
 
