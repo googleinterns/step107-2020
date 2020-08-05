@@ -59,6 +59,7 @@ p {
   font-style: normal;
   font-weight: normal;
   margin: auto;
+  padding-bottom: 20px;
   max-width: 920px;
 }
 
@@ -78,7 +79,7 @@ input {
   height: 25px;
   margin: 8px auto;
   max-width: 1035px;
-  width: 100%;
+  width: 50%;
 }
 
 input:hover {

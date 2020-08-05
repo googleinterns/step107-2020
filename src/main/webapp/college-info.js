@@ -331,7 +331,7 @@ function loadComments() {
  */
 function createCommentElement(name, message, time) {
   const commentElement = document.createElement('p');
-  commentElement.innerText = `${name} posted ${message} on ${time}`;
+  commentElement.innerText = `${name} posted "${message}" on ${time}`;
   return commentElement;
 }
 
@@ -430,7 +430,10 @@ function loadLogin() {
         } else {
           // Sets login link.
           logLink.setAttribute('href', loginObj.loginURL);
-          logLink.innerText = 'Sign in here to leave a comment.';
+          //logLink.innerText = 'Click here to sign in.';
+          const logIMG = document.createElement('IMG');
+          logIMG.setAttribute('src', 'https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png');
+          logLink.append(logIMG);
         }
         loginDiv.appendChild(logLine);
       });
