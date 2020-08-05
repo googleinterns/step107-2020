@@ -430,7 +430,6 @@ function loadLogin() {
         } else {
           // Sets login link.
           logLink.setAttribute('href', loginObj.loginURL);
-          //logLink.innerText = 'Click here to sign in.';
           const logIMG = document.createElement('IMG');
           logIMG.setAttribute('src', 'https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png');
           logLink.append(logIMG);
